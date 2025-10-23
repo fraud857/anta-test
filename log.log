@@ -1,3 +1,7 @@
+http://10.131.128.80:7799/api/tenant/mrs/user/export?managerUrl=https://10.131.194.230:9022/mrsmanager/&password=km72QG3Npy!1&username=u_adp_manager
+
+
+
 https://authtest.anta.com/logout?service=https://authtest.anta.com/oauth2.0/authorize?response_type=code&client_id=100264&redirect_uri=https://adp-test.anta.com/index
 
 
