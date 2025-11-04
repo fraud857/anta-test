@@ -1,0 +1,60 @@
+{
+  "LAST_ID": "",
+  "FORM_CODE": "",
+  "UUID": "",
+  "PAGE": "",
+  "PAGE_SIZE": "",
+  "DATA": {
+    "LAST_UPDATE_DATE_START": "",
+    "LAST_UPDATE_DATE_END": "",
+    "APPCODE": "应用编码",
+    "STAFFNO": "员工编码"
+  }
+}
+
+
+
+注意事项：
+
+1、单批次不超过300条，不低于50条
+2、LAST_ID,首页不用传，从第2页开始，都必须传
+3、LAST_UPDATE_DATE_END 不能超过当前时间
+4、所有时间格式为带时区格式，如 2023-10-31T01:00:00+08:00
+5、只能采用单线程同步调用，禁止采用多线程并发调用
+6、必须按时间增量拉取，需要考虑失败重新拉取的场景及失败预警，拉取方案需要告知主数据管理部
+7、该接口有做限流处理，限流策略（以应用系统为单位） 50次/秒、5万/天
+
+
+{
+  "UUID": "",
+  "MDM_CODE": "",
+  "RESULT": "",
+  "MESSAGE": "",
+  "ERROR_CODE": "",
+  "LAST_PAGE": "",
+  "DATA": [
+    {
+      "APPSTATUS": "状态",
+      "STAFFNO": "员工编码",
+      "APPCODE": "应用编码",
+      "ACCOUNT_INFO": {
+        "id": "账号信息主键id",
+        "SUBADMINNO": "外部负责人",
+        "STATUSFLAG": " 账号状态",
+        "USERTYPEFLAG": "账号类型",
+        "PARTNERCODE": "合作方编码",
+        "TERMVALIDITY": "账号有效期",
+        "ORGACCFLAG": "组织账号",
+        "STAFFNO": "账号/员工编码",
+        "ORGCODE": "\t 归属组织",
+        "INTERNALORGCODE": "内部组织",
+        "TITLE": "岗位信息",
+        "LEADERNO": "内部负责人",
+        "FULLNAME": "姓名",
+        "MAIL": "邮箱地址",
+        "OUTRECEPTERFLAG": "是否外部负责人",
+        "COMPANYTYPE": "归属组织类型"
+      }
+    }
+  ]
+}
