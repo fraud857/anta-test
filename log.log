@@ -1,3 +1,12 @@
+
+[2025-11-05 18:37:45.132] [traceId=54da77d1663e065339dd72a429c8ed56 spanId=752087985961214363] [service=cyber-usercenter-test ] [c.d.c.u.s.s.impl.SysDataServiceImpl] [http-nio-8080-exec-6] [ERROR] Failed to get token from /sdkAuth/getToken: 400 : "<!doctype html><html lang="en"><head><title>HTTP Status 400 – Bad Request</title><style type="text/css">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:black;} .line {height:1px;background-color:#525D76;border:none;}</style></head><body><h1>HTTP Status 400 – Bad Request</h1></body></html>"
+
+
+
+
+
+
+
 https://cnp.anta.com/kpanda/clusters/
 
 http://10.131.128.80:7799/api/tenant/mrs/user/export?managerUrl=https://10.131.194.230:9022/mrsmanager/&password=km72QG3Npy!1&username=u_adp_manager
