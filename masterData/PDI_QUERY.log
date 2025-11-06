@@ -1,0 +1,40 @@
+/demdm-api/open/api/v2/selectApi/PDI_QUERY/1.0.0
+
+{
+  "LAST_ID": "",
+  "FORM_CODE": "ALL",
+  "UUID": "16184989241DD8843F87B0F3BA753RTY",
+  "PAGE": "1",
+  "PAGE_SIZE": "100",
+  "DATA": {
+    "LAST_UPDATE_DATE_START": "2023-10-31T01:00:00+08:00",
+    "LAST_UPDATE_DATE_END": "2023-10-31T02:00:00+08:00"
+  }
+}
+
+
+{
+  "UUID": "16184989241DD8843F87B0F3BA753RTY",
+  "MDM_CODE": "",
+  "RESULT": "S",
+  "MESSAGE": "QUERY_SUCCESS",
+  "ERROR_CODE": "",
+  "LAST_PAGE": "true",
+  "DATA": [
+    {
+      "AORGAH": "调动后组织编码",
+      "CREATED_BY": "2021061682",
+      "LAST_UPDATED_BY": "2021061682",
+      "BEGDA": "2025-07-25T00:00:00+08:00",
+      "GUID": "单据号",
+      "ANTAID": "安踏工号",
+      "ENDDA": "2025-07-26T00:00:00+08:00",
+      "CREATION_DATE": "2025-07-25T13:31:23+08:00",
+      "LAST_UPDATE_DATE": "2025-07-25T13:31:23+08:00",
+      "STATUS": "Y",
+      "BORGAH": "调动前组织编码",
+      "ID": "701583694296261"
+    }
+  ]
+}
+
