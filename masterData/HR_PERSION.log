@@ -1,0 +1,237 @@
+/demdm-api/open/api/v2/selectApi/HR_M_PERSON_INFO_QUERY/1.0.0
+
+{
+  "LAST_ID": "分页查询时，上次查询最后一个ID值，首页查询不必填，分页查询必填",
+  "FORM_CODE": "表单编码，默认ALL",
+  "UUID": "唯一标识，每次查询的标识，用于排查问题",
+  "PAGE": "页码",
+  "PAGE_SIZE": "条数",
+  "DATA": {
+    "LAST_UPDATE_DATE_START": "开始时间，带时区格式",
+    "LAST_UPDATE_DATE_END": "结束时间，带时区格式",
+    "EMPID": "员工工号，可多值查询['工号1','工号2']"
+  }
+}
+{
+  "LAST_ID": "",
+  "FORM_CODE": "ALL",
+  "UUID": "16184989241DD8843F87B0F3BA753RTY",
+  "PAGE": "1",
+  "PAGE_SIZE": "100",
+  "DATA": {
+    "LAST_UPDATE_DATE_START": "2023-10-31T01:00:00+08:00",
+    "LAST_UPDATE_DATE_END": "2023-10-31T02:00:00+08:00",
+    "EMPID": ""
+  }
+}
+
+{
+  "UUID": "唯一标识，与入参时一致",
+  "MDM_CODE": "",
+  "RESULT": "返回状态，S-成功；E-失败",
+  "MESSAGE": "",
+  "ERROR_CODE": "",
+  "LAST_PAGE": "是否最后一页，true-最后一页；false-非最后一页，还需要继续调用查询",
+  "DATA": [
+    {
+      "HR_CLOCK_IN": [
+        {
+          "ZDKQY_STATUS": "打卡状态-字典值-0452",
+          "EMPID": "员工工号",
+          "id": "",
+          "ZDKQY": "打卡区域-字典值-0419"
+        }
+      ],
+      "PERNR": "SAP员工编号",
+      "NATIO": "国籍-字典值-0425",
+      "ZGWZU": "岗位族-字典值-0412",
+      "PERSK": "员工子类-字典值-0424",
+      "HR_S_CERTIFICATE_INFO": [
+        {
+          "MDM_ID": "主表ID，用于关联主表和子表",
+          "NUM": "证件号码",
+          "EFBEG": "证件有效开始时间",
+          "EFEND": "证件有效结束时间",
+          "ISSAI": "证件签发地",
+          "ID": "子表id",
+          "CERTIFICATE_TYPE": "证件类型-字典值-0430"
+        }
+      ],
+      "PERSG": "员工组-字典值-0423",
+      "MTRAI": "是否管培生/是否校招生-字典值-0427",
+      "ZGZDD": "工作地点-字典值-0416",
+      "ORGEH": "部门-字典值-0442",
+      "ID": "",
+      "ENAME": "姓名",
+      "ZJSSJ_BEGDA": "最近一次晋升时间",
+      "ZGWZZJ": "子职级-字典值-0444",
+      "ZWULK": "物理卡号",
+      "ZGWXL": "岗位序列-字典值-0432",
+      "ZJSJ": "直接上级",
+      "RSV16": "别名",
+      "INTCELL": "国际手机号",
+      "RSV14": "拼音名",
+      "EMPID": "员工工号",
+      "ZRZLX": "入职类型-字典值-0418",
+      "ZABKRS": "薪酬范围-字典值-0435",
+      "HR_S_MAIL_INFO": [
+        {
+          "MDM_ID": "主表ID，用于关联主表和子表",
+          "MAILTYPE": "邮箱类型-字典值-0451",
+          "MAILSTATUS": "邮箱状态-字典值-0450",
+          "MAIL": "邮箱地址",
+          "ID": "子表ID"
+        }
+      ],
+      "ZAREACODE": "手机区号",
+      "GBDAT": "出生日期",
+      "RSV12": "名",
+      "STELL": "标准岗-字典值-0434",
+      "RSV13": "拼音姓",
+      "RSV10": "是否境外-字典值-0426",
+      "RSV11": "姓",
+      "ZXLSBM": "新零售门店编码",
+      "PLANS": "职位-字典值-0443",
+      "ZBUFFER10": "来源系统-字典值-0445",
+      "WERKS": "人事范围/业务主体-字典值-0421",
+      "PHONE": "办公电话",
+      "ZZZRQ": "转正日期",
+      "SFSYQ": "是否试用期-字典值-0428",
+      "MTCAT": "管培生类别-字典值-0441",
+      "RSV05": " 姓名拼音",
+      "ZBUFFER6": "所属业务类型-字典值-0410",
+      "RSV06": "离职日期",
+      "HR_PARTTIME_INFO": [
+        {
+          "PLANS": "职位-字典值-0443",
+          "EMPID": "工号",
+          "RSV07": " 兼职组织ID",
+          "ZYGLX": "兼职类型-字典值-0446",
+          "JZSTATUS": "兼岗状态-字典值-0447",
+          "id": "关联表主键id"
+        }
+      ],
+      "RSV03": "岗位层级-字典值-0436",
+      "GESCH": "性别-字典值-0404",
+      "RSV08": "是否干部-字典值-0417",
+      "ZPP": "员工所属品牌-字典值-0420",
+      "ZYWBK": "所服务的业务板块-字典值-0408",
+      "ZGWZXL": "岗位子序列-字典值-0433",
+      "STAT2": "员工状态-字典值-0403",
+      "ZGWZJ": "岗位职级-字典值-0415",
+      "BTRTL": "人事子范围/业务单元-字典值-0422",
+      "ZCMSBM": "CMS门店编码",
+      "HIREDATE": "入职日期",
+      "ZJRJT": "加入集团日期",
+      "CELL": "手机",
+      "ZJYPP": "经营品牌-字典值-0448",
+      "ZSFNBYG": "是否内部员工"
+    }
+  ]
+}
+
+
+{
+  "UUID": "16184989241DD8843F87B0F3BA753RTY",
+  "MDM_CODE": "",
+  "RESULT": "S",
+  "MESSAGE": "QUERY_SUCCESS",
+  "ERROR_CODE": "",
+  "LAST_PAGE": "false",
+  "DATA": [
+    {
+      "HR_CLOCK_IN": [
+        {
+          "ZDKQY_STATUS": "1",
+          "EMPID": "测试员工工号110301",
+          "id": "737283301187589",
+          "ZDKQY": "A00091"
+        }
+      ],
+      "PERNR": "SAP员工编号",
+      "NATIO": "CN",
+      "ZGWZU": "100",
+      "PERSK": "A1",
+      "HR_S_CERTIFICATE_INFO": [
+        {
+          "MDM_ID": "737281473064965",
+          "NUM": "证件号码",
+          "EFBEG": "",
+          "EFEND": "",
+          "ISSAI": "",
+          "ID": "737284352040965",
+          "CERTIFICATE_TYPE": "IDCARD"
+        }
+      ],
+      "PERSG": "A",
+      "MTRAI": "2",
+      "ZGZDD": "0001",
+      "ORGEH": "test",
+      "ID": "737281473064965",
+      "ENAME": "姓名",
+      "ZJSSJ_BEGDA": "2025-11-21T00:00:00+08:00",
+      "ZGWZZJ": "",
+      "ZWULK": "物理卡号",
+      "ZGWXL": "1",
+      "ZJSJ": "",
+      "RSV16": "",
+      "INTCELL": "国际手机号",
+      "RSV14": "拼音名",
+      "EMPID": "测试员工工号110301",
+      "ZRZLX": "Z1",
+      "ZABKRS": "1",
+      "HR_S_MAIL_INFO": [
+        {
+          "MDM_ID": "737281473064965",
+          "MAILTYPE": "",
+          "MAILSTATUS": "",
+          "MAIL": "邮箱地址",
+          "ID": "737284352049157"
+        }
+      ],
+      "ZAREACODE": "手机区号",
+      "GBDAT": "2025-11-03T10:19:07+08:00",
+      "RSV12": "名",
+      "STELL": "测试标准岗",
+      "RSV13": "拼音姓",
+      "RSV10": "1",
+      "RSV11": "姓",
+      "ZXLSBM": "新零售门店编码",
+      "PLANS": "测试职位",
+      "ZBUFFER10": "",
+      "WERKS": "1000",
+      "PHONE": "办公电话",
+      "ZZZRQ": "2025-11-27T00:00:00+08:00",
+      "SFSYQ": "1",
+      "MTCAT": "",
+      "RSV05": " 姓名拼音",
+      "ZBUFFER6": "10",
+      "RSV06": "",
+      "HR_PARTTIME_INFO": [
+        {
+          "PLANS": "测试职位",
+          "EMPID": "测试员工工号110301",
+          "RSV07": " 兼职组织ID",
+          "ZYGLX": "1",
+          "JZSTATUS": "1",
+          "id": "737283030691845"
+        }
+      ],
+      "RSV03": "测试层级",
+      "GESCH": "2",
+      "RSV08": "2",
+      "ZPP": "001",
+      "ZYWBK": "0001",
+      "ZGWZXL": "",
+      "STAT2": "8",
+      "ZGWZJ": "B",
+      "BTRTL": "0042",
+      "ZCMSBM": "CMS门店编码",
+      "HIREDATE": "2025-11-20T00:00:00+08:00",
+      "ZJRJT": "2025-11-11T00:00:00+08:00",
+      "CELL": "手机",
+      "ZJYPP": "",
+      "ZSFNBYG": "是否内部员工"
+    }
+  ]
+}
