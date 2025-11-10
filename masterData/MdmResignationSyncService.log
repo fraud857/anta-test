@@ -1,0 +1,238 @@
+package com.datacyber.cyber.user.service.mdm;
+
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.datacyber.cyber.user.config.MdmSyncConfig;
+import com.datacyber.cyber.user.dao.entity.SysUser;
+import com.datacyber.cyber.user.dao.service.ISysUserService;
+import com.datacyber.cyber.user.dto.mdm.HrPersonData;
+import com.datacyber.cyber.user.dto.mdm.HrPersonInfoRequest;
+import com.datacyber.cyber.user.dto.mdm.HrPersonInfoResponse;
+import com.datacyber.cyber.user.dto.mdm.SyncResult;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * MDM离职状态同步服务
+ * 负责协调整个离职状态同步流程，管理同步状态，实现批量查询逻辑
+ */
+@Service
+@Slf4j
+public class MdmResignationSyncService {
+
+    @Autowired
+    private MdmApiClient mdmApiClient;
+
+    @Autowired
+    private MdmSyncConfig config;
+
+    @Autowired
+    private ISysUserService sysUserService;
+
+    @Autowired
+    private MdmResignationDataProcessor resignationDataProcessor;
+
+    private static final String LAST_SYNC_TIMESTAMP_KEY = "mdm:sync:resignation:last_timestamp";
+    private static final String RATE_LIMIT_KEY = "resignation_sync";
+    private static final String RESIGNATION_API_PATH = "/anta/mdm/demdm-api/open/api/v2/selectApi/HR_M_PERSON_INFO_QUERY/1.0.0";
+
+    /**
+     * 执行完整的离职状态同步流程
+     *
+     * @return 同步结果
+     */
+    public SyncResult executeSync() {
+        SyncResult result = SyncResult.builder()
+                .success(false)
+                .totalProcessed(0)
+                .build();
+
+        // 记录同步开始时间
+        String syncStartTimeStr = mdmApiClient.getCurrentTimestamp();
+        result.setSyncTime(syncStartTimeStr);
+
+        log.info("开始执行MDM离职状态同步，同步时间: {}", syncStartTimeStr);
+
+        try {
+            // 1. 获取所有需要检查的用户工号列表
+            List<String> allEmpIds = getAllUserEmpIds();
+            if (CollectionUtils.isEmpty(allEmpIds)) {
+                log.warn("没有需要同步的用户工号");
+                result.setSuccess(true);
+                return result;
+            }
+
+            log.info("获取到{}个用户工号需要同步", allEmpIds.size());
+
+            // 2. 按批次大小分组（每批最多100个）
+            List<List<String>> batches = splitIntoBatches(allEmpIds, config.getResignationBatchSize());
+            log.info("分为{}个批次进行查询", batches.size());
+
+            // 3. 逐批次查询和处理
+            int totalProcessed = 0;
+            for (int i = 0; i < batches.size(); i++) {
+                List<String> batchEmpIds = batches.get(i);
+                log.info("处理第{}/{}批次，工号数量: {}", i + 1, batches.size(), batchEmpIds.size());
+
+                int batchProcessed = processBatch(batchEmpIds);
+                totalProcessed += batchProcessed;
+
+                // 批次间延迟，避免API限流
+                if (i < batches.size() - 1) {
+                    Thread.sleep(100);
+                }
+            }
+
+            // 4. 保存同步时间戳
+            mdmApiClient.saveLastSyncTimestamp(LAST_SYNC_TIMESTAMP_KEY, syncStartTimeStr);
+
+            // 5. 设置同步结果
+            result.setSuccess(true);
+            result.setTotalProcessed(totalProcessed);
+
+            log.info("MDM离职状态同步完成，共处理{}个批次，成功处理{}条记录", batches.size(), totalProcessed);
+
+        } catch (Exception e) {
+            log.error("MDM离职状态同步失败", e);
+            result.setSuccess(false);
+            result.setErrorMessage(e.getMessage());
+        }
+
+        return result;
+    }
+
+    /**
+     * 获取所有用户的员工工号列表
+     */
+    private List<String> getAllUserEmpIds() {
+        // 查询所有有thirdPartyId的用户
+        List<SysUser> users = sysUserService.list(
+                new LambdaQueryWrapper<SysUser>()
+                        .isNotNull(SysUser::getThirdPartyId)
+                        .ne(SysUser::getThirdPartyId, "")
+        );
+
+        return users.stream()
+                .map(SysUser::getThirdPartyId)
+                .filter(StringUtils::isNotBlank)
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 将工号列表按指定大小分批
+     */
+    private List<List<String>> splitIntoBatches(List<String> empIds, int batchSize) {
+        List<List<String>> batches = new ArrayList<>();
+        for (int i = 0; i < empIds.size(); i += batchSize) {
+            int end = Math.min(i + batchSize, empIds.size());
+            batches.add(new ArrayList<>(empIds.subList(i, end)));
+        }
+        return batches;
+    }
+
+    /**
+     * 处理单个批次的工号查询
+     */
+    private int processBatch(List<String> empIds) {
+        int batchProcessed = 0;
+
+        try {
+            // 分页查询该批次的所有数据
+            String lastId = "";
+            boolean hasMore = true;
+            int pageNumber = 1;
+
+            while (hasMore) {
+                log.info("查询第{}页数据", pageNumber);
+
+                HrPersonInfoResponse response = fetchResignationDataWithRetry(empIds, lastId, pageNumber);
+
+                if (response == null) {
+                    throw new RuntimeException("API响应为空");
+                }
+
+                if (!"QUERY_SUCCESS".equalsIgnoreCase(response.getMessage())) {
+                    throw new RuntimeException("API调用失败: " + response.getMessage() +
+                            ", errorCode: " + response.getErrorCode());
+                }
+
+                // 处理当前页数据
+                if (!CollectionUtils.isEmpty(response.getData())) {
+                    log.info("第{}页获取到{}条数据", pageNumber, response.getData().size());
+                    int processed = resignationDataProcessor.processBatch(response.getData());
+                    batchProcessed += processed;
+                    log.info("第{}页处理完成，成功处理{}条数据", pageNumber, processed);
+
+                    // 获取最后一条记录的ID用于下一页查询
+                    HrPersonData lastRecord = response.getData().get(response.getData().size() - 1);
+                    lastId = lastRecord.getId();
+                } else {
+                    log.info("第{}页没有数据", pageNumber);
+                }
+
+                // 检查是否还有下一页
+                hasMore = !response.isLastPage();
+                if (hasMore) {
+                    pageNumber++;
+                    log.info("还有下一页数据，lastId={}, 下一页页码={}", lastId, pageNumber);
+                } else {
+                    log.info("已到达数据最后一页");
+                }
+            }
+
+        } catch (Exception e) {
+            log.error("处理批次失败: empIds={}", empIds, e);
+            throw new RuntimeException("处理批次失败: " + e.getMessage(), e);
+        }
+
+        return batchProcessed;
+    }
+
+    /**
+     * 带重试机制的获取离职数据
+     *
+     * @param empIds     员工工号列表
+     * @param lastId     上一页的最后一条记录ID
+     * @param pageNumber 页码
+     * @return HR人员信息响应
+     */
+    private HrPersonInfoResponse fetchResignationDataWithRetry(
+            List<String> empIds,
+            String lastId,
+            Integer pageNumber) {
+
+        // 生成请求UUID
+        String requestUuid = mdmApiClient.generateRequestUuid();
+
+        // 判断是否为首页
+        boolean isFirstPage = (lastId == null || lastId.trim().isEmpty());
+
+        // 构建请求体
+        HrPersonInfoRequest request = HrPersonInfoRequest.builder()
+                .lastId(isFirstPage ? "" : lastId)
+                .formCode("ALL")
+                .uuid(requestUuid)
+                .page(String.valueOf(pageNumber))
+                .pageSize(String.valueOf(config.getBatchSize()))
+                .data(HrPersonInfoRequest.DataFilter.builder()
+                        .empid(empIds)
+                        .build())
+                .build();
+
+        log.info("获取离职数据（带重试）: uuid={}, lastId={}, page={}, pageSize={}, empIds数量={}",
+                requestUuid, request.getLastId(), request.getPage(), config.getBatchSize(), empIds.size());
+
+        // 构建完整的API URL
+        String apiUrl = config.getApiBaseUrl() + RESIGNATION_API_PATH;
+
+        // 使用通用的带重试方法调用API
+        return mdmApiClient.callMdmApiWithRetry(apiUrl, request, HrPersonInfoResponse.class, RATE_LIMIT_KEY);
+    }
+}

@@ -1,0 +1,10 @@
+mdm:
+  sync:
+    transferEnabled: true
+    apiBaseUrl: http://aop-test.antaapi.com/ASH24111208564609
+    appCode: ASH25101309132431
+    secretKey: 5c3ce657c7fb4c29aa06c6d35df5eee9
+    mdmAppCode: SYSID0432
+    cron: "0 * * * * ?"
+    appOrgCodes: BORGAH
+    resignationSyncEnabled: true

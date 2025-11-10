@@ -1,0 +1,445 @@
+package com.datacyber.cyber.user.service.mdm;
+
+import cn.hutool.crypto.digest.DigestUtil;
+import com.alibaba.fastjson.JSON;
+import com.datacyber.cyber.user.config.MdmSyncConfig;
+import com.datacyber.cyber.user.util.RedisService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import javax.annotation.Resource;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * 负责与MDM系统API交互，包括认证、请求发送、限流控制等
+ * 提供通用的API调用方法，支持调用各种MDM接口
+ */
+@Slf4j
+@Service
+public class MdmApiClient {
+
+    @Autowired
+    private MdmSyncConfig config;
+
+    @Resource(name = "restTemplate")
+    private RestTemplate restTemplate;
+
+    @Autowired
+    @SuppressWarnings("rawtypes")
+    private RedisService redisService;
+
+    private static final String RATE_LIMIT_SECOND_KEY_PREFIX = "mdm:ratelimit:second:";
+    private static final String RATE_LIMIT_DAY_KEY_PREFIX = "mdm:ratelimit:day:";
+    private static final int RATE_LIMIT_SECOND_TTL = 2;
+    private static final int RATE_LIMIT_DAY_TTL = 86400;
+
+    /**
+     * 构建认证请求头
+     * 包含op-api-key、op-api-timestamp、op-api-sign、op-api-extend
+     *
+     * @return 认证请求头Map
+     */
+    private Map<String, String> buildAuthHeaders() {
+        Map<String, String> headers = new HashMap<>();
+
+        // 生成13位毫秒时间戳
+        String timestamp = String.valueOf(System.currentTimeMillis());
+
+        // op-api-key: 应用编码
+        headers.put("op-api-key", config.getAppCode());
+
+        // op-api-timestamp: 当前时间戳（13位毫秒）
+        headers.put("op-api-timestamp", timestamp);
+
+        // op-api-sign: MD5(应用编码+密钥+时间戳)
+        String sign = generateSignature(config.getAppCode(), config.getSecretKey(), timestamp);
+        headers.put("op-api-sign", sign);
+
+        // op-api-extend: MDM应用编码
+        headers.put("op-api-extend", config.getMdmAppCode());
+
+        log.info("构建认证请求头: appCode={}, timestamp={}, sign={}, mdmAppCode={}",
+                config.getAppCode(), timestamp, sign, config.getMdmAppCode());
+
+        return headers;
+    }
+
+    /**
+     * 生成签名
+     * 使用MD5算法对"应用编码+密钥+时间戳"进行加密
+     *
+     * @param appCode   应用编码
+     * @param secretKey 密钥
+     * @param timestamp 时间戳（13位毫秒）
+     * @return MD5签名
+     */
+    private static String generateSignature(String appCode, String secretKey, String timestamp) {
+        String signStr = appCode + secretKey + timestamp;
+        String sign = DigestUtil.md5Hex(signStr);
+        log.info("生成签名: signStr={}, sign={}", signStr, sign);
+        return sign;
+    }
+
+    /**
+     * 通用的MDM API调用方法
+     * 支持调用任意MDM接口，自动处理认证、限流等
+     *
+     * @param url          API完整URL
+     * @param requestBody  请求体对象
+     * @param responseType 响应类型
+     * @param rateLimitKey 限流key（用于区分不同接口的限流）
+     * @param <T>          响应类型泛型
+     * @return API响应对象
+     */
+    public <T> T callMdmApi(String url, Object requestBody, Class<T> responseType, String rateLimitKey) {
+        // 检查限流
+        checkRateLimit(rateLimitKey);
+
+        log.info("调用MDM API: url={}, requestBody={}", url, JSON.toJSONString(requestBody));
+
+        try {
+            // 构建认证请求头
+            Map<String, String> authHeaders = buildAuthHeaders();
+
+            // 构建HTTP请求头
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            authHeaders.forEach(headers::set);
+
+            // 构建请求实体
+            HttpEntity<String> requestEntity = new HttpEntity<>(JSON.toJSONString(requestBody), headers);
+
+            // 发送POST请求
+            ResponseEntity<String> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.POST,
+                    requestEntity,
+                    String.class
+            );
+
+            // 解析响应
+            if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
+                T apiResponse = JSON.parseObject(response.getBody(), responseType);
+                log.info("MDM API调用成功: url={}, response={}", url, response.getBody());
+                return apiResponse;
+            } else {
+                log.error("MDM API调用失败: url={}, statusCode={}, body={}",
+                        url, response.getStatusCode(), response.getBody());
+                throw new RuntimeException("MDM API调用失败: HTTP " + response.getStatusCode());
+            }
+
+        } catch (Exception e) {
+            log.error("MDM API调用异常: url={}", url, e);
+            throw new RuntimeException("MDM API调用失败: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 通用的MDM API调用方法（带重试）
+     * 支持网络错误时最多重试3次，使用指数退避策略
+     *
+     * @param url          API完整URL
+     * @param requestBody  请求体对象
+     * @param responseType 响应类型
+     * @param rateLimitKey 限流key（用于区分不同接口的限流）
+     * @param <T>          响应类型泛型
+     * @return API响应对象
+     */
+    public <T> T callMdmApiWithRetry(String url, Object requestBody, Class<T> responseType, String rateLimitKey) {
+        int maxRetries = 3;
+        int retryDelay = 1000; // 初始延迟1秒
+
+        for (int attempt = 1; attempt <= maxRetries; attempt++) {
+            try {
+                return callMdmApi(url, requestBody, responseType, rateLimitKey);
+
+            } catch (Exception e) {
+                // 检查是否为认证错误
+                if (e.getMessage() != null && e.getMessage().contains("认证")) {
+                    log.error("认证错误，不进行重试", e);
+                    throw e;
+                }
+
+                // 检查是否为限流错误
+                if (e.getMessage() != null && e.getMessage().contains("限流")) {
+                    log.warn("限流错误，等待60秒后重试", e);
+                    try {
+                        Thread.sleep(60000);
+                    } catch (InterruptedException ie) {
+                        Thread.currentThread().interrupt();
+                        throw new RuntimeException("重试等待被中断", ie);
+                    }
+                    continue;
+                }
+
+                // 网络错误重试
+                if (attempt < maxRetries) {
+                    log.warn("API调用失败，{}秒后重试 (第{}/{}次): {}",
+                            retryDelay / 1000, attempt, maxRetries, e.getMessage());
+
+                    try {
+                        Thread.sleep(retryDelay);
+                    } catch (InterruptedException ie) {
+                        Thread.currentThread().interrupt();
+                        throw new RuntimeException("重试被中断", ie);
+                    }
+
+                    // 指数退避：1秒、2秒、4秒
+                    retryDelay *= 2;
+                } else {
+                    log.error("API调用失败，已达最大重试次数", e);
+                    throw new RuntimeException("API调用失败，已达最大重试次数: " + e.getMessage(), e);
+                }
+            }
+        }
+
+        throw new RuntimeException("API调用失败，已达最大重试次数");
+    }
+
+    /**
+     * 检查并控制限流
+     * 实现每秒最大50次请求和每天最大50000次请求的限流
+     * 支持针对不同接口单独限流
+     *
+     * @param rateLimitKey 限流key，用于区分不同接口（如：user_sync、org_query等）
+     */
+    private void checkRateLimit(String rateLimitKey) {
+        // 获取当前时间的秒级和天级key
+        long currentTimeMillis = System.currentTimeMillis();
+        String currentSecond = String.valueOf(currentTimeMillis / 1000);
+        String currentDay = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+        // 使用rateLimitKey区分不同接口的限流
+        String secondKey = RATE_LIMIT_SECOND_KEY_PREFIX + rateLimitKey + ":" + currentSecond;
+        String dayKey = RATE_LIMIT_DAY_KEY_PREFIX + rateLimitKey + ":" + currentDay;
+
+        // 检查每秒限流
+        Object secondCountObj = redisService.get(secondKey);
+        if (ObjectUtils.isEmpty(secondCountObj)) {
+            redisService.set(secondKey, 0, RATE_LIMIT_SECOND_TTL);
+        }
+        Long secondCount = redisService.incr(secondKey, 1);
+
+        if (secondCount > config.getMaxRequestsPerSecond()) {
+            log.warn("达到每秒限流阈值，等待1秒: rateLimitKey={}, currentCount={}, limit={}",
+                    rateLimitKey, secondCount, config.getMaxRequestsPerSecond());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                throw new RuntimeException("限流等待被中断", e);
+            }
+        }
+
+        // 检查每天限流
+        Object dayCountObj = redisService.get(dayKey);
+        if (ObjectUtils.isEmpty(dayCountObj)) {
+            redisService.set(dayKey, 0, RATE_LIMIT_DAY_TTL);
+        }
+        Long dayCount = redisService.incr(dayKey, 1);
+
+        if (dayCount > config.getMaxRequestsPerDay()) {
+            log.error("已达到每日API调用限制: rateLimitKey={}, currentCount={}, limit={}",
+                    rateLimitKey, dayCount, config.getMaxRequestsPerDay());
+            throw new RuntimeException("已达到每日API调用限制[" + rateLimitKey + "]: " + dayCount + "/" + config.getMaxRequestsPerDay());
+        }
+
+        log.debug("限流检查通过: rateLimitKey={}, secondCount={}, dayCount={}", rateLimitKey, secondCount, dayCount);
+    }
+
+    /**
+     * 通用的MDM API调用方法（支持自定义URL和请求头）
+     * 适用于需要特殊配置的场景
+     *
+     * @param url           API完整URL
+     * @param requestBody   请求体对象
+     * @param responseType  响应类型
+     * @param rateLimitKey  限流key（用于区分不同接口的限流）
+     * @param customHeaders 自定义请求头（可选，会与认证头合并）
+     * @param <T>           响应类型泛型
+     * @return API响应对象
+     */
+    public <T> T callMdmApi(String url, Object requestBody, Class<T> responseType, String rateLimitKey, Map<String, String> customHeaders) {
+        // 检查限流
+        checkRateLimit(rateLimitKey);
+
+        log.info("调用MDM API（自定义头）: url={}, requestBody={}", url, JSON.toJSONString(requestBody));
+
+        try {
+            // 构建认证请求头
+            Map<String, String> authHeaders = buildAuthHeaders();
+
+            // 构建HTTP请求头
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            authHeaders.forEach(headers::set);
+
+            // 添加自定义请求头
+            if (customHeaders != null && !customHeaders.isEmpty()) {
+                customHeaders.forEach(headers::set);
+            }
+
+            // 构建请求实体
+            HttpEntity<String> requestEntity = new HttpEntity<>(JSON.toJSONString(requestBody), headers);
+
+            // 发送POST请求
+            ResponseEntity<String> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.POST,
+                    requestEntity,
+                    String.class
+            );
+
+            // 解析响应
+            if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
+                T apiResponse = JSON.parseObject(response.getBody(), responseType);
+                log.info("MDM API调用成功: url={}", url);
+                return apiResponse;
+            } else {
+                log.error("MDM API调用失败: url={}, statusCode={}, body={}",
+                        url, response.getStatusCode(), response.getBody());
+                throw new RuntimeException("MDM API调用失败: HTTP " + response.getStatusCode());
+            }
+
+        } catch (Exception e) {
+            log.error("MDM API调用异常: url={}", url, e);
+            throw new RuntimeException("MDM API调用失败: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 通用的MDM API GET请求方法
+     * 支持调用GET类型的MDM接口
+     *
+     * @param url          API完整URL（包含查询参数）
+     * @param responseType 响应类型
+     * @param rateLimitKey 限流key（用于区分不同接口的限流）
+     * @param <T>          响应类型泛型
+     * @return API响应对象
+     */
+    public <T> T callMdmApiGet(String url, Class<T> responseType, String rateLimitKey) {
+        // 检查限流
+        checkRateLimit(rateLimitKey);
+
+        log.info("调用MDM API (GET): url={}", url);
+
+        try {
+            // 构建认证请求头
+            Map<String, String> authHeaders = buildAuthHeaders();
+
+            // 构建HTTP请求头
+            HttpHeaders headers = new HttpHeaders();
+            authHeaders.forEach(headers::set);
+
+            // 构建请求实体
+            HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
+
+            // 发送GET请求
+            ResponseEntity<String> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    requestEntity,
+                    String.class
+            );
+
+            // 解析响应
+            if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
+                T apiResponse = JSON.parseObject(response.getBody(), responseType);
+                log.info("MDM API调用成功 (GET): url={}", url);
+                return apiResponse;
+            } else {
+                log.error("MDM API调用失败 (GET): url={}, statusCode={}, body={}",
+                        url, response.getStatusCode(), response.getBody());
+                throw new RuntimeException("MDM API调用失败: HTTP " + response.getStatusCode());
+            }
+
+        } catch (Exception e) {
+            log.error("MDM API调用异常 (GET): url={}", url, e);
+            throw new RuntimeException("MDM API调用失败: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 获取上次成功同步的时间戳
+     * 从Redis获取，如果不存在则返回默认时间（指定天数前）
+     *
+     * @param syncKey     同步时间戳的Redis key（如：mdm:sync:user:last_timestamp）
+     * @param defaultDays 默认天数（如果Redis中没有记录，返回多少天前的时间）
+     * @return ISO 8601格式的时间戳
+     */
+    public String getLastSyncTimestamp(String syncKey, int defaultDays) {
+        try {
+            Object timestamp = redisService.get(syncKey);
+            if (timestamp != null) {
+                String lastSyncTime = timestamp.toString();
+                log.info("获取上次同步时间戳: key={}, timestamp={}", syncKey, lastSyncTime);
+                return lastSyncTime;
+            }
+
+            // 如果没有上次同步时间，返回指定天数前的时间作为默认值
+            ZonedDateTime defaultTime = ZonedDateTime.now(ZoneId.of("Asia/Shanghai")).minusDays(defaultDays);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
+            String defaultTimestamp = defaultTime.format(formatter);
+            log.info("未找到上次同步时间戳，使用默认值（{}天前）: key={}, timestamp={}",
+                    defaultDays, syncKey, defaultTimestamp);
+            return defaultTimestamp;
+
+        } catch (Exception e) {
+            log.error("获取上次同步时间戳失败: key={}", syncKey, e);
+            // 发生异常时返回指定天数前的时间
+            ZonedDateTime defaultTime = ZonedDateTime.now(ZoneId.of("Asia/Shanghai")).minusDays(defaultDays);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
+            return defaultTime.format(formatter);
+        }
+    }
+
+    /**
+     * 保存同步时间戳到Redis
+     * 时间戳格式使用ISO 8601格式（yyyy-MM-dd'T'HH:mm:ssXXX）
+     *
+     * @param syncKey   同步时间戳的Redis key（如：mdm:sync:user:last_timestamp）
+     * @param timestamp 时间戳
+     */
+    public void saveLastSyncTimestamp(String syncKey, String timestamp) {
+        try {
+            redisService.set(syncKey, timestamp);
+            log.info("保存同步时间戳成功: key={}, timestamp={}", syncKey, timestamp);
+        } catch (Exception e) {
+            log.error("保存同步时间戳失败: key={}, timestamp={}", syncKey, timestamp, e);
+            throw new RuntimeException("保存同步时间戳失败: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 生成请求UUID
+     * 为每个API请求生成唯一标识符
+     *
+     * @return UUID字符串
+     */
+    public String generateRequestUuid() {
+        return java.util.UUID.randomUUID().toString();
+    }
+
+    /**
+     * 获取当前时间戳（ISO 8601格式）
+     */
+    String getCurrentTimestamp() {
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Asia/Shanghai"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
+        return now.format(formatter);
+    }
+
+    public static void main(String[] args) {
+        String s = generateSignature("ASH25101309132431", "5c3ce657c7fb4c29aa06c6d35df5eee9", "1762236266393");
+        System.out.println(s);
+    }
+}
