@@ -1,4 +1,6 @@
-
+25/11/27 17:34:04 INFO RetryInvocationHandler: Call From cyber-worker-test-8574cd4775-m8xkp/10.131.15.83 to mrs-adp-q02-node-master2femp.mrs-h69n.com:8032 failed on connection exception: java.net.ConnectException: Connection refused; For more details see:  http://wiki.apache.org/hadoop/ConnectionRefused, while invoking ApplicationClientProtocolPBClientImpl.getNewApplication over 18 after 19 failover attempts. Trying to failover after sleeping for 42745ms.
+25/11/27 17:34:47 INFO ConfiguredRMFailoverProxyProvider: Failing over to 19
+25/11/27 17:34:47 INFO RetryInvocationHandler: DestHost:destPort mrs-adp-q02-node-master3qkoz.mrs-h69n.com:8032 , LocalHost:localPort cyber-worker-test-8574cd4775-m8xkp/10.131.15.83:0. Failed on local exception: java.io.IOException: Couldn't set up IO streams: java.lang.IllegalArgumentException: Server has invalid Kerberos principal: mapred/hadoop.950c233d_ab6e_4ad9_ab28_f2766f074340.com@B2D05EE0_E921_40A8_A6FD_DCB7693B106B.COM, expecting: mapred/hadoop.950c233d_ab6e_4ad9_ab28_f2766f074340.com@950C233D_AB6E_4AD9_AB28_F2766F074340.COM, while invoking ApplicationClientProtocolPBClientImpl.getNewApplication over 19 after 20 failover attempts. Trying to failover after sleeping for 33880ms.
 
 
 
