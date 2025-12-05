@@ -1,0 +1,23 @@
+third:
+  login:
+    thirdPartyLoginPlatformConfig: anta
+    userInfoUrl: https://authtest.anta.com/oauth2.0/profile
+    accessTokenUrl: https://authtest.anta.com/oauth2.0/accessToken
+    clientId: 100264
+    clientPassword: d8ad6120b06d42d983dfe267e2a6d54f
+    redirectUrl: https://adp-test.anta.com/index
+    loginUrl: https://authtest.anta.com/oauth2.0/authorize?response_type=code&client_id=100264&redirect_uri=https://adp-test.anta.com/index
+    # logoutUrl: https://authtest.anta.com/logout?service=https://authtest.anta.com/oauth2.0/authorize?response_type=code&client_id=100264&redirect_uri=https://adp-test.anta.com/index
+    logoutUrl: https://authtest.anta.com/logout?service=https://adp-test.anta.com/index
+
+    loginAccountField: loginName
+    loginAccountFieldValue: employeeId
+    loginAccountThirdPartyIdValue: employeeId
+
+    tenantLoginName: SuperAdmin
+    loginAccountAliasNameValue: name
+    loginAccountLoginNameValue: employeeId
+    loginAccountUserNameValue: employeeId
+    loginAccountPhoneValue: mobilephone
+    loginAccountEmailValue: email
+
