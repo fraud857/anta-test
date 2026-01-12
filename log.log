@@ -1,3 +1,60 @@
+日志获取中
+2026-01-12 09:59:11 INFO  Worker: 10.131.8.25:7800 receives the metadata collection task
+2026-01-12 09:59:11 INFO  Metadata collection parameters information:
+2026-01-12 09:59:11 INFO  【taskId】:1911, 【recordId】:63391
+2026-01-12 09:59:11 INFO  【datasource type】:HIVE
+2026-01-12 09:59:11 INFO  【datasource id】:2009875419122475009
+2026-01-12 09:59:11 INFO  【datasource connection id】:2009875419193778177
+2026-01-12 09:59:11 INFO  【datasource jdbc url】:jdbc:hive2://mrs-adp-q02-node-master2femp.mrs-h69n.com:22550/test01_dev
+2026-01-12 09:59:11 INFO  【database name】:test01_dev
+2026-01-12 09:59:58 ERROR Hive getMetaData occurred exception.
+java.lang.RuntimeException: Authentication: simple 操作失败: null
+	at com.datacyber.cybermeta.jdbc.plugins.Hive3Plugin$HiveJdbcDialect.runSecured(Hive3Plugin.java:103)
+	at com.datacyber.cybermeta.jdbc.plugins.Hive3Plugin$HiveJdbcDialect.getConnection(Hive3Plugin.java:198)
+	at com.datacyber.cyberdata.worker.service.accessor.impl.HiveAccessService.getMetaData(HiveAccessService.java:130)
+	at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService.lambda$collect$0(MetadataCollectorService.java:253)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.UndeclaredThrowableException: null
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1894)
+	at com.datacyber.cybermeta.jdbc.plugins.Hive3Plugin$HiveJdbcDialect.runSecured(Hive3Plugin.java:99)
+	... 8 common frames omitted
+Caused by: java.sql.SQLException: Could not open client transport with JDBC Uri: jdbc:hive2://mrs-adp-q02-node-master2femp.mrs-h69n.com:22550/test01_dev: Peer indicated failure: PLAIN auth failed: org.apache.hive.service.auth.basic.BasicAuthenticationException: user[anonymous] basic authentication failed.
+	at org.apache.hive.jdbc.HiveConnection.<init>(HiveConnection.java:256)
+	at org.apache.hive.jdbc.HiveDriver.connect(HiveDriver.java:107)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:677)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:189)
+	at com.datacyber.cybermeta.jdbc.plugins.jdbc.DriverConnectionFactoryNoPool.openConnection(DriverConnectionFactoryNoPool.java:50)
+	at com.datacyber.cybermeta.jdbc.plugins.Hive3Plugin$HiveJdbcDialect.getHiveConnection(Hive3Plugin.java:203)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:423)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1878)
+	... 9 common frames omitted
+Caused by: org.apache.thrift.transport.TTransportException: Peer indicated failure: PLAIN auth failed: org.apache.hive.service.auth.basic.BasicAuthenticationException: user[anonymous] basic authentication failed.
+	at org.apache.thrift.transport.TSaslTransport.receiveSaslMessage(TSaslTransport.java:199)
+	at org.apache.thrift.transport.TSaslTransport.open(TSaslTransport.java:307)
+	at org.apache.thrift.transport.TSaslClientTransport.open(TSaslClientTransport.java:37)
+	at org.apache.hive.jdbc.HiveConnection.openTransport(HiveConnection.java:343)
+	at org.apache.hive.jdbc.HiveConnection.<init>(HiveConnection.java:228)
+	... 17 common frames omitted
+2026-01-12 09:59:58 INFO  Thread【MetaDataCollector_sub_thread_63391_0】Complete the current batch collection, table of count: 0
+2026-01-12 09:59:58 INFO  Start collecting object information.
+2026-01-12 09:59:58 INFO  Complete collect object information.
+2026-01-12 09:59:58 INFO  The metadata is retrieved and ready to be written to persistent storage.
+2026-01-12 09:59:58 INFO  A total of 0 tables are found in this collection task, which are written to persistent storage in 0 batches.
+2026-01-12 09:59:58 INFO  Writes to persistent storage have been completed
+2026-01-12 09:59:58 INFO  The collection task has been completed, A total of 0 tables have been collected.
+2026-01-12 09:59:58 INFO  Clean up the collection context information
+2026-01-12 09:59:58 INFO  END-EOF
+
+帮助
+
+
+
+
 25/11/27 17:34:04 INFO RetryInvocationHandler: Call From cyber-worker-test-8574cd4775-m8xkp/10.131.15.83 to mrs-adp-q02-node-master2femp.mrs-h69n.com:8032 failed on connection exception: java.net.ConnectException: Connection refused; For more details see:  http://wiki.apache.org/hadoop/ConnectionRefused, while invoking ApplicationClientProtocolPBClientImpl.getNewApplication over 18 after 19 failover attempts. Trying to failover after sleeping for 42745ms.
 25/11/27 17:34:47 INFO ConfiguredRMFailoverProxyProvider: Failing over to 19
 25/11/27 17:34:47 INFO RetryInvocationHandler: DestHost:destPort mrs-adp-q02-node-master3qkoz.mrs-h69n.com:8032 , LocalHost:localPort cyber-worker-test-8574cd4775-m8xkp/10.131.15.83:0. Failed on local exception: java.io.IOException: Couldn't set up IO streams: java.lang.IllegalArgumentException: Server has invalid Kerberos principal: mapred/hadoop.950c233d_ab6e_4ad9_ab28_f2766f074340.com@B2D05EE0_E921_40A8_A6FD_DCB7693B106B.COM, expecting: mapred/hadoop.950c233d_ab6e_4ad9_ab28_f2766f074340.com@950C233D_AB6E_4AD9_AB28_F2766F074340.COM, while invoking ApplicationClientProtocolPBClientImpl.getNewApplication over 19 after 20 failover attempts. Trying to failover after sleeping for 33880ms.
