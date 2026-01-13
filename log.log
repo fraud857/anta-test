@@ -1,3 +1,695 @@
+2026-01-13 16:23:21,336 | INFO  | [pool-39-thread-1] | Trying to connect to metastore with URI thrift://MRS-ADP-Q02-node-master3QKOz.mrs-h69n.com:9083 | org.apache.hadoop.hive.metastore.HiveMetaStoreClient.open(HiveMetaStoreClient.java:777)
+2026-01-13 16:23:21,337 | INFO  | [pool-39-thread-1] | HMSC::open(): Could not find delegation token. Creating KERBEROS-based thrift connection. | org.apache.hadoop.hive.metastore.HiveMetaStoreClient.open(HiveMetaStoreClient.java:844)
+2026-01-13 16:23:21,337 | INFO  | [pool-39-thread-1] | Whether to use hadoop rpc protection: true | org.apache.hadoop.hive.metastore.utils.MetaStoreUtils.getMetaStoreSaslProperties(MetaStoreUtils.java:1147)
+2026-01-13 16:23:21,346 | INFO  | [pool-39-thread-1] | Opened a connection to metastore, current connections: 3 | org.apache.hadoop.hive.metastore.HiveMetaStoreClient.open(HiveMetaStoreClient.java:871)
+2026-01-13 16:23:21,347 | INFO  | [pool-39-thread-1] | Connected to metastore. | org.apache.hadoop.hive.metastore.HiveMetaStoreClient.open(HiveMetaStoreClient.java:967)
+2026-01-13 16:23:21,347 | INFO  | [pool-39-thread-1] | RetryingMetaStoreClient proxy=class org.apache.hadoop.hive.ql.metadata.SessionHiveMetaStoreClient ugi=p_SuperAdmin@950C233D_AB6E_4AD9_AB28_F2766F074340.COM (auth:KERBEROS) retries=1 delay=1 lifetime=0 | org.apache.hadoop.hive.metastore.RetryingMetaStoreClient.<init>(RetryingMetaStoreClient.java:99)
+2026-01-13 16:23:21,881 | WARN  | [pool-39-thread-1] | Cannot find HUDI_CONF_DIR, please set it as the dir of hudi-defaults.conf | org.apache.hudi.common.config.DFSPropertiesConfiguration.getConfPathFromEnv(DFSPropertiesConfiguration.java:235)
+2026-01-13 16:23:21,912 | WARN  | [pool-39-thread-1] | Properties file file:/etc/hudi/conf/hudi-defaults.conf not found. Ignoring to load props file | org.apache.hudi.common.config.DFSPropertiesConfiguration.addPropsFromFile(DFSPropertiesConfiguration.java:158)
+2026-01-13 16:23:23,572 | INFO  | [pool-39-thread-1] | It took 1108 ms to build plan. | org.apache.spark.sql.execution.QueryExecution.logInfo(Logging.scala:60)
+2026-01-13 16:23:24,290 | INFO  | [pool-39-thread-1] | Code generated in 429.98129 ms | org.apache.spark.sql.catalyst.expressions.codegen.CodeGenerator.logInfo(Logging.scala:60)
+2026-01-13 16:23:24,492 | INFO  | [pool-39-thread-1] | Block broadcast_0 stored as values in memory (estimated size 777.7 KiB, free 433.6 MiB) | org.apache.spark.storage.memory.MemoryStore.logInfo(Logging.scala:60)
+2026-01-13 16:23:24,961 | INFO  | [pool-39-thread-1] | Block broadcast_0_piece0 stored as bytes in memory (estimated size 91.4 KiB, free 433.6 MiB) | org.apache.spark.storage.memory.MemoryStore.logInfo(Logging.scala:60)
+2026-01-13 16:23:24,965 | INFO  | [dispatcher-BlockManagerMaster] | Added broadcast_0_piece0 in memory on MRS-ADP-Q02-hdfs-groupMUwL0001.mrs-h69n.com:22787 (size: 91.4 KiB, free: 434.3 MiB) | org.apache.spark.storage.BlockManagerInfo.logInfo(Logging.scala:60)
+2026-01-13 16:23:24,998 | INFO  | [pool-39-thread-1] | Created broadcast 0 from  | org.apache.spark.SparkContext.logInfo(Logging.scala:60)
+2026-01-13 16:23:25,255 | WARN  | [pool-39-thread-1] | Request failed, Response code: 403; Request ID: 0000019BB673DD6981099C0EF15CDFC0; Request path: http://adp-cluster-dev.obs.cn-east-273.antacloud.com/data%2Fhive%2Ftest01.db%2Fb_foitem_copy | com.obs.services.internal.RestStorageService.invoke0(NativeMethodAccessorImpl.java:-2)
+2026-01-13 16:23:25,257 | WARN  | [pool-39-thread-1] | Storage|1|HTTP+XML|getObjectMetadata||||2026-01-13 16:23:25|2026-01-13 16:23:25|||403| | com.obs.services.AbstractClient.invoke0(NativeMethodAccessorImpl.java:-2)
+2026-01-13 16:23:25,266 | ERROR | [pool-39-thread-1] | sql execute error:SELECT * from test01.b_foitem_copy | com.datacyber.cyberdata.spark.CustomSqlHandler.lambda$main$0(CustomSqlHandler.java:228)
+2026-01-13 16:23:29,996 | ERROR | [Driver] | org.apache.hadoop.security.AccessControlException: getFileStatus on obs://adp-cluster-dev/data/hive/test01.db/b_foitem_copy: ResponseCode[403],ErrorCode[AccessDenied],ErrorMessage[null
+Request Error.],RequestId[0000019BB673DD6981099C0EF15CDFC0] | com.datacyber.cyberdata.spark.CustomSqlHandler.main(CustomSqlHandler.java:244)
+java.util.concurrent.ExecutionException: org.apache.hadoop.security.AccessControlException: getFileStatus on obs://adp-cluster-dev/data/hive/test01.db/b_foitem_copy: ResponseCode[403],ErrorCode[AccessDenied],ErrorMessage[null
+Request Error.],RequestId[0000019BB673DD6981099C0EF15CDFC0]
+	at java.util.concurrent.FutureTask.report(FutureTask.java:122) ~[?:1.8.0_462]
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192) ~[?:1.8.0_462]
+	at com.datacyber.cyberdata.spark.CustomSqlHandler.main(CustomSqlHandler.java:242) [custom-spark-submit-project.jar:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_462]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_462]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_462]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_462]
+	at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:740) [spark-yarn_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+Caused by: org.apache.hadoop.security.AccessControlException: getFileStatus on obs://adp-cluster-dev/data/hive/test01.db/b_foitem_copy: ResponseCode[403],ErrorCode[AccessDenied],ErrorMessage[null
+Request Error.],RequestId[0000019BB673DD6981099C0EF15CDFC0]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.translateException(OBSCommonUtils.java:422) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.translateException(OBSCommonUtils.java:691) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSPosixBucketUtils.innerFsGetObjectStatus(OBSPosixBucketUtils.java:564) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSFileSystem.innerGetFileStatus(OBSFileSystem.java:1948) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.lambda$getFileStatusWithRetry$8(OBSCommonUtils.java:1528) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSInvoker.retryByMaxTime(OBSInvoker.java:68) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSInvoker.retryByMaxTime(OBSInvoker.java:55) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.getFileStatusWithRetry(OBSCommonUtils.java:1527) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSFileSystem.getFileStatus(OBSFileSystem.java:1921) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.Globber.getFileStatus(Globber.java:122) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.Globber.doGlob(Globber.java:361) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.Globber.glob(Globber.java:212) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.FileSystem.globStatus(FileSystem.java:2236) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:285) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.listStatus(FileInputFormat.java:253) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.getSplits(FileInputFormat.java:342) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.spark.rdd.HadoopRDD.getPartitions(HadoopRDD.scala:210) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:501) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:483) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:61) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.collectFromPlan(Dataset.scala:4333) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$head$1(Dataset.scala:3316) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$withAction$2(Dataset.scala:4323) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.QueryExecution$.withInternalError(QueryExecution.scala:563) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$withAction$1(Dataset.scala:4321) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$6(SQLExecution.scala:140) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:218) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:119) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:936) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.$anonfun$withFuseMonitor$1(SparkSession.scala:942) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.defense.DefenseContext.withFuseMonitor(DefenseContext.scala:145) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.withFuseMonitor(SparkSession.scala:942) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:71) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.withAction(Dataset.scala:4321) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.head(Dataset.scala:3316) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.take(Dataset.scala:3539) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.getRows(Dataset.scala:280) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.showString(Dataset.scala:315) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at com.datacyber.cyberdata.spark.CustomSqlHandler.lambda$main$0(CustomSqlHandler.java:102) ~[custom-spark-submit-project.jar:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) ~[?:1.8.0_462]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) ~[?:1.8.0_462]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[?:1.8.0_462]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[?:1.8.0_462]
+	at java.lang.Thread.run(Thread.java:750) ~[?:1.8.0_462]
+Caused by: com.obs.services.exception.ObsException: com.obs.services.exception.ObsException: Error message:Request Error.OBS service Error Message. -- ResponseCode: 403, ResponseStatus: Forbidden, RequestId: 0000019BB673DD6981099C0EF15CDFC0, HostId: 36AAAQAAEAABAAAQAAEAABAAAQAAEAABAAAaI=AAAAAAAAAAAAAAAAAAAAAAAAAAheaders{error-message:Access Denied,request-id:0000019BB673DD6981099C0EF15CDFC0,content-length:0,id-2:36AAAQAAEAABAAAQAAEAABAAAQAAEAABAAAaI=AAAAAAAAAAAAAAAAAAAAAAAAAA,error-code:AccessDenied,x-reserved-indicator:396,date:Tue, 13 Jan 2026 08:23:25 GMT,}
+	at com.obs.services.internal.utils.ServiceUtils.changeFromServiceException(ServiceUtils.java:579) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractClient.doActionWithResult(AbstractClient.java:408) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractObjectClient.getObjectMetadata(AbstractObjectClient.java:660) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractPFSClient.getAttribute(AbstractPFSClient.java:164) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSPosixBucketUtils.innerFsGetObjectStatus(OBSPosixBucketUtils.java:546) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSFileSystem.innerGetFileStatus(OBSFileSystem.java:1948) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.lambda$getFileStatusWithRetry$8(OBSCommonUtils.java:1528) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSInvoker.retryByMaxTime(OBSInvoker.java:68) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSInvoker.retryByMaxTime(OBSInvoker.java:55) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.getFileStatusWithRetry(OBSCommonUtils.java:1527) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSFileSystem.getFileStatus(OBSFileSystem.java:1921) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.Globber.getFileStatus(Globber.java:122) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.Globber.doGlob(Globber.java:361) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.Globber.glob(Globber.java:212) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.FileSystem.globStatus(FileSystem.java:2236) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:285) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.listStatus(FileInputFormat.java:253) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.getSplits(FileInputFormat.java:342) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.spark.rdd.HadoopRDD.getPartitions(HadoopRDD.scala:210) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:501) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:483) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:61) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.collectFromPlan(Dataset.scala:4333) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$head$1(Dataset.scala:3316) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$withAction$2(Dataset.scala:4323) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.QueryExecution$.withInternalError(QueryExecution.scala:563) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$withAction$1(Dataset.scala:4321) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$6(SQLExecution.scala:140) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:218) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:119) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:936) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.$anonfun$withFuseMonitor$1(SparkSession.scala:942) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.defense.DefenseContext.withFuseMonitor(DefenseContext.scala:145) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.withFuseMonitor(SparkSession.scala:942) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:71) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.withAction(Dataset.scala:4321) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.head(Dataset.scala:3316) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.take(Dataset.scala:3539) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.getRows(Dataset.scala:280) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.showString(Dataset.scala:315) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at com.datacyber.cyberdata.spark.CustomSqlHandler.lambda$main$0(CustomSqlHandler.java:102) ~[custom-spark-submit-project.jar:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) ~[?:1.8.0_462]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) ~[?:1.8.0_462]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[?:1.8.0_462]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[?:1.8.0_462]
+	at java.lang.Thread.run(Thread.java:750) ~[?:1.8.0_462]
+Caused by: com.obs.services.internal.ServiceException: Request Error.
+	at com.obs.services.internal.RestStorageService.createServiceException(RestStorageService.java:702) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.internal.RestStorageService.handleRequestErrorResponse(RestStorageService.java:526) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.internal.RestStorageService.tryRequest(RestStorageService.java:512) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.internal.RestStorageService.performRequest(RestStorageService.java:387) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.internal.RestStorageService.performRestHead(RestStorageService.java:980) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.internal.service.ObsObjectBaseService.getObjectImpl(ObsObjectBaseService.java:229) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.internal.service.ObsObjectBaseService.getObjectMetadataImpl(ObsObjectBaseService.java:401) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractObjectClient.access$2000(AbstractObjectClient.java:60) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractObjectClient$14.action(AbstractObjectClient.java:665) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractObjectClient$14.action(AbstractObjectClient.java:661) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractClient.doActionWithResult(AbstractClient.java:398) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractObjectClient.getObjectMetadata(AbstractObjectClient.java:660) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractPFSClient.getAttribute(AbstractPFSClient.java:164) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSPosixBucketUtils.innerFsGetObjectStatus(OBSPosixBucketUtils.java:546) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSFileSystem.innerGetFileStatus(OBSFileSystem.java:1948) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.lambda$getFileStatusWithRetry$8(OBSCommonUtils.java:1528) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSInvoker.retryByMaxTime(OBSInvoker.java:68) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSInvoker.retryByMaxTime(OBSInvoker.java:55) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.getFileStatusWithRetry(OBSCommonUtils.java:1527) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSFileSystem.getFileStatus(OBSFileSystem.java:1921) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.Globber.getFileStatus(Globber.java:122) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.Globber.doGlob(Globber.java:361) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.Globber.glob(Globber.java:212) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.FileSystem.globStatus(FileSystem.java:2236) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:285) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.listStatus(FileInputFormat.java:253) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.getSplits(FileInputFormat.java:342) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.spark.rdd.HadoopRDD.getPartitions(HadoopRDD.scala:210) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:501) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:483) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:61) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.collectFromPlan(Dataset.scala:4333) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$head$1(Dataset.scala:3316) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$withAction$2(Dataset.scala:4323) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.QueryExecution$.withInternalError(QueryExecution.scala:563) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$withAction$1(Dataset.scala:4321) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$6(SQLExecution.scala:140) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:218) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:119) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:936) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.$anonfun$withFuseMonitor$1(SparkSession.scala:942) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.defense.DefenseContext.withFuseMonitor(DefenseContext.scala:145) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.withFuseMonitor(SparkSession.scala:942) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:71) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.withAction(Dataset.scala:4321) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.head(Dataset.scala:3316) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.take(Dataset.scala:3539) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.getRows(Dataset.scala:280) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.showString(Dataset.scala:315) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at com.datacyber.cyberdata.spark.CustomSqlHandler.lambda$main$0(CustomSqlHandler.java:102) ~[custom-spark-submit-project.jar:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) ~[?:1.8.0_462]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) ~[?:1.8.0_462]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[?:1.8.0_462]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[?:1.8.0_462]
+	at java.lang.Thread.run(Thread.java:750) ~[?:1.8.0_462]
+2026-01-13 16:23:30,000 | INFO  | [Driver] | SparkContext is stopping with exitCode 0. | org.apache.spark.SparkContext.logInfo(Logging.scala:60)
+2026-01-13 16:23:30,030 | INFO  | [Driver] | Stopped Spark web UI at http://MRS-ADP-Q02-hdfs-groupMUwL0001.mrs-h69n.com:22803 | org.apache.spark.ui.SparkUI.logInfo(Logging.scala:60)
+2026-01-13 16:23:30,060 | INFO  | [Driver] | Shutting down all executors | org.apache.spark.scheduler.cluster.YarnClusterSchedulerBackend.logInfo(Logging.scala:60)
+2026-01-13 16:23:30,064 | INFO  | [dispatcher-CoarseGrainedScheduler] | Asking each executor to shut down | org.apache.spark.scheduler.cluster.YarnSchedulerBackend$YarnDriverEndpoint.logInfo(Logging.scala:60)
+2026-01-13 16:23:30,200 | INFO  | [dispatcher-event-loop-0] | MapOutputTrackerMasterEndpoint stopped! | org.apache.spark.MapOutputTrackerMasterEndpoint.logInfo(Logging.scala:60)
+2026-01-13 16:23:30,223 | INFO  | [Driver] | MemoryStore cleared | org.apache.spark.storage.memory.MemoryStore.logInfo(Logging.scala:60)
+2026-01-13 16:23:30,224 | INFO  | [Driver] | BlockManager stopped | org.apache.spark.storage.BlockManager.logInfo(Logging.scala:60)
+2026-01-13 16:23:30,246 | INFO  | [Driver] | BlockManagerMaster stopped | org.apache.spark.storage.BlockManagerMaster.logInfo(Logging.scala:60)
+2026-01-13 16:23:30,252 | INFO  | [dispatcher-event-loop-1] | OutputCommitCoordinator stopped! | org.apache.spark.scheduler.OutputCommitCoordinator$OutputCommitCoordinatorEndpoint.logInfo(Logging.scala:60)
+2026-01-13 16:23:30,273 | INFO  | [Driver] | Successfully stopped SparkContext | org.apache.spark.SparkContext.logInfo(Logging.scala:60)
+2026-01-13 16:23:30,273 | INFO  | [Driver] | SparkContext is stopping with exitCode 0. | org.apache.spark.SparkContext.logInfo(Logging.scala:60)
+2026-01-13 16:23:30,273 | INFO  | [Driver] | SparkContext already stopped. | org.apache.spark.SparkContext.logInfo(Logging.scala:60)
+All resources have been released.
+2026-01-13 16:23:30,275 | ERROR | [Driver] | User class threw exception:  | org.apache.spark.deploy.yarn.ApplicationMaster.logError(Logging.scala:97)
+java.lang.RuntimeException: java.util.concurrent.ExecutionException: org.apache.hadoop.security.AccessControlException: getFileStatus on obs://adp-cluster-dev/data/hive/test01.db/b_foitem_copy: ResponseCode[403],ErrorCode[AccessDenied],ErrorMessage[null
+Request Error.],RequestId[0000019BB673DD6981099C0EF15CDFC0]
+	at com.datacyber.cyberdata.spark.CustomSqlHandler.main(CustomSqlHandler.java:248) ~[custom-spark-submit-project.jar:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_462]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_462]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_462]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_462]
+	at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:740) [spark-yarn_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+Caused by: java.util.concurrent.ExecutionException: org.apache.hadoop.security.AccessControlException: getFileStatus on obs://adp-cluster-dev/data/hive/test01.db/b_foitem_copy: ResponseCode[403],ErrorCode[AccessDenied],ErrorMessage[null
+Request Error.],RequestId[0000019BB673DD6981099C0EF15CDFC0]
+	at java.util.concurrent.FutureTask.report(FutureTask.java:122) ~[?:1.8.0_462]
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192) ~[?:1.8.0_462]
+	at com.datacyber.cyberdata.spark.CustomSqlHandler.main(CustomSqlHandler.java:242) ~[custom-spark-submit-project.jar:?]
+	... 5 more
+Caused by: org.apache.hadoop.security.AccessControlException: getFileStatus on obs://adp-cluster-dev/data/hive/test01.db/b_foitem_copy: ResponseCode[403],ErrorCode[AccessDenied],ErrorMessage[null
+Request Error.],RequestId[0000019BB673DD6981099C0EF15CDFC0]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.translateException(OBSCommonUtils.java:422) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.translateException(OBSCommonUtils.java:691) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSPosixBucketUtils.innerFsGetObjectStatus(OBSPosixBucketUtils.java:564) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSFileSystem.innerGetFileStatus(OBSFileSystem.java:1948) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.lambda$getFileStatusWithRetry$8(OBSCommonUtils.java:1528) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSInvoker.retryByMaxTime(OBSInvoker.java:68) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSInvoker.retryByMaxTime(OBSInvoker.java:55) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.getFileStatusWithRetry(OBSCommonUtils.java:1527) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSFileSystem.getFileStatus(OBSFileSystem.java:1921) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.Globber.getFileStatus(Globber.java:122) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.Globber.doGlob(Globber.java:361) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.Globber.glob(Globber.java:212) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.FileSystem.globStatus(FileSystem.java:2236) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:285) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.listStatus(FileInputFormat.java:253) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.getSplits(FileInputFormat.java:342) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.spark.rdd.HadoopRDD.getPartitions(HadoopRDD.scala:210) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:501) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:483) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:61) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.collectFromPlan(Dataset.scala:4333) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$head$1(Dataset.scala:3316) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$withAction$2(Dataset.scala:4323) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.QueryExecution$.withInternalError(QueryExecution.scala:563) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$withAction$1(Dataset.scala:4321) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$6(SQLExecution.scala:140) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:218) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:119) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:936) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.$anonfun$withFuseMonitor$1(SparkSession.scala:942) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.defense.DefenseContext.withFuseMonitor(DefenseContext.scala:145) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.withFuseMonitor(SparkSession.scala:942) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:71) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.withAction(Dataset.scala:4321) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.head(Dataset.scala:3316) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.take(Dataset.scala:3539) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.getRows(Dataset.scala:280) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.showString(Dataset.scala:315) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at com.datacyber.cyberdata.spark.CustomSqlHandler.lambda$main$0(CustomSqlHandler.java:102) ~[custom-spark-submit-project.jar:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) ~[?:1.8.0_462]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) ~[?:1.8.0_462]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[?:1.8.0_462]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[?:1.8.0_462]
+	at java.lang.Thread.run(Thread.java:750) ~[?:1.8.0_462]
+Caused by: com.obs.services.exception.ObsException: com.obs.services.exception.ObsException: Error message:Request Error.OBS service Error Message. -- ResponseCode: 403, ResponseStatus: Forbidden, RequestId: 0000019BB673DD6981099C0EF15CDFC0, HostId: 36AAAQAAEAABAAAQAAEAABAAAQAAEAABAAAaI=AAAAAAAAAAAAAAAAAAAAAAAAAAheaders{error-message:Access Denied,request-id:0000019BB673DD6981099C0EF15CDFC0,content-length:0,id-2:36AAAQAAEAABAAAQAAEAABAAAQAAEAABAAAaI=AAAAAAAAAAAAAAAAAAAAAAAAAA,error-code:AccessDenied,x-reserved-indicator:396,date:Tue, 13 Jan 2026 08:23:25 GMT,}
+	at com.obs.services.internal.utils.ServiceUtils.changeFromServiceException(ServiceUtils.java:579) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractClient.doActionWithResult(AbstractClient.java:408) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractObjectClient.getObjectMetadata(AbstractObjectClient.java:660) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractPFSClient.getAttribute(AbstractPFSClient.java:164) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSPosixBucketUtils.innerFsGetObjectStatus(OBSPosixBucketUtils.java:546) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSFileSystem.innerGetFileStatus(OBSFileSystem.java:1948) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.lambda$getFileStatusWithRetry$8(OBSCommonUtils.java:1528) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSInvoker.retryByMaxTime(OBSInvoker.java:68) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSInvoker.retryByMaxTime(OBSInvoker.java:55) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.getFileStatusWithRetry(OBSCommonUtils.java:1527) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSFileSystem.getFileStatus(OBSFileSystem.java:1921) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.Globber.getFileStatus(Globber.java:122) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.Globber.doGlob(Globber.java:361) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.Globber.glob(Globber.java:212) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.FileSystem.globStatus(FileSystem.java:2236) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:285) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.listStatus(FileInputFormat.java:253) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.getSplits(FileInputFormat.java:342) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.spark.rdd.HadoopRDD.getPartitions(HadoopRDD.scala:210) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:501) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:483) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:61) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.collectFromPlan(Dataset.scala:4333) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$head$1(Dataset.scala:3316) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$withAction$2(Dataset.scala:4323) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.QueryExecution$.withInternalError(QueryExecution.scala:563) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$withAction$1(Dataset.scala:4321) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$6(SQLExecution.scala:140) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:218) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:119) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:936) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.$anonfun$withFuseMonitor$1(SparkSession.scala:942) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.defense.DefenseContext.withFuseMonitor(DefenseContext.scala:145) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.withFuseMonitor(SparkSession.scala:942) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:71) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.withAction(Dataset.scala:4321) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.head(Dataset.scala:3316) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.take(Dataset.scala:3539) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.getRows(Dataset.scala:280) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.showString(Dataset.scala:315) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at com.datacyber.cyberdata.spark.CustomSqlHandler.lambda$main$0(CustomSqlHandler.java:102) ~[custom-spark-submit-project.jar:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) ~[?:1.8.0_462]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) ~[?:1.8.0_462]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[?:1.8.0_462]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[?:1.8.0_462]
+	at java.lang.Thread.run(Thread.java:750) ~[?:1.8.0_462]
+Caused by: com.obs.services.internal.ServiceException: Request Error.
+	at com.obs.services.internal.RestStorageService.createServiceException(RestStorageService.java:702) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.internal.RestStorageService.handleRequestErrorResponse(RestStorageService.java:526) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.internal.RestStorageService.tryRequest(RestStorageService.java:512) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.internal.RestStorageService.performRequest(RestStorageService.java:387) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.internal.RestStorageService.performRestHead(RestStorageService.java:980) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.internal.service.ObsObjectBaseService.getObjectImpl(ObsObjectBaseService.java:229) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.internal.service.ObsObjectBaseService.getObjectMetadataImpl(ObsObjectBaseService.java:401) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractObjectClient.access$2000(AbstractObjectClient.java:60) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractObjectClient$14.action(AbstractObjectClient.java:665) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractObjectClient$14.action(AbstractObjectClient.java:661) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractClient.doActionWithResult(AbstractClient.java:398) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractObjectClient.getObjectMetadata(AbstractObjectClient.java:660) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at com.obs.services.AbstractPFSClient.getAttribute(AbstractPFSClient.java:164) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSPosixBucketUtils.innerFsGetObjectStatus(OBSPosixBucketUtils.java:546) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSFileSystem.innerGetFileStatus(OBSFileSystem.java:1948) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.lambda$getFileStatusWithRetry$8(OBSCommonUtils.java:1528) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSInvoker.retryByMaxTime(OBSInvoker.java:68) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSInvoker.retryByMaxTime(OBSInvoker.java:55) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.getFileStatusWithRetry(OBSCommonUtils.java:1527) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.obs.OBSFileSystem.getFileStatus(OBSFileSystem.java:1921) ~[hadoop-huaweicloud-3.1.1-hw-54.6.6.jar:?]
+	at org.apache.hadoop.fs.Globber.getFileStatus(Globber.java:122) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.Globber.doGlob(Globber.java:361) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.Globber.glob(Globber.java:212) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.fs.FileSystem.globStatus(FileSystem.java:2236) ~[hadoop-common-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:285) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.listStatus(FileInputFormat.java:253) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.hadoop.mapred.FileInputFormat.getSplits(FileInputFormat.java:342) ~[hadoop-mapreduce-client-core-3.3.1-h0.cbu.mrs.360.r9.jar:?]
+	at org.apache.spark.rdd.HadoopRDD.getPartitions(HadoopRDD.scala:210) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at scala.Option.getOrElse(Option.scala:189) ~[scala-library-2.12.19.jar:?]
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290) ~[spark-core_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:501) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:483) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:61) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.collectFromPlan(Dataset.scala:4333) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$head$1(Dataset.scala:3316) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$withAction$2(Dataset.scala:4323) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.QueryExecution$.withInternalError(QueryExecution.scala:563) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.$anonfun$withAction$1(Dataset.scala:4321) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$6(SQLExecution.scala:140) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:218) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:119) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:936) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.$anonfun$withFuseMonitor$1(SparkSession.scala:942) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.defense.DefenseContext.withFuseMonitor(DefenseContext.scala:145) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.SparkSession.withFuseMonitor(SparkSession.scala:942) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:71) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.withAction(Dataset.scala:4321) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.head(Dataset.scala:3316) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.take(Dataset.scala:3539) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.getRows(Dataset.scala:280) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at org.apache.spark.sql.Dataset.showString(Dataset.scala:315) ~[spark-sql_2.12-3.5.6-h0.cbu.mrs.360.r9.jar:3.5.6-h0.cbu.mrs.360.r9]
+	at com.datacyber.cyberdata.spark.CustomSqlHandler.lambda$main$0(CustomSqlHandler.java:102) ~[custom-spark-submit-project.jar:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) ~[?:1.8.0_462]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) ~[?:1.8.0_462]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[?:1.8.0_462]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[?:1.8.0_462]
+	at java.lang.Thread.run(Thread.java:750) ~[?:1.8.0_462]
+2026-01-13 16:23:30,293 | INFO  | [Driver] | Final app status: FAILED, exitCode: 15, (reason: User class threw exception: java.lang.RuntimeException: java.util.concurrent.ExecutionException: org.apache.hadoop.security.AccessControlException: getFileStatus on obs://adp-cluster-dev/data/hive/test01.db/b_foitem_copy: ResponseCode[403],ErrorCode[AccessDenied],ErrorMessage[null
+Request Error.],RequestId[0000019BB673DD6981099C0EF15CDFC0]
+	at com.datacyber.cyberdata.spark.CustomSqlHandler.main(CustomSqlHandler.java:248)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:740)
+Caused by: java.util.concurrent.ExecutionException: org.apache.hadoop.security.AccessControlException: getFileStatus on obs://adp-cluster-dev/data/hive/test01.db/b_foitem_copy: ResponseCode[403],ErrorCode[AccessDenied],ErrorMessage[null
+Request Error.],RequestId[0000019BB673DD6981099C0EF15CDFC0]
+	at java.util.concurrent.FutureTask.report(FutureTask.java:122)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.datacyber.cyberdata.spark.CustomSqlHandler.main(CustomSqlHandler.java:242)
+	... 5 more
+Caused by: org.apache.hadoop.security.AccessControlException: getFileStatus on obs://adp-cluster-dev/data/hive/test01.db/b_foitem_copy: ResponseCode[403],ErrorCode[AccessDenied],ErrorMessage[null
+Request Error.],RequestId[0000019BB673DD6981099C0EF15CDFC0]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.translateException(OBSCommonUtils.java:422)
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.translateException(OBSCommonUtils.java:691)
+	at org.apache.hadoop.fs.obs.OBSPosixBucketUtils.innerFsGetObjectStatus(OBSPosixBucketUtils.java:564)
+	at org.apache.hadoop.fs.obs.OBSFileSystem.innerGetFileStatus(OBSFileSystem.java:1948)
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.lambda$getFileStatusWithRetry$8(OBSCommonUtils.java:1528)
+	at org.apache.hadoop.fs.obs.OBSInvoker.retryByMaxTime(OBSInvoker.java:68)
+	at org.apache.hadoop.fs.obs.OBSInvoker.retryByMaxTime(OBSInvoker.java:55)
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.getFileStatusWithRetry(OBSCommonUtils.java:1527)
+	at org.apache.hadoop.fs.obs.OBSFileSystem.getFileStatus(OBSFileSystem.java:1921)
+	at org.apache.hadoop.fs.Globber.getFileStatus(Globber.java:122)
+	at org.apache.hadoop.fs.Globber.doGlob(Globber.java:361)
+	at org.apache.hadoop.fs.Globber.glob(Globber.java:212)
+	at org.apache.hadoop.fs.FileSystem.globStatus(FileSystem.java:2236)
+	at org.apache.hadoop.mapred.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:285)
+	at org.apache.hadoop.mapred.FileInputFormat.listStatus(FileInputFormat.java:253)
+	at org.apache.hadoop.mapred.FileInputFormat.getSplits(FileInputFormat.java:342)
+	at org.apache.spark.rdd.HadoopRDD.getPartitions(HadoopRDD.scala:210)
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290)
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49)
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290)
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49)
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290)
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49)
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290)
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49)
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290)
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49)
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290)
+	at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:501)
+	at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:483)
+	at org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:61)
+	at org.apache.spark.sql.Dataset.collectFromPlan(Dataset.scala:4333)
+	at org.apache.spark.sql.Dataset.$anonfun$head$1(Dataset.scala:3316)
+	at org.apache.spark.sql.Dataset.$anonfun$withAction$2(Dataset.scala:4323)
+	at org.apache.spark.sql.execution.QueryExecution$.withInternalError(QueryExecution.scala:563)
+	at org.apache.spark.sql.Dataset.$anonfun$withAction$1(Dataset.scala:4321)
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$6(SQLExecution.scala:140)
+	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:218)
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:119)
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:936)
+	at org.apache.spark.sql.SparkSession.$anonfun$withFuseMonitor$1(SparkSession.scala:942)
+	at org.apache.spark.sql.defense.DefenseContext.withFuseMonitor(DefenseContext.scala:145)
+	at org.apache.spark.sql.SparkSession.withFuseMonitor(SparkSession.scala:942)
+	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:71)
+	at org.apache.spark.sql.Dataset.withAction(Dataset.scala:4321)
+	at org.apache.spark.sql.Dataset.head(Dataset.scala:3316)
+	at org.apache.spark.sql.Dataset.take(Dataset.scala:3539)
+	at org.apache.spark.sql.Dataset.getRows(Dataset.scala:280)
+	at org.apache.spark.sql.Dataset.showString(Dataset.scala:315)
+	at com.datacyber.cyberdata.spark.CustomSqlHandler.lambda$main$0(CustomSqlHandler.java:102)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: com.obs.services.exception.ObsException: Error message:Request Error.OBS service Error Message. -- ResponseCode: 403, ResponseStatus: Forbidden, RequestId: 0000019BB673DD6981099C0EF15CDFC0, HostId: 36AAAQAAEAABAAAQAAEAABAAAQAAEAABAAAaI=AAAAAAAAAAAAAAAAAAAAAAAAAAheaders{error-message:Access Denied,request-id:0000019BB673DD6981099C0EF15CDFC0,content-length:0,id-2:36AAAQAAEAABAAAQAAEAABAAAQAAEAABAAAaI=AAAAAAAAAAAAAAAAAAAAAAAAAA,error-code:AccessDenied,x-reserved-indicator:396,date:Tue, 13 Jan 2026 08:23:25 GMT,}
+	at com.obs.services.internal.utils.ServiceUtils.changeFromServiceException(ServiceUtils.java:579)
+	at com.obs.services.AbstractClient.doActionWithResult(AbstractClient.java:408)
+	at com.obs.services.AbstractObjectClient.getObjectMetadata(AbstractObjectClient.java:660)
+	at com.obs.services.AbstractPFSClient.getAttribute(AbstractPFSClient.java:164)
+	at org.apache.hadoop.fs.obs.OBSPosixBucketUtils.innerFsGetObjectStatus(OBSPosixBucketUtils.java:546)
+	... 64 more
+Caused by: com.obs.services.internal.ServiceException: Request Error. HEAD 'http://adp-cluster-dev.obs.cn-east-273.antacloud.com/data%2Fhive%2Ftest01.db%2Fb_foitem_copy' on Host 'adp-cluster-dev.obs.cn-east-273.antacloud.com' @ 'Tue, 13 Jan 2026 08:23:25 GMT' -- ResponseCode: 403, ResponseStatus: Forbidden, RequestId: 0000019BB673DD6981099C0EF15CDFC0, HostId: 36AAAQAAEAABAAAQAAEAABAAAQAAEAABAAAaI=AAAAAAAAAAAAAAAAAAAAAAAAAA
+	at com.obs.services.internal.RestStorageService.createServiceException(RestStorageService.java:702)
+	at com.obs.services.internal.RestStorageService.handleRequestErrorResponse(RestStorageService.java:526)
+	at com.obs.services.internal.RestStorageService.tryRequest(RestStorageService.java:512)
+	at com.obs.services.internal.RestStorageService.performRequest(RestStorageService.java:387)
+	at com.obs.services.internal.RestStorageService.performRestHead(RestStorageService.java:980)
+	at com.obs.services.internal.service.ObsObjectBaseService.getObjectImpl(ObsObjectBaseService.java:229)
+	at com.obs.services.internal.service.ObsObjectBaseService.getObjectMetadataImpl(ObsObjectBaseService.java:401)
+	at com.obs.services.AbstractObjectClient.access$2000(AbstractObjectClient.java:60)
+	at com.obs.services.AbstractObjectClient$14.action(AbstractObjectClient.java:665)
+	at com.obs.services.AbstractObjectClient$14.action(AbstractObjectClient.java:661)
+	at com.obs.services.AbstractClient.doActionWithResult(AbstractClient.java:398)
+	... 67 more
+) | org.apache.spark.deploy.yarn.ApplicationMaster.logInfo(Logging.scala:60)
+2026-01-13 16:23:30,313 | INFO  | [shutdown-hook-0] | Deleting staging directory hdfs://hacluster/user/p_SuperAdmin/.sparkStaging/application_1768094372387_0569 | org.apache.spark.deploy.yarn.ApplicationMaster.logInfo(Logging.scala:60)
+2026-01-13 16:23:30,334 | INFO  | [shutdown-hook-0] | Unregistering ApplicationMaster with FAILED (diag message: User class threw exception: java.lang.RuntimeException: java.util.concurrent.ExecutionException: org.apache.hadoop.security.AccessControlException: getFileStatus on obs://adp-cluster-dev/data/hive/test01.db/b_foitem_copy: ResponseCode[403],ErrorCode[AccessDenied],ErrorMessage[null
+Request Error.],RequestId[0000019BB673DD6981099C0EF15CDFC0]
+	at com.datacyber.cyberdata.spark.CustomSqlHandler.main(CustomSqlHandler.java:248)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:740)
+Caused by: java.util.concurrent.ExecutionException: org.apache.hadoop.security.AccessControlException: getFileStatus on obs://adp-cluster-dev/data/hive/test01.db/b_foitem_copy: ResponseCode[403],ErrorCode[AccessDenied],ErrorMessage[null
+Request Error.],RequestId[0000019BB673DD6981099C0EF15CDFC0]
+	at java.util.concurrent.FutureTask.report(FutureTask.java:122)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.datacyber.cyberdata.spark.CustomSqlHandler.main(CustomSqlHandler.java:242)
+	... 5 more
+Caused by: org.apache.hadoop.security.AccessControlException: getFileStatus on obs://adp-cluster-dev/data/hive/test01.db/b_foitem_copy: ResponseCode[403],ErrorCode[AccessDenied],ErrorMessage[null
+Request Error.],RequestId[0000019BB673DD6981099C0EF15CDFC0]
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.translateException(OBSCommonUtils.java:422)
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.translateException(OBSCommonUtils.java:691)
+	at org.apache.hadoop.fs.obs.OBSPosixBucketUtils.innerFsGetObjectStatus(OBSPosixBucketUtils.java:564)
+	at org.apache.hadoop.fs.obs.OBSFileSystem.innerGetFileStatus(OBSFileSystem.java:1948)
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.lambda$getFileStatusWithRetry$8(OBSCommonUtils.java:1528)
+	at org.apache.hadoop.fs.obs.OBSInvoker.retryByMaxTime(OBSInvoker.java:68)
+	at org.apache.hadoop.fs.obs.OBSInvoker.retryByMaxTime(OBSInvoker.java:55)
+	at org.apache.hadoop.fs.obs.OBSCommonUtils.getFileStatusWithRetry(OBSCommonUtils.java:1527)
+	at org.apache.hadoop.fs.obs.OBSFileSystem.getFileStatus(OBSFileSystem.java:1921)
+	at org.apache.hadoop.fs.Globber.getFileStatus(Globber.java:122)
+	at org.apache.hadoop.fs.Globber.doGlob(Globber.java:361)
+	at org.apache.hadoop.fs.Globber.glob(Globber.java:212)
+	at org.apache.hadoop.fs.FileSystem.globStatus(FileSystem.java:2236)
+	at org.apache.hadoop.mapred.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:285)
+	at org.apache.hadoop.mapred.FileInputFormat.listStatus(FileInputFormat.java:253)
+	at org.apache.hadoop.mapred.FileInputFormat.getSplits(FileInputFormat.java:342)
+	at org.apache.spark.rdd.HadoopRDD.getPartitions(HadoopRDD.scala:210)
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290)
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49)
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290)
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49)
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290)
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49)
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290)
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49)
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290)
+	at org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:49)
+	at org.apache.spark.rdd.RDD.$anonfun$partitions$2(RDD.scala:294)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.rdd.RDD.partitions(RDD.scala:290)
+	at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:501)
+	at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:483)
+	at org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:61)
+	at org.apache.spark.sql.Dataset.collectFromPlan(Dataset.scala:4333)
+	at org.apache.spark.sql.Dataset.$anonfun$head$1(Dataset.scala:3316)
+	at org.apache.spark.sql.Dataset.$anonfun$withAction$2(Dataset.scala:4323)
+	at org.apache.spark.sql.execution.QueryExecution$.withInternalError(QueryExecution.scala:563)
+	at org.apache.spark.sql.Dataset.$anonfun$withAction$1(Dataset.scala:4321)
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$6(SQLExecution.scala:140)
+	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:218)
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:119)
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:936)
+	at org.apache.spark.sql.SparkSession.$anonfun$withFuseMonitor$1(SparkSession.scala:942)
+	at org.apache.spark.sql.defense.DefenseContext.withFuseMonitor(DefenseContext.scala:145)
+	at org.apache.spark.sql.SparkSession.withFuseMonitor(SparkSession.scala:942)
+	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:71)
+	at org.apache.spark.sql.Dataset.withAction(Dataset.scala:4321)
+	at org.apache.spark.sql.Dataset.head(Dataset.scala:3316)
+	at org.apache.spark.sql.Dataset.take(Dataset.scala:3539)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 2026-01-13 13:42:59 INFO  Current task status: Running2026-01-13 13:42:59 INFO  Start execute SPARK_SQL on worker_host: 10.131.11.232:78002026-01-13 13:42:59 INFO  Current log dir: /opt/app/instanceLogs/20260113/instanceLogs/1968500511214804993/temp/2010950683592646657/1768282979365.log2026-01-13 13:42:59 INFO  Task executor: com.datacyber.cyberdata.worker.service.SparkSqlExecutorService2026-01-13 13:42:59 INFO  Start executing the Spark failover process2026-01-13 13:42:59 INFO  The spark applicationId is empty, preparing to start a new spark application2026-01-13 13:42:59 INFO  The environment is initialized2026-01-13 13:42:59 INFO  prepare the spark submit script......2026-01-13 13:42:59 INFO  spark task submit on yarn with depoly-mode cluster: 1001 2 iam_spark_dev2026-01-13 13:42:59 INFO  hadoop default fs: hdfs://hacluster2026-01-13 13:42:59 INFO  sql: SELECT * from test01.b_foitem_copy;2026-01-13 13:42:59 INFO  spark command:/opt/module/spark-3.5.6-mrs/bin/spark-submit --class com.datacyber.cyberdata.spark.CustomSqlHandler --master yarn --deploy-mode cluster --name test_saprk --conf 'spark.executor.memory=2g' --conf 'spark.driver.memory=1g' --conf 'spark.driver.cores=1' --conf 'spark.executor.cores=1' --conf 'spark.executor.instances=1' --conf 'spark.yarn.queue=default' /opt/module/spark-3.5.6-mrs/jars/custom-spark-submit-project.jar U0VMRUNUICogZnJvbSB0ZXN0MDEuYl9mb2l0ZW1fY29weTs= http://10.131.0.85:30303/worker/writeLog /opt/app/instanceLogs/20260113/instanceLogs/1968500511214804993/temp/2010950683592646657/results true  2026-01-13 13:42:59 INFO  spark-submit command : /bin/bash /home/datac/shell/2010950683592646657.sh2026-01-13 13:42:59 INFO  Successful prepare the spark submit script......2026-01-13 13:42:59 WARN  1001,2,iam_spark_dev, kerberos info: null2026-01-13 13:42:59 INFO  Temporary ENV Variables2026-01-13 13:42:59 INFO  -------------------------2026-01-13 13:42:59 INFO  {}2026-01-13 13:42:59 INFO  -------------------------2026-01-13 13:42:59 INFO  Full Command2026-01-13 13:42:59 INFO  -------------------------2026-01-13 13:42:59 INFO  /bin/bash /home/datac/shell/2010950683592646657.sh2026-01-13 13:42:59 INFO  -------------------------2026-01-13 13:42:59 INFO  --- Invoking Shell command line now ---2026-01-13 13:42:59 INFO  =================================================================Warning: Ignoring non-Spark config property: hoodie.schema.evolution.enableWarning: Ignoring non-Spark config property: hoodie.archive.delete.parallelismWarning: Ignoring non-Spark config property: hoodie.clean.asyncWarning: Ignoring non-Spark config property: hoodie.clean.trigger.strategyWarning: Ignoring non-Spark config property: hoodie.use.hive.write.styleWarning: Ignoring non-Spark config property: hoodie.keep.min.commitsWarning: Ignoring non-Spark config property: token.server.fs.obs.endpointWarning: Ignoring non-Spark config property: hoodie.datasource.write.keygenerator.classWarning: Ignoring non-Spark config property: hoodie.datasource.write.payload.classWarning: Ignoring non-Spark config property: hoodie.cleaner.policyWarning: Ignoring non-Spark config property: fs.obs.delegation.token.onlyWarning: Ignoring non-Spark config property: hoodie.cleaner.parallelismWarning: Ignoring non-Spark config property: hoodie.parquet.compression.codecWarning: Ignoring non-Spark config property: hoodie.datasource.hive_sync.enableWarning: Ignoring non-Spark config property: hoodie.bulkinsert.shuffle.parallelismWarning: Ignoring non-Spark config property: hoodie.parquet.small.file.limitWarning: Ignoring non-Spark config property: hoodie.cleaner.commits.retainedWarning: Ignoring non-Spark config property: hoodie.compact.inline.max.delta.commitsWarning: Ignoring non-Spark config property: hoodie.delete.shuffle.parallelismWarning: Ignoring non-Spark config property: hoodie.archive.hours.retainedWarning: Ignoring non-Spark config property: hoodie.archive.policyWarning: Ignoring non-Spark config property: hoodie.upsert.shuffle.parallelismWarning: Ignoring non-Spark config property: hoodie.clean.automaticWarning: Ignoring non-Spark config property: fs.obs.delegation.token.providers.ccWarning: Ignoring non-Spark config property: hoodie.compact.inlineWarning: Ignoring non-Spark config property: hoodie.insert.shuffle.parallelismWarning: Ignoring non-Spark config property: hoodie.datasource.write.hive_style_partitioningWarning: Ignoring non-Spark config property: hoodie.datasource.hive_sync.modeWarning: Ignoring non-Spark config property: hoodie.archive.asyncWarning: Ignoring non-Spark config property: hoodie.upgrade.enableWarning: Ignoring non-Spark config property: hoodie.cleaner.hours.retainedWarning: Ignoring non-Spark config property: hoodie.datasource.hive_sync.support_timestampWarning: Ignoring non-Spark config property: hoodie.rollback.parallelismWarning: Ignoring non-Spark config property: hoodie.archive.automaticWarning: Ignoring non-Spark config property: hoodie.schedule.compact.only.inlineWarning: Ignoring non-Spark config property: hoodie.keep.max.commitsWarning: Ignoring non-Spark config property: hoodie.run.compact.only.inline26/01/13 13:44:15 WARN SparkConf: The configuration key 'spark.yarn.access.hadoopFileSystems' has been deprecated as of Spark 3.0 and may be removed in the future. Please use the new key 'spark.kerberos.access.hadoopFileSystems' instead.26/01/13 13:44:15 WARN SparkConf: The configuration key 'spark.rpc.numRetries' has been deprecated as of Spark 2.2.0 and may be removed in the future. Not used anymore26/01/13 13:44:15 WARN SparkConf: The configuration key 'spark.yarn.kerberos.relogin.period' has been deprecated as of Spark 3.0 and may be removed in the future. Please use the new key 'spark.kerberos.relogin.period' instead.26/01/13 13:44:15 WARN SparkConf: The configuration key 'spark.executor.plugins' has been deprecated as of Spark 3.0.0 and may be removed in the future. Feature replaced with new plugin API. See Monitoring documentation.26/01/13 13:44:15 WARN SparkConf: The configuration key 'spark.reducer.maxReqSizeShuffleToMem' has been deprecated as of Spark 2.3 and may be removed in the future. Please use the new key 'spark.network.maxRemoteBlockSizeFetchToMem' instead.26/01/13 13:44:15 WARN SparkConf: The configuration key 'spark.rpc.retry.wait' has been deprecated as of Spark 2.2.0 and may be removed in the future. Not used anymore26/01/13 13:44:16 WARN SparkConf: The configuration key 'spark.yarn.access.hadoopFileSystems' has been deprecated as of Spark 3.0 and may be removed in the future. Please use the new key 'spark.kerberos.access.hadoopFileSystems' instead.26/01/13 13:44:16 WARN SparkConf: The configuration key 'spark.rpc.numRetries' has been deprecated as of Spark 2.2.0 and may be removed in the future. Not used anymore26/01/13 13:44:16 WARN SparkConf: The configuration key 'spark.yarn.kerberos.relogin.period' has been deprecated as of Spark 3.0 and may be removed in the future. Please use the new key 'spark.kerberos.relogin.period' instead.26/01/13 13:44:16 WARN SparkConf: The configuration key 'spark.executor.plugins' has been deprecated as of Spark 3.0.0 and may be removed in the future. Feature replaced with new plugin API. See Monitoring documentation.26/01/13 13:44:16 WARN SparkConf: The configuration key 'spark.reducer.maxReqSizeShuffleToMem' has been deprecated as of Spark 2.3 and may be removed in the future. Please use the new key 'spark.network.maxRemoteBlockSizeFetchToMem' instead.26/01/13 13:44:16 WARN SparkConf: The configuration key 'spark.rpc.retry.wait' has been deprecated as of Spark 2.2.0 and may be removed in the future. Not used anymore26/01/13 13:44:18 INFO AbstractService: Service org.apache.hadoop.yarn.client.api.impl.YarnClientImpl failed in state STARTEDjava.lang.IllegalArgumentException: Can't get Kerberos realm	at org.apache.hadoop.security.HadoopKerberosName.setConfiguration(HadoopKerberosName.java:78)	at org.apache.hadoop.security.UserGroupInformation.initialize(UserGroupInformation.java:322)	at org.apache.hadoop.security.UserGroupInformation.ensureInitialized(UserGroupInformation.java:307)	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:582)	at org.apache.hadoop.yarn.client.RMProxy.&lt;init&gt;(RMProxy.java:72)	at org.apache.hadoop.yarn.client.ClientRMProxy.&lt;init&gt;(ClientRMProxy.java:66)	at org.apache.hadoop.yarn.client.ClientRMProxy.createRMProxy(ClientRMProxy.java:79)	at org.apache.hadoop.yarn.client.api.impl.YarnClientImpl.serviceStart(YarnClientImpl.java:261)	at org.apache.hadoop.service.AbstractService.start(AbstractService.java:202)	at org.apache.spark.deploy.yarn.Client.submitApplication(Client.scala:213)	at org.apache.spark.deploy.yarn.Client.run(Client.scala:1403)	at org.apache.spark.deploy.yarn.YarnClusterApplication.start(Client.scala:1871)	at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:1076)	at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:201)	at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:224)	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:93)	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1167)	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1176)	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)Caused by: java.lang.IllegalArgumentException: KrbException: Cannot locate default realm	at java.security.jgss/javax.security.auth.kerberos.KerberosPrincipal.&lt;init&gt;(KerberosPrincipal.java:179)	at org.apache.hadoop.security.authentication.util.KerberosUtil.getDefaultRealm(KerberosUtil.java:128)	at org.apache.hadoop.security.HadoopKerberosName.setConfiguration(HadoopKerberosName.java:76)	... 18 moreException in thread "main" java.lang.IllegalArgumentException: Can't get Kerberos realm	at org.apache.hadoop.security.HadoopKerberosName.setConfiguration(HadoopKerberosName.java:78)	at org.apache.hadoop.security.UserGroupInformation.initialize(UserGroupInformation.java:322)	at org.apache.hadoop.security.UserGroupInformation.ensureInitialized(UserGroupInformation.java:307)	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:582)	at org.apache.hadoop.yarn.client.RMProxy.&lt;init&gt;(RMProxy.java:72)	at org.apache.hadoop.yarn.client.ClientRMProxy.&lt;init&gt;(ClientRMProxy.java:66)	at org.apache.hadoop.yarn.client.ClientRMProxy.createRMProxy(ClientRMProxy.java:79)	at org.apache.hadoop.yarn.client.api.impl.YarnClientImpl.serviceStart(YarnClientImpl.java:261)	at org.apache.hadoop.service.AbstractService.start(AbstractService.java:202)	at org.apache.spark.deploy.yarn.Client.submitApplication(Client.scala:213)	at org.apache.spark.deploy.yarn.Client.run(Client.scala:1403)	at org.apache.spark.deploy.yarn.YarnClusterApplication.start(Client.scala:1871)	at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:1076)	at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:201)	at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:224)	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:93)	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1167)	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1176)	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)Caused by: java.lang.IllegalArgumentException: KrbException: Cannot locate default realm	at java.security.jgss/javax.security.auth.kerberos.KerberosPrincipal.&lt;init&gt;(KerberosPrincipal.java:179)	at org.apache.hadoop.security.authentication.util.KerberosUtil.getDefaultRealm(KerberosUtil.java:128)	at org.apache.hadoop.security.HadoopKerberosName.setConfiguration(HadoopKerberosName.java:76)	... 18 more26/01/13 13:44:18 INFO ShutdownHookManager: Shutdown hook called26/01/13 13:44:18 INFO ShutdownHookManager: Deleting directory /tmp/spark-8cdb8aa8-b6dc-49f0-b17a-d365ca6a58d6
 
 
