@@ -1,3 +1,83 @@
+
+
+
+
+
+2026-01-13 09:36:47.087 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.security.SecurityUtilService - start parseTableIdInfo,tableId:TableId(catalogName=null, schemaName=test01, tableName=b_foitem_copy, metaType=null, tableALias=null),datasourceInfo:mrs_hive_spark_test,currentDB:,currentSchema:default, tempTableMapInfo:{}
+2026-01-13 09:36:47.087 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.security.SecurityUtilService - tableName:b_foitem_copy
+2026-01-13 09:36:47.087 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.security.SecurityUtilService - current schema:test01
+2026-01-13 09:36:47.087 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.security.SecurityUtilService - start get mrs_hive_spark_test 's datasourceName,db:test01
+2026-01-13 09:36:47.087 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.security.SecurityUtilService - data connections size:4
+2026-01-13 09:36:47.087 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.security.SecurityUtilService - current db's datasource name:mrs_hive_spark_test,env:2
+2026-01-13 09:36:47.087 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.security.SecurityUtilService - current datasource name:(mrs_hive_spark_test,2),currentEnv:2
+2026-01-13 09:36:47.087 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.security.SecurityUtilService - start checkIsOwner,catalog:mrs_hive_spark_test360,database:null,schema:test01,tableName:b_foitem_copy
+2026-01-13 09:36:47.107 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.security.SecurityUtilService - ownerId:1
+2026-01-13 09:36:47.107 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.security.SecurityUtilService - performUserId:1 is owner
+2026-01-13 09:36:47.107 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.security.SecurityUtilService - -----read
+2026-01-13 09:36:47.107 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.security.AbstractPrivilegesService - accessLogs size:0
+2026-01-13 09:36:47.107 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.security.AbstractPrivilegesService - getParseInfoByMqDtoOver:[]
+2026-01-13 09:36:47.107 ERROR [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.AbstractTaskExecutor - 1 spark: taskDispatchMqDto: TaskDispatchMqDto(resourceGroupId=1, taskType=SPARK_SQL, env=temp, convertedEnv=dev, tenantId=1001, projectId=1968500511214804993, mode=NORM, taskInstanceId=2010888723605905410, parentInstanceId=null, clusterName=iam_spark_dev, clusterType=HADOOP, storageClusterName=null, storageClusterId=1992956917615718402, taskName=test_saprk, taskConfig=[{"key":"isOpenAQE","value":"false"},{"key":"spark.driver.cores","value":"1"},{"key":"spark.driver.memory","value":"1g"},{"key":"spark.executor.cores","value":"1"},{"key":"spark.executor.instances","value":"1"},{"key":"spark.executor.memory","value":"2g"}], taskId=1998681423015882754, structureType=null, businessTime=Mon Jan 12 00:00:00 CST 2026, scheduleTime=Tue Jan 13 09:36:46 CST 2026, timeoutDuration=60, taskContent={"sqlContent":"SELECT * from test01.b_foitem_copy;","submitParam":[{"key":"isOpenAQE","value":"false"},{"key":"spark.driver.cores","value":"1"},{"key":"spark.driver.memory","value":"1g"},{"key":"spark.executor.cores","value":"1"},{"key":"spark.executor.instances","value":"1"},{"key":"spark.executor.memory","value":"2g"}]}, enforce=null, globalVariables={}, localVariables={}, componentInputParams=[], componentOutputParams=[], contextInputParameters=[], contextOutputParameters=null, operateType=START, deployMode=null, isSessionClusterTask=false, isSessionTask=false, sessionClusterName=null, sendTime=null, flinkProvidedDirs=null, flinkDependencyFileDirs=null, clusterVersion=null, hadoopUserName=null, onS3=false, workPath=/opt/app/instanceLogs/20260113/instanceLogs/1968500511214804993/temp/2010888723605905410, logPath=/opt/app/instanceLogs/20260113/instanceLogs/1968500511214804993/temp/2010888723605905410/1768268206981.log, logResultPath=/opt/app/instanceLogs/20260113/instanceLogs/1968500511214804993/temp/2010888723605905410/0123456789.log, applicationId=null, jobId=null, isKerberos=null, runMode=1, performUserId=1, performUser=SuperAdmin, performType=2, chargeUserId=112, chargeUser=liuAdmin2, kubernetesNamespace=null, kubernetesConfig=null, s3Bucket=null, s3Endpoint=null, s3AccessKey=null, s3SecretKey=null, pipeline=null, jdbcLoop=null, hiveConfHdfsDir=null, costTime=null, taskRunUserId=1, useWholeDB=false)
+2026-01-13 09:36:47.107 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.SparkExecutorService - spark: 执行executeTask线程名称:SPARK_SQL-TaskExecutor-2010888723605905410
+2026-01-13 09:36:47.107 ERROR [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.SparkExecutorService - 2 spark: currentDispatchDto: TaskDispatchMqDto(resourceGroupId=1, taskType=SPARK_SQL, env=temp, convertedEnv=dev, tenantId=1001, projectId=1968500511214804993, mode=NORM, taskInstanceId=2010888723605905410, parentInstanceId=null, clusterName=iam_spark_dev, clusterType=HADOOP, storageClusterName=null, storageClusterId=1992956917615718402, taskName=test_saprk, taskConfig=[{"key":"isOpenAQE","value":"false"},{"key":"spark.driver.cores","value":"1"},{"key":"spark.driver.memory","value":"1g"},{"key":"spark.executor.cores","value":"1"},{"key":"spark.executor.instances","value":"1"},{"key":"spark.executor.memory","value":"2g"}], taskId=1998681423015882754, structureType=null, businessTime=Mon Jan 12 00:00:00 CST 2026, scheduleTime=Tue Jan 13 09:36:46 CST 2026, timeoutDuration=60, taskContent={"sqlContent":"SELECT * from test01.b_foitem_copy;","submitParam":[{"key":"isOpenAQE","value":"false"},{"key":"spark.driver.cores","value":"1"},{"key":"spark.driver.memory","value":"1g"},{"key":"spark.executor.cores","value":"1"},{"key":"spark.executor.instances","value":"1"},{"key":"spark.executor.memory","value":"2g"}]}, enforce=null, globalVariables={}, localVariables={}, componentInputParams=[], componentOutputParams=[], contextInputParameters=[], contextOutputParameters=null, operateType=START, deployMode=null, isSessionClusterTask=false, isSessionTask=false, sessionClusterName=null, sendTime=null, flinkProvidedDirs=null, flinkDependencyFileDirs=null, clusterVersion=null, hadoopUserName=null, onS3=false, workPath=/opt/app/instanceLogs/20260113/instanceLogs/1968500511214804993/temp/2010888723605905410, logPath=/opt/app/instanceLogs/20260113/instanceLogs/1968500511214804993/temp/2010888723605905410/1768268206981.log, logResultPath=/opt/app/instanceLogs/20260113/instanceLogs/1968500511214804993/temp/2010888723605905410/0123456789.log, applicationId=null, jobId=null, isKerberos=null, runMode=1, performUserId=1, performUser=SuperAdmin, performType=2, chargeUserId=112, chargeUser=liuAdmin2, kubernetesNamespace=null, kubernetesConfig=null, s3Bucket=null, s3Endpoint=null, s3AccessKey=null, s3SecretKey=null, pipeline=null, jdbcLoop=null, hiveConfHdfsDir=null, costTime=null, taskRunUserId=1, useWholeDB=false)
+2026-01-13 09:36:47.107 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.SparkExecutorService - spark: spark failover获取到的appId为空
+2026-01-13 09:36:47.107 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.SparkExecutorService - spark: spark failover结果:false
+2026-01-13 09:36:47.110 ERROR [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.support.cluster.ClusterEngineManager - 集群:1001~~2~~iam_spark_dev 加载失败: java.lang.IllegalArgumentException: kerberosConf can not null, engine code: MRS_360_SPARK_TEST_DEV
+        at org.springframework.util.Assert.notNull(Assert.java:201)
+        at com.datacyber.cyberdata.worker.support.cluster.ClusterEngineManager.downloadClusterConfig(ClusterEngineManager.java:596)
+        at com.datacyber.cyberdata.worker.support.cluster.ClusterEngineManager.loadEngine(ClusterEngineManager.java:223)
+        at com.datacyber.cyberdata.worker.support.cluster.ClusterEngineManager.lambda$afterPropertiesSet$0(ClusterEngineManager.java:141)
+        at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+        at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305)
+        at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+
+2026-01-13 09:36:47.110 ERROR [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.AbstractTaskExecutor - Task execute failed 
+com.datacyber.cyberdata.worker.exception.WorkerException: 集群:1001~~2~~iam_spark_dev 加载失败: java.lang.IllegalArgumentException: kerberosConf can not null, engine code: MRS_360_SPARK_TEST_DEV
+        at org.springframework.util.Assert.notNull(Assert.java:201)
+        at com.datacyber.cyberdata.worker.support.cluster.ClusterEngineManager.downloadClusterConfig(ClusterEngineManager.java:596)
+        at com.datacyber.cyberdata.worker.support.cluster.ClusterEngineManager.loadEngine(ClusterEngineManager.java:223)
+        at com.datacyber.cyberdata.worker.support.cluster.ClusterEngineManager.lambda$afterPropertiesSet$0(ClusterEngineManager.java:141)
+        at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+        at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305)
+        at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+
+        at com.datacyber.cyberdata.worker.support.cluster.ClusterEngineManager.getHadoopConfigDir(ClusterEngineManager.java:463)
+        at com.datacyber.cyberdata.worker.service.SparkSqlExecutorService.buildYarnCommandOfNew(SparkSqlExecutorService.java:115)
+        at com.datacyber.cyberdata.worker.service.SparkSqlExecutorService.buildCommand(SparkSqlExecutorService.java:94)
+        at com.datacyber.cyberdata.worker.service.SparkExecutorService.executeTask(SparkExecutorService.java:178)
+        at com.datacyber.cyberdata.worker.service.AbstractTaskExecutor.runTask(AbstractTaskExecutor.java:310)
+        at com.datacyber.cyberdata.worker.service.AbstractTaskExecutor$$FastClassBySpringCGLIB$$4b20b1cc.invoke(<generated>)
+        at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:792)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithSpan(SpannedMethodInvocation.java:50)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithContinuation(SpannedMethodInvocation.java:42)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.proceed(SpannedMethodInvocation.java:36)
+        at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+2026-01-13 09:36:47.111 ERROR [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.SparkExecutorService - spark application id is empty
+2026-01-13 09:36:47.111 INFO  [cyber-worker] [SPARK_SQL-TaskExecutor-2010888723605905410] com.datacyber.cyberdata.worker.service.AbstractTaskExecutor - handleInstanceState: localVariables:{}
+
+
+
+
+
+
+
+
+
+
+
+
 日志获取中
 2026-01-12 09:59:11 INFO  Worker: 10.131.8.25:7800 receives the metadata collection task
 2026-01-12 09:59:11 INFO  Metadata collection parameters information:
