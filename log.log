@@ -1,3 +1,115 @@
+ed":"true","hbase.fileStream.cleaner.ttl.enable":"false"}
+2026-01-14 20:33:38.043 INFO  [cyber-worker] [work-async-executor-2] com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService - 获取HBase表列表，namespace: SHUXIN_TEST2
+2026-01-14 20:33:38.142 ERROR [cyber-worker] [work-async-executor-2] com.datacyber.cyberdata.common.task.datasource.JdbcDialectPluginHolder - 执行异常
+java.lang.RuntimeException: 获取hbase schema下的tables列表失败
+        at com.datacyber.cybermeta.jdbc.plugins.HbasePlugin$HbaseJdbcDialect.execute(HbasePlugin.java:70)
+        at com.datacyber.cybermeta.jdbc.plugins.HbasePlugin$HbaseJdbcDialect.getSchemaTables(HbasePlugin.java:102)
+        at com.datacyber.cyberdata.common.task.datasource.DataSourceConnectionHelper.lambda$listTablesHbase$2(DataSourceConnectionHelper.java:144)
+        at com.datacyber.cyberdata.common.task.datasource.JdbcDialectPluginHolder.executeWithContextClassLoader(JdbcDialectPluginHolder.java:430)
+        at com.datacyber.cyberdata.common.task.datasource.DataSourceConnectionHelper.listTablesHbase(DataSourceConnectionHelper.java:143)
+        at com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService.listMetaDataTables(HBaseAccessService.java:76)
+        at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService.collect(MetadataCollectorService.java:209)
+        at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService$$FastClassBySpringCGLIB$$d292a704.invoke(<generated>)
+        at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:792)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithSpan(SpannedMethodInvocation.java:50)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithContinuation(SpannedMethodInvocation.java:42)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.proceed(SpannedMethodInvocation.java:36)
+        at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.io.IOException: java.lang.reflect.InvocationTargetException
+        at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:240)
+        at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:218)
+        at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
+        at com.datacyber.cybermeta.jdbc.plugins.HbasePlugin$HbaseJdbcDialect.hbaseConnect(HbasePlugin.java:390)
+        at com.datacyber.cybermeta.jdbc.plugins.HbasePlugin$HbaseJdbcDialect.execute(HbasePlugin.java:66)
+        ... 19 common frames omitted
+Caused by: java.lang.reflect.InvocationTargetException: null
+        at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+        at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+        at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+        at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:238)
+        ... 23 common frames omitted
+Caused by: java.lang.NullPointerException: null
+        at org.apache.zookeeper.KeeperException.create(KeeperException.java:91)
+        at org.apache.zookeeper.KeeperException.create(KeeperException.java:51)
+        at org.apache.zookeeper.ZooKeeper.exists(ZooKeeper.java:1045)
+        at org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper.exists(RecoverableZooKeeper.java:221)
+        at org.apache.hadoop.hbase.zookeeper.ZKUtil.checkExists(ZKUtil.java:541)
+        at org.apache.hadoop.hbase.zookeeper.ZKClusterId.readClusterIdZNode(ZKClusterId.java:65)
+        at org.apache.hadoop.hbase.client.ZooKeeperRegistry.getClusterId(ZooKeeperRegistry.java:105)
+        at org.apache.hadoop.hbase.client.ConnectionManager$HConnectionImplementation.retrieveClusterId(ConnectionManager.java:880)
+        at org.apache.hadoop.hbase.client.ConnectionManager$HConnectionImplementation.<init>(ConnectionManager.java:636)
+        ... 28 common frames omitted
+2026-01-14 20:33:38.143 ERROR [cyber-worker] [work-async-executor-2] com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService - 获取HBase表列表失败
+com.datacyber.cyberdata.common.exception.CommonException: 执行异常
+        at com.datacyber.cyberdata.common.task.datasource.JdbcDialectPluginHolder.executeWithContextClassLoader(JdbcDialectPluginHolder.java:433)
+        at com.datacyber.cyberdata.common.task.datasource.DataSourceConnectionHelper.listTablesHbase(DataSourceConnectionHelper.java:143)
+        at com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService.listMetaDataTables(HBaseAccessService.java:76)
+        at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService.collect(MetadataCollectorService.java:209)
+        at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService$$FastClassBySpringCGLIB$$d292a704.invoke(<generated>)
+        at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:792)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithSpan(SpannedMethodInvocation.java:50)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithContinuation(SpannedMethodInvocation.java:42)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.proceed(SpannedMethodInvocation.java:36)
+        at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.RuntimeException: 获取hbase schema下的tables列表失败
+        at com.datacyber.cybermeta.jdbc.plugins.HbasePlugin$HbaseJdbcDialect.execute(HbasePlugin.java:70)
+        at com.datacyber.cybermeta.jdbc.plugins.HbasePlugin$HbaseJdbcDialect.getSchemaTables(HbasePlugin.java:102)
+        at com.datacyber.cyberdata.common.task.datasource.DataSourceConnectionHelper.lambda$listTablesHbase$2(DataSourceConnectionHelper.java:144)
+        at com.datacyber.cyberdata.common.task.datasource.JdbcDialectPluginHolder.executeWithContextClassLoader(JdbcDialectPluginHolder.java:430)
+        ... 16 common frames omitted
+Caused by: java.io.IOException: java.lang.reflect.InvocationTargetException
+        at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:240)
+        at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:218)
+        at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
+        at com.datacyber.cybermeta.jdbc.plugins.HbasePlugin$HbaseJdbcDialect.hbaseConnect(HbasePlugin.java:390)
+        at com.datacyber.cybermeta.jdbc.plugins.HbasePlugin$HbaseJdbcDialect.execute(HbasePlugin.java:66)
+        ... 19 common frames omitted
+Caused by: java.lang.reflect.InvocationTargetException: null
+        at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+        at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+        at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+        at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:238)
+        ... 23 common frames omitted
+Caused by: java.lang.NullPointerException: null
+        at org.apache.zookeeper.KeeperException.create(KeeperException.java:91)
+        at org.apache.zookeeper.KeeperException.create(KeeperException.java:51)
+        at org.apache.zookeeper.ZooKeeper.exists(ZooKeeper.java:1045)
+        at org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper.exists(RecoverableZooKeeper.java:221)
+        at org.apache.hadoop.hbase.zookeeper.ZKUtil.checkExists(ZKUtil.java:541)
+        at org.apache.hadoop.hbase.zookeeper.ZKClusterId.readClusterIdZNode(ZKClusterId.java:65)
+        at org.apache.hadoop.hbase.client.ZooKeeperRegistry.getClusterId(ZooKeeperRegistry.java:105)
+        at org.apache.hadoop.hbase.client.ConnectionManager$HConnectionImplementation.retrieveClusterId(ConnectionManager.java:880)
+        at org.apache.hadoop.hbase.client.ConnectionManager$HConnectionImplementation.<init>(ConnectionManager.java:636)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Affect(class count: 1 , method count: 1) cost in 233 ms, listenerId: 2
 method=com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService.extractHBaseCfgInfo location=AtExit
 ts=2026-01-14 20:14:24.544; [cost=1.393698ms] result=@ArrayList[
