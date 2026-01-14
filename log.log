@@ -1,3 +1,73 @@
+2026-01-14 20:11:05.615 INFO  [cyber-worker] [work-async-executor-8] com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService - detail信息:{}
+2026-01-14 20:11:05.615 INFO  [cyber-worker] [work-async-executor-8] com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService - cfgInfo:null
+2026-01-14 20:11:05.615 INFO  [cyber-worker] [work-async-executor-8] com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService - 获取HBase表列表，namespace: SHUXIN_TEST2
+2026-01-14 20:11:05.658 ERROR [cyber-worker] [work-async-executor-8] com.datacyber.cyberdata.common.task.datasource.JdbcDialectPluginHolder - 执行异常
+java.lang.RuntimeException: 获取hbase schema下的tables列表失败
+        at com.datacyber.cybermeta.jdbc.plugins.HbasePlugin$HbaseJdbcDialect.execute(HbasePlugin.java:70)
+        at com.datacyber.cybermeta.jdbc.plugins.HbasePlugin$HbaseJdbcDialect.getSchemaTables(HbasePlugin.java:102)
+        at com.datacyber.cyberdata.common.task.datasource.DataSourceConnectionHelper.lambda$listTablesHbase$2(DataSourceConnectionHelper.java:144)
+        at com.datacyber.cyberdata.common.task.datasource.JdbcDialectPluginHolder.executeWithContextClassLoader(JdbcDialectPluginHolder.java:430)
+        at com.datacyber.cyberdata.common.task.datasource.DataSourceConnectionHelper.listTablesHbase(DataSourceConnectionHelper.java:143)
+        at com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService.listMetaDataTables(HBaseAccessService.java:72)
+        at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService.collect(MetadataCollectorService.java:209)
+        at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService$$FastClassBySpringCGLIB$$d292a704.invoke(<generated>)
+        at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:792)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithSpan(SpannedMethodInvocation.java:50)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithContinuation(SpannedMethodInvocation.java:42)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.proceed(SpannedMethodInvocation.java:36)
+        at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.RuntimeException: json参数无hbase.zookeeper.quorum键值
+        at com.datacyber.cybermeta.jdbc.plugins.HbasePlugin$HbaseJdbcDialect.hbaseConnect(HbasePlugin.java:388)
+        at com.datacyber.cybermeta.jdbc.plugins.HbasePlugin$HbaseJdbcDialect.execute(HbasePlugin.java:66)
+        ... 19 common frames omitted
+2026-01-14 20:11:05.658 ERROR [cyber-worker] [work-async-executor-8] com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService - 获取HBase表列表失败
+com.datacyber.cyberdata.common.exception.CommonException: 执行异常
+        at com.datacyber.cyberdata.common.task.datasource.JdbcDialectPluginHolder.executeWithContextClassLoader(JdbcDialectPluginHolder.java:433)
+        at com.datacyber.cyberdata.common.task.datasource.DataSourceConnectionHelper.listTablesHbase(DataSourceConnectionHelper.java:143)
+        at com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService.listMetaDataTables(HBaseAccessService.java:72)
+        at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService.collect(MetadataCollectorService.java:209)
+        at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService$$FastClassBySpringCGLIB$$d292a704.invoke(<generated>)
+        at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:792)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithSpan(SpannedMethodInvocation.java:50)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithContinuation(SpannedMethodInvocation.java:42)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.proceed(SpannedMethodInvocation.java:36)
+        at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.RuntimeException: 获取hbase schema下的tables列表失败
+        at com.datacyber.cybermeta.jdbc.plugins.HbasePlugin$HbaseJdbcDialect.execute(HbasePlugin.java:70)
+        at com.datacyber.cybermeta.jdbc.plugins.HbasePlugin$HbaseJdbcDialect.getSchemaTables(HbasePlugin.java:102)
+        at com.datacyber.cyberdata.common.task.datasource.DataSourceConnectionHelper.lambda$listTablesHbase$2(DataSourceConnectionHelper.java:144)
+        at com.datacyber.cyberdata.common.task.datasource.JdbcDialectPluginHolder.executeWithContextClassLoader(JdbcDialectPluginHolder.java:430)
+        ... 16 common frames omitted
+Caused by: java.lang.RuntimeException: json参数无hbase.zookeeper.quorum键值
+        at com.datacyber.cybermeta.jdbc.plugins.HbasePlugin$HbaseJdbcDialect.hbaseConnect(HbasePlugin.java:388)
+        at com.datacyber.cybermeta.jdbc.plugins.HbasePlugin$HbaseJdbcDialect.execute(HbasePlugin.java:66)
+        ... 19 common frames omitted
+2026-01-14 20:11:05.658 ERROR [cyber-worker] [work-async-executor-8] com.datacyber.cyberdata.worker.service.metadata.MetadataColl
+
+
+
+
+
+
+
+
+
+
+
 2026-01-14 20:05:23 INFO  Worker: 10.131.9.72:7800 receives the metadata collection task2026-01-14 20:05:23 INFO  Metadata collection parameters information:2026-01-14 20:05:23 INFO  【taskId】:1913, 【recordId】:636752026-01-14 20:05:23 INFO  【datasource type】:HBASE2026-01-14 20:05:23 INFO  【datasource id】:20099038890101473302026-01-14 20:05:23 INFO  【datasource connection id】:20099038892701941782026-01-14 20:05:23 INFO  【datasource jdbc url】:null2026-01-14 20:05:23 INFO  【database name】:SHUXIN_TEST22026-01-14 20:05:23 INFO  【schema name】:SHUXIN_TEST22026-01-14 20:05:23 INFO  【use DBA Table】:false2026-01-14 20:05:23 ERROR An exception occurs in the collection task com.datacyber.metaserver.common.exception.MetadataException: 获取HBase表列表失败: 执行异常	at com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService.listMetaDataTables(HBaseAccessService.java:82)	at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService.collect(MetadataCollectorService.java:209)	at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService$$FastClassBySpringCGLIB$$d292a704.invoke(&lt;generated&gt;)	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:792)	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762)	at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithSpan(SpannedMethodInvocation.java:50)	at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithContinuation(SpannedMethodInvocation.java:42)	at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.proceed(SpannedMethodInvocation.java:36)	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115)	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)	at java.base/java.lang.Thread.run(Thread.java:829)2026-01-14 20:05:23 INFO  The collection task has been completed, A total of 0 tables have been collected.2026-01-14 20:05:23 INFO  Clean up the collection context information2026-01-14 20:05:23 INFO  END-EOF
 
 
