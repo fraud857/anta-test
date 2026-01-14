@@ -1,3 +1,68 @@
+Affect(class count: 1 , method count: 1) cost in 233 ms, listenerId: 2
+method=com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService.extractHBaseCfgInfo location=AtExit
+ts=2026-01-14 20:14:24.544; [cost=1.393698ms] result=@ArrayList[
+    @Object[][
+        @DatasourceConnection[
+            serialVersionUID=@Long[1],
+            id=@Long[2009903889270194178],
+            datasourceId=@Long[2009903889010147330],
+            env=@Integer[2],
+            state=@Integer[1],
+            collectSwitch=@Integer[0],
+            createEngineSwitch=@Integer[0],
+            loginType=@Integer[4],
+            host=null,
+            port=null,
+            dbName=null,
+            detail=@String[{}],
+            storageClusterId=@Long[1992956917615718402],
+            serverlessClusterId=null,
+            kerberosId=null,
+            sslTruststore=null,
+            sslKeystore=null,
+            iamRole=null,
+            connectivityInfo=@String[{"connectivityStatus":true,"errorMessage":"","resourceGroupId":1,"testTime":"2026-01-14T16:27:09.990"}],
+            catalogName=@String[hbase_test],
+            createUser=@Long[1],
+            createTime=@LocalDateTime[
+                MIN=@LocalDateTime[-999999999-01-01T00:00],
+                MAX=@LocalDateTime[+999999999-12-31T23:59:59.999999999],
+                serialVersionUID=@Long[6207766400415563566],
+                date=@LocalDate[2026-01-10],
+                time=@LocalTime[16:23:24],
+            ],
+            updateUser=null,
+            updateTime=@LocalDateTime[
+                MIN=@LocalDateTime[-999999999-01-01T00:00],
+                MAX=@LocalDateTime[+999999999-12-31T23:59:59.999999999],
+                serialVersionUID=@Long[6207766400415563566],
+                date=@LocalDate[2026-01-10],
+                time=@LocalTime[16:23:24],
+            ],
+            compatibleMode=null,
+            kerberosInfo=null,
+            connectivityStatus=@Integer[1],
+            testTime=@LocalDateTime[
+                MIN=@LocalDateTime[-999999999-01-01T00:00],
+                MAX=@LocalDateTime[+999999999-12-31T23:59:59.999999999],
+                serialVersionUID=@Long[6207766400415563566],
+                date=@LocalDate[2026-01-14],
+                time=@LocalTime[16:27:10],
+            ],
+        ],
+    ],
+    null,
+    null,
+]
+
+
+
+
+
+
+
+
+
 2026-01-14 20:11:05.615 INFO  [cyber-worker] [work-async-executor-8] com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService - detail信息:{}
 2026-01-14 20:11:05.615 INFO  [cyber-worker] [work-async-executor-8] com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService - cfgInfo:null
 2026-01-14 20:11:05.615 INFO  [cyber-worker] [work-async-executor-8] com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService - 获取HBase表列表，namespace: SHUXIN_TEST2
