@@ -1,3 +1,16 @@
+2026-01-14 20:05:23 INFO  Worker: 10.131.9.72:7800 receives the metadata collection task2026-01-14 20:05:23 INFO  Metadata collection parameters information:2026-01-14 20:05:23 INFO  【taskId】:1913, 【recordId】:636752026-01-14 20:05:23 INFO  【datasource type】:HBASE2026-01-14 20:05:23 INFO  【datasource id】:20099038890101473302026-01-14 20:05:23 INFO  【datasource connection id】:20099038892701941782026-01-14 20:05:23 INFO  【datasource jdbc url】:null2026-01-14 20:05:23 INFO  【database name】:SHUXIN_TEST22026-01-14 20:05:23 INFO  【schema name】:SHUXIN_TEST22026-01-14 20:05:23 INFO  【use DBA Table】:false2026-01-14 20:05:23 ERROR An exception occurs in the collection task com.datacyber.metaserver.common.exception.MetadataException: 获取HBase表列表失败: 执行异常	at com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService.listMetaDataTables(HBaseAccessService.java:82)	at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService.collect(MetadataCollectorService.java:209)	at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService$$FastClassBySpringCGLIB$$d292a704.invoke(&lt;generated&gt;)	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:792)	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762)	at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithSpan(SpannedMethodInvocation.java:50)	at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithContinuation(SpannedMethodInvocation.java:42)	at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.proceed(SpannedMethodInvocation.java:36)	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115)	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)	at java.base/java.lang.Thread.run(Thread.java:829)2026-01-14 20:05:23 INFO  The collection task has been completed, A total of 0 tables have been collected.2026-01-14 20:05:23 INFO  Clean up the collection context information2026-01-14 20:05:23 INFO  END-EOF
+
+
+
+
+
+
+
+
+
+
+
+
 2026-01-13 16:23:21,336 | INFO  | [pool-39-thread-1] | Trying to connect to metastore with URI thrift://MRS-ADP-Q02-node-master3QKOz.mrs-h69n.com:9083 | org.apache.hadoop.hive.metastore.HiveMetaStoreClient.open(HiveMetaStoreClient.java:777)
 2026-01-13 16:23:21,337 | INFO  | [pool-39-thread-1] | HMSC::open(): Could not find delegation token. Creating KERBEROS-based thrift connection. | org.apache.hadoop.hive.metastore.HiveMetaStoreClient.open(HiveMetaStoreClient.java:844)
 2026-01-13 16:23:21,337 | INFO  | [pool-39-thread-1] | Whether to use hadoop rpc protection: true | org.apache.hadoop.hive.metastore.utils.MetaStoreUtils.getMetaStoreSaslProperties(MetaStoreUtils.java:1147)
