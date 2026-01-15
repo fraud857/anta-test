@@ -1,3 +1,53 @@
+t = 90000
+2026-01-15 18:02:52.024 ERROR [cyber-worker] [ReadOnlyZKClient-10.131.194.252:2181,10.131.195.229:2181,10.131.195.79:2181@0x634d4eaf-SendThread(10.131.194.252:2181)] org.apache.zookeeper.client.ZooKeeperSaslClient - An error: (java.security.PrivilegedActionException: javax.security.sasl.SaslException: GSS initiate failed [Caused by GSSException: No valid credentials provided (Mechanism level: Server not found in Kerberos database (7) - LOOKING_UP_SERVER)]) occurred when evaluating Zookeeper Quorum Member's  received SASL token. Zookeeper Client will go to AUTH_FAILED state.
+2026-01-15 18:02:52.024 ERROR [cyber-worker] [ReadOnlyZKClient-10.131.194.252:2181,10.131.195.229:2181,10.131.195.79:2181@0x634d4eaf-SendThread(10.131.194.252:2181)] org.apache.zookeeper.ClientCnxn - SASL authentication with Zookeeper Quorum member failed.
+javax.security.sasl.SaslException: An error: (java.security.PrivilegedActionException: javax.security.sasl.SaslException: GSS initiate failed [Caused by GSSException: No valid credentials provided (Mechanism level: Server not found in Kerberos database (7) - LOOKING_UP_SERVER)]) occurred when evaluating Zookeeper Quorum Member's  received SASL token. Zookeeper Client will go to AUTH_FAILED state.
+        at org.apache.zookeeper.client.ZooKeeperSaslClient.createSaslToken(ZooKeeperSaslClient.java:338)
+        at org.apache.zookeeper.client.ZooKeeperSaslClient.createSaslToken(ZooKeeperSaslClient.java:303)
+        at org.apache.zookeeper.client.ZooKeeperSaslClient.sendSaslPacket(ZooKeeperSaslClient.java:366)
+        at org.apache.zookeeper.client.ZooKeeperSaslClient.initialize(ZooKeeperSaslClient.java:403)
+        at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1220)
+Caused by: java.security.PrivilegedActionException: null
+        at java.base/java.security.AccessController.doPrivileged(Native Method)
+        at java.base/javax.security.auth.Subject.doAs(Subject.java:423)
+        at org.apache.zookeeper.client.ZooKeeperSaslClient.createSaslToken(ZooKeeperSaslClient.java:317)
+        ... 4 common frames omitted
+Caused by: javax.security.sasl.SaslException: GSS initiate failed
+        at jdk.security.jgss/com.sun.security.sasl.gsskerb.GssKrb5Client.evaluateChallenge(GssKrb5Client.java:222)
+        at org.apache.zookeeper.client.ZooKeeperSaslClient$1.run(ZooKeeperSaslClient.java:320)
+        at org.apache.zookeeper.client.ZooKeeperSaslClient$1.run(ZooKeeperSaslClient.java:317)
+        ... 7 common frames omitted
+Caused by: org.ietf.jgss.GSSException: No valid credentials provided (Mechanism level: Server not found in Kerberos database (7) - LOOKING_UP_SERVER)
+        at java.security.jgss/sun.security.jgss.krb5.Krb5Context.initSecContext(Krb5Context.java:773)
+        at java.security.jgss/sun.security.jgss.GSSContextImpl.initSecContext(GSSContextImpl.java:266)
+        at java.security.jgss/sun.security.jgss.GSSContextImpl.initSecContext(GSSContextImpl.java:196)
+        at jdk.security.jgss/com.sun.security.sasl.gsskerb.GssKrb5Client.evaluateChallenge(GssKrb5Client.java:203)
+        ... 9 common frames omitted
+Caused by: sun.security.krb5.KrbException: Server not found in Kerberos database (7) - LOOKING_UP_SERVER
+        at java.security.jgss/sun.security.krb5.KrbTgsRep.<init>(KrbTgsRep.java:73)
+        at java.security.jgss/sun.security.krb5.KrbTgsReq.getReply(KrbTgsReq.java:226)
+        at java.security.jgss/sun.security.krb5.KrbTgsReq.sendAndGetCreds(KrbTgsReq.java:237)
+        at java.security.jgss/sun.security.krb5.internal.CredentialsUtil.serviceCredsSingle(CredentialsUtil.java:477)
+        at java.security.jgss/sun.security.krb5.internal.CredentialsUtil.serviceCreds(CredentialsUtil.java:340)
+        at java.security.jgss/sun.security.krb5.internal.CredentialsUtil.serviceCreds(CredentialsUtil.java:314)
+        at java.security.jgss/sun.security.krb5.internal.CredentialsUtil.acquireServiceCreds(CredentialsUtil.java:169)
+        at java.security.jgss/sun.security.krb5.Credentials.acquireServiceCreds(Credentials.java:490)
+        at java.security.jgss/sun.security.jgss.krb5.Krb5Context.initSecContext(Krb5Context.java:697)
+        ... 12 common frames omitted
+Caused by: sun.security.krb5.Asn1Exception: Identifier doesn't match expected value (906)
+        at java.security.jgss/sun.security.krb5.internal.KDCRep.init(KDCRep.java:140)
+        at java.security.jgss/sun.security.krb5.internal.TGSRep.init(TGSRep.java:65)
+        at java.security.jgss/sun.security.krb5.internal.TGSRep.<init>(TGSRep.java:60)
+        at java.security.jgss/sun.security.krb5.KrbTgsRep.<init>(KrbTgsRep.java:55)
+        ... 20 common frames omitted
+2026-01-15 18:02:52.024 INFO  [cyber-worker] [ReadOnlyZKClient-10.131.194.252:2181,10.131.195.229:2181,10.131.195.79:2181@0x634d4eaf-EventThread] org.apache.zookeeper.ClientCnxn - EventThread shut down for session: 0x1700006f6529ecd9
+2026-01-15 18:02:54.974 INFO  [cyber-worker] [pool-17-thread-1] com.datacyber.cyberdata.worker.HdfsTempFileDeleteService - HdfsTempFileDeleteService_线程扫描...
+2026-01-15 18:03:00.000 INFO  [cyber-worker] [scheduling-1] com.datacyber.cyberdata.worker.scheduler.WorkerSelfRegistry - HealthCheckEnable=true
+2026-01-15 18:03:00.033 INFO  [cyber-worker] [scheduling-1] com.datacyber.cyberdata.worker.api.service.impl.WorkerRpcServiceImpl - Heartbeat report url:http://coordinator-inner-dev:7500/coordinator/worker/heartbeat, request={"active":true,"availableThread":63,"cpuUsage":0.26,"createTime":"2026-01-15T17:53:37.517640000","env":"all","host":"10.131.9.118","jvmFreeMemory":4602356720,"jvmMaxMemory":6442450944,"maxCpu":3.0,"maxThread":64,"port":7800,"reservedJvmMb":7168.0,"resourceGroupNameEn":"default","sysFreeMemory":7608115200,"sysMaxMemory":12884901888,"type":"worker","updateTime":"2026-01-15T18:03:00.010821000","usedCpu":0.0,"usedJvmMb":0.0,"usedMemMb":0.0}, response={"code":"200","data":true,"msg":"成功"}
+
+
+
+
 :10:29.443 INFO  [cyber-worker] [work-async-executor-16] com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService - 获取HBase表列表，namespace: SHUXIN_TEST2
 2026-01-15 17:10:29.443 INFO  [cyber-worker] [work-async-executor-16] com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService - kerberosInfo enabled: true, principal: u_meta
 2026-01-15 17:10:29.467 INFO  [cyber-worker] [work-async-executor-16] com.datacyber.cyberdata.common.utils.KerberosUtils - Set JAAS config for ZooKeeper SASL: /home/datac/tmp/kerberos/jaas_d228607ca10f107299335db3c0957af0.conf
