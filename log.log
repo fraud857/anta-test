@@ -1,3 +1,102 @@
+
+2026-01-15 18:04:31.414 ERROR [cyber-worker] [work-async-executor-6] com.datacyber.cybermeta.jdbc.plugins.HbaseMrsPlugin$HbaseMrsJdbcDialect - runSecuredErr:executeSql:[]Get Schema Error: Zookeeper LIST could not be completed in 30000 ms
+java.lang.RuntimeException: executeSql:[]Get Schema Error: Zookeeper LIST could not be completed in 30000 ms
+        at com.datacyber.cybermeta.jdbc.plugins.jdbc.AbstractJdbcDialect.getSchemaTables(AbstractJdbcDialect.java:339)
+        at com.datacyber.cybermeta.jdbc.plugins.jdbc.AbstractJdbcDialect.getSchemaTables(AbstractJdbcDialect.java:248)
+        at com.datacyber.cybermeta.jdbc.plugins.HbaseMrsPlugin$HbaseMrsJdbcDialect.lambda$getSchemaTables$6(HbaseMrsPlugin.java:205)
+        at java.base/java.security.AccessController.doPrivileged(Native Method)
+        at java.base/javax.security.auth.Subject.doAs(Subject.java:423)
+        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1878)
+        at com.datacyber.cybermeta.jdbc.plugins.HbaseMrsPlugin$HbaseMrsJdbcDialect.runSecured(HbaseMrsPlugin.java:91)
+        at com.datacyber.cybermeta.jdbc.plugins.HbaseMrsPlugin$HbaseMrsJdbcDialect.getSchemaTables(HbaseMrsPlugin.java:205)
+        at com.datacyber.cyberdata.common.task.datasource.DataSourceConnectionHelper.lambda$listTablesHbaseMrsWithKerberos$7(DataSourceConnectionHelper.java:215)
+        at com.datacyber.cyberdata.common.task.datasource.JdbcDialectPluginHolder.executeWithContextClassLoader(JdbcDialectPluginHolder.java:430)
+        at com.datacyber.cyberdata.common.task.datasource.DataSourceConnectionHelper.lambda$listTablesHbaseMrsWithKerberos$8(DataSourceConnectionHelper.java:214)
+        at java.base/java.security.AccessController.doPrivileged(Native Method)
+        at java.base/javax.security.auth.Subject.doAs(Subject.java:423)
+        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1878)
+        at com.datacyber.cyberdata.common.utils.KerberosUtils.runSecured(KerberosUtils.java:82)
+        at com.datacyber.cyberdata.common.task.datasource.DataSourceConnectionHelper.listTablesHbaseMrsWithKerberos(DataSourceConnectionHelper.java:212)
+        at com.datacyber.cyberdata.worker.service.accessor.impl.HBaseAccessService.listMetaDataTables(HBaseAccessService.java:88)
+        at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService.collect(MetadataCollectorService.java:209)
+        at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService$$FastClassBySpringCGLIB$$d292a704.invoke(<generated>)
+        at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:792)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithSpan(SpannedMethodInvocation.java:50)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithContinuation(SpannedMethodInvocation.java:42)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.proceed(SpannedMethodInvocation.java:36)
+        at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: org.apache.phoenix.exception.PhoenixIOException: Zookeeper LIST could not be completed in 30000 ms
+        at org.apache.phoenix.util.ClientUtil.parseServerException(ClientUtil.java:69)
+        at org.apache.phoenix.query.ConnectionQueryServicesImpl.ensureTableCreated(ConnectionQueryServicesImpl.java:1806)
+        at org.apache.phoenix.query.ConnectionQueryServicesImpl.createTable(ConnectionQueryServicesImpl.java:2267)
+        at org.apache.phoenix.query.DelegateConnectionQueryServices.createTable(DelegateConnectionQueryServices.java:159)
+        at org.apache.phoenix.schema.MetaDataClient.createTableInternal(MetaDataClient.java:3278)
+        at org.apache.phoenix.schema.MetaDataClient.createTable(MetaDataClient.java:1064)
+        at org.apache.phoenix.compile.CreateTableCompiler$CreateTableMutationPlan.execute(CreateTableCompiler.java:491)
+        at org.apache.phoenix.jdbc.PhoenixStatement$2.call(PhoenixStatement.java:573)
+        at org.apache.phoenix.jdbc.PhoenixStatement$2.call(PhoenixStatement.java:538)
+        at org.apache.phoenix.call.CallRunner.run(CallRunner.java:53)
+        at org.apache.phoenix.jdbc.PhoenixStatement.executeMutation(PhoenixStatement.java:537)
+        at org.apache.phoenix.jdbc.PhoenixStatement.executeMutation(PhoenixStatement.java:525)
+        at org.apache.phoenix.jdbc.PhoenixStatement.executeUpdate(PhoenixStatement.java:2244)
+        at org.apache.phoenix.query.ConnectionQueryServicesImpl$12.call(ConnectionQueryServicesImpl.java:3657)
+        at org.apache.phoenix.query.ConnectionQueryServicesImpl$12.call(ConnectionQueryServicesImpl.java:3603)
+        at org.apache.phoenix.util.PhoenixContextExecutor.call(PhoenixContextExecutor.java:76)
+        at org.apache.phoenix.query.ConnectionQueryServicesImpl.init(ConnectionQueryServicesImpl.java:3603)
+        at org.apache.phoenix.jdbc.PhoenixDriver.getConnectionQueryServices(PhoenixDriver.java:272)
+        at org.apache.phoenix.jdbc.PhoenixEmbeddedDriver.createConnection(PhoenixEmbeddedDriver.java:150)
+        at org.apache.phoenix.jdbc.PhoenixDriver.connect(PhoenixDriver.java:229)
+        at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:677)
+        at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:189)
+        at com.datacyber.cybermeta.jdbc.plugins.jdbc.DriverConnectionFactoryNoPool.openConnection(DriverConnectionFactoryNoPool.java:50)
+        at com.datacyber.cybermeta.jdbc.plugins.jdbc.AbstractJdbcDialect.getSchemaTables(AbstractJdbcDialect.java:260)
+        ... 30 common frames omitted
+Caused by: org.apache.hadoop.hbase.DoNotRetryIOException: Zookeeper LIST could not be completed in 30000 ms
+        at org.apache.hadoop.hbase.zookeeper.ReadOnlyZKClient.lambda$getTimerTask$0(ReadOnlyZKClient.java:285)
+        at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:713)
+        at org.apache.hbase.thirdparty.io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+        at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:701)
+        at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:788)
+        at org.apache.hbase.thirdparty.io.netty.util.Hashe
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 t = 90000
 2026-01-15 18:02:52.024 ERROR [cyber-worker] [ReadOnlyZKClient-10.131.194.252:2181,10.131.195.229:2181,10.131.195.79:2181@0x634d4eaf-SendThread(10.131.194.252:2181)] org.apache.zookeeper.client.ZooKeeperSaslClient - An error: (java.security.PrivilegedActionException: javax.security.sasl.SaslException: GSS initiate failed [Caused by GSSException: No valid credentials provided (Mechanism level: Server not found in Kerberos database (7) - LOOKING_UP_SERVER)]) occurred when evaluating Zookeeper Quorum Member's  received SASL token. Zookeeper Client will go to AUTH_FAILED state.
 2026-01-15 18:02:52.024 ERROR [cyber-worker] [ReadOnlyZKClient-10.131.194.252:2181,10.131.195.229:2181,10.131.195.79:2181@0x634d4eaf-SendThread(10.131.194.252:2181)] org.apache.zookeeper.ClientCnxn - SASL authentication with Zookeeper Quorum member failed.
