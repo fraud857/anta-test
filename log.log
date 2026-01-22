@@ -1,3 +1,127 @@
+2026-01-22 15:08:30 INFO  Current task status: Running
+2026-01-22 15:08:30 INFO  Start execute HIVE on worker_host: 10.131.8.19:7800
+2026-01-22 15:08:30 INFO  Current log dir: /opt/app/instanceLogs/20260122/instanceLogs/2012887764074090498/temp/2014233698000322561/1769065710945.log
+2026-01-22 15:08:31 INFO  Task executor: com.datacyber.cyberdata.worker.service.JdbcSQLExecutorService
+2026-01-22 15:08:31 INFO  kerberos principal:u_adp_proxyuser
+2026-01-22 15:08:31 INFO  Start execute jdbc task:111,taskID:2013435106136399874
+2026-01-22 15:08:31 INFO  get jdbc plugin:com.datacyber.cybermeta.jdbc.plugins.HiveMrsPlugin$HiveJdbcDialect@5dddb1dc
+2026-01-22 15:08:31 INFO  Hive Start execution
+2026-01-22 15:08:31 INFO  Start create connection
+2026-01-22 15:08:31 INFO  Create connection complete
+2026-01-22 15:08:31 INFO  Start log thread
+2026-01-22 15:08:31 INFO  start execute sql:show tables
+2026-01-22 15:08:31 INFO  execute result column:[SQL:show tables, Copy:true, tab_name]
+2026-01-22 15:08:31 INFO  appId:null
+2026-01-22 15:08:31 INFO  HIVE Execution complete
+2026-01-22 15:08:31 INFO  excutorContext.InstanceState: SUCCEED
+2026-01-22 15:08:31 INFO  Final task status: Run successfully
+2026-01-22 15:08:31 INFO  Cost time is: 0.741s
+2026-01-22 15:08:31 INFO  END-EOF
+
+
+
+
+
+
+2026-01-22 15:07:52 INFO  Current task status: Running
+2026-01-22 15:07:52 INFO  Start execute HIVE on worker_host: 10.131.8.19:7800
+2026-01-22 15:07:52 INFO  Current log dir: /opt/app/instanceLogs/20260122/instanceLogs/2012887764074090498/temp/2014233537912127490/1769065672779.log
+2026-01-22 15:07:52 INFO  Task executor: com.datacyber.cyberdata.worker.service.JdbcSQLExecutorService
+2026-01-22 15:07:53 INFO  kerberos principal:u_adp_proxyuser
+2026-01-22 15:07:53 INFO  Start execute jdbc task:111,taskID:2013435106136399874
+2026-01-22 15:07:53 INFO  get jdbc plugin:com.datacyber.cybermeta.jdbc.plugins.HiveMrsPlugin$HiveJdbcDialect@207f0aec
+2026-01-22 15:07:53 INFO  Hive Start execution
+2026-01-22 15:07:53 INFO  Start create connection
+2026-01-22 15:07:53 ERROR sqlErr:Authentication: kerberos 登录失败: null
+java.lang.RuntimeException: Authentication: kerberos 登录失败: null
+	at com.datacyber.cybermeta.jdbc.plugins.HiveMrsPlugin$HiveJdbcDialect.runSecured(HiveMrsPlugin.java:99)
+	at com.datacyber.cybermeta.jdbc.plugins.HiveMrsPlugin$HiveJdbcDialect.getConnection(HiveMrsPlugin.java:220)
+	at com.datacyber.cyberdata.worker.service.JdbcSQLExecutorService.executeTask(JdbcSQLExecutorService.java:259)
+	at com.datacyber.cyberdata.worker.service.AbstractTaskExecutor.runTask(AbstractTaskExecutor.java:309)
+	at com.datacyber.cyberdata.worker.service.AbstractTaskExecutor$$FastClassBySpringCGLIB$$4b20b1cc.invoke(&lt;generated&gt;)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:792)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762)
+	at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithSpan(SpannedMethodInvocation.java:50)
+	at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithContinuation(SpannedMethodInvocation.java:42)
+	at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.proceed(SpannedMethodInvocation.java:36)
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.UndeclaredThrowableException: null
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1894)
+	at com.datacyber.cybermeta.jdbc.plugins.HiveMrsPlugin$HiveJdbcDialect.runSecured(HiveMrsPlugin.java:95)
+	... 16 common frames omitted
+Caused by: java.sql.SQLException: org.apache.hive.jdbc.ZooKeeperHiveClientException: Unable to read HiveServer2 configs from ZooKeeper
+	at org.apache.hive.jdbc.HiveConnection.&lt;init&gt;(HiveConnection.java:170)
+	at org.apache.hive.jdbc.HiveDriver.connect(HiveDriver.java:107)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:677)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:189)
+	at com.datacyber.cybermeta.jdbc.plugins.jdbc.DriverConnectionFactoryNoPool.openConnection(DriverConnectionFactoryNoPool.java:50)
+	at com.datacyber.cybermeta.jdbc.plugins.HiveMrsPlugin$HiveJdbcDialect.getHiveConnection(HiveMrsPlugin.java:225)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:423)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1878)
+	... 17 common frames omitted
+Caused by: org.apache.hive.jdbc.ZooKeeperHiveClientException: Unable to read HiveServer2 configs from ZooKeeper
+	at org.apache.hive.jdbc.ZooKeeperHiveClientHelper.configureConnParams(ZooKeeperHiveClientHelper.java:147)
+	at org.apache.hive.jdbc.Utils.configureConnParamsFromZooKeeper(Utils.java:511)
+	at org.apache.hive.jdbc.Utils.parseURL(Utils.java:334)
+	at org.apache.hive.jdbc.HiveConnection.&lt;init&gt;(HiveConnection.java:168)
+	... 25 common frames omitted
+Caused by: org.apache.zookeeper.KeeperException$SessionClosedRequireAuthException: KeeperErrorCode = Session closed because client failed to authenticate for /hiveserver2
+	at org.apache.zookeeper.KeeperException.create(KeeperException.java:153)
+	at org.apache.zookeeper.KeeperException.create(KeeperException.java:54)
+	at org.apache.zookeeper.ZooKeeper.getChildren(ZooKeeper.java:2869)
+	at org.apache.curator.framework.imps.GetChildrenBuilderImpl$3.call(GetChildrenBuilderImpl.java:242)
+	at org.apache.curator.framework.imps.GetChildrenBuilderImpl$3.call(GetChildrenBuilderImpl.java:231)
+	at org.apache.curator.RetryLoop.callWithRetry(RetryLoop.java:93)
+	at org.apache.curator.framework.imps.GetChildrenBuilderImpl.pathInForeground(GetChildrenBuilderImpl.java:228)
+	at org.apache.curator.framework.imps.GetChildrenBuilderImpl.forPath(GetChildrenBuilderImpl.java:219)
+	at org.apache.curator.framework.imps.GetChildrenBuilderImpl.forPath(GetChildrenBuilderImpl.java:41)
+	at org.apache.hive.jdbc.ZooKeeperHiveClientHelper.getServerHosts(ZooKeeperHiveClientHelper.java:98)
+	at org.apache.hive.jdbc.ZooKeeperHiveClientHelper.configureConnParams(ZooKeeperHiveClientHelper.java:142)
+	... 28 common frames omitted
+2026-01-22 15:07:53 INFO  excutorContext.InstanceState: FAILED_ERROR
+2026-01-22 15:07:53 INFO  Task failed status: Error failed
+2026-01-22 15:07:53 INFO  Final task status: Error failed
+2026-01-22 15:07:53 INFO  Cost time is: 0.659s
+2026-01-22 15:07:53 INFO  END-EOF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 2026-01-15 20:37:47.062 ERROR [cyber-worker] [FLINK_SQL-TaskExecutor-2011779845563838465] com.datacyber.cyberdata.dao.core.util.KerberosPersonalUtils - 未找到引擎集群: clusterName=FLINK_IAM_DEV, tenantId=1001
 2026-01-15 20:37:47.315 ERROR [cyber-worker] [FLINK_SQL-TaskExecutor-2011779845563838465] com.datacyber.cyberdata.worker.service.AbstractTaskExecutor - Task execute failed 
 com.datacyber.cyberdata.worker.exception.WorkerException: you must bind kerberos in this cluster, please check flink engine config in project
