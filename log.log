@@ -162,12 +162,329 @@ WHERE r.name IN ('CyberDataAdmin', 'ProjectAdmin', 'Dev', 'OPS')
 	
 
 
+-- ================================================================
+-- 完整SQL：新权限点 DataQualityDataComparisonTask:manualExecution
+-- 包含: biz_permission + biz_permission_resource + biz_role_permission
+-- ================================================================
+-- ====== 步骤1：插入 biz_permission 权限点 ======
+INSERT INTO biz_permission (parent_id, app_code, permission_code, path_code, level, name, type, sort, is_system, description, state, create_user, create_time)
+SELECT 
+    null AS parent_id,
+    p.app_code,
+    'DataQualityRuleManage:add' AS permission_code,
+    null AS path_code,
+    0 AS level,
+    '标签管理' AS name,
+    3 AS type,              -- 3=按钮/操作
+    (SELECT COALESCE(MAX(sort), 0) + 1 FROM biz_permission WHERE parent_id = p.id) AS sort,
+    1 AS is_system,
+    '标签管理' AS description,
+    1 AS state,
+    1 AS create_user,
+    NOW() AS create_time
+FROM biz_permission p
+WHERE p.permission_code = 'DataQualityDataComparisonTask'
+  AND NOT EXISTS (
+      SELECT 1 FROM biz_permission 
+      WHERE permission_code = 'DataQualityRuleManage:add'
+  );
+-- ====== 步骤2：插入 biz_permission_resource 权限资源关联 ======
+-- 参考 DataQualityDataComparisonTask:add 的资源配置
+INSERT INTO biz_permission_resource (
+    permission_id,
+    app_code,
+    backend_url,
+    backend_method,
+    match_mode,
+    frontend_path,
+    element_type,
+    element_key,
+    sort,
+    description,
+    state,
+    create_user,
+    create_time
+)
+SELECT 
+    p.id AS permission_id,
+    p.app_code,
+    NULL AS backend_url,           -- 如有具体接口URL请替换
+    NULL AS backend_method,        -- 如 POST/GET 等
+    1 AS match_mode,               -- 1=精确匹配
+    NULL AS frontend_path,
+    2 AS element_type,             -- 2=按钮
+    'DataQualityRuleManage:add' AS element_key,  -- 前端元素标识
+    1 AS sort,
+    '标签管理' AS description,
+    1 AS state,
+    1 AS create_user,
+    NOW() AS create_time
+FROM biz_permission p
+WHERE p.permission_code = 'DataQualityRuleManage:add'
+  AND NOT EXISTS (
+      SELECT 1 FROM biz_permission_resource 
+      WHERE permission_id = p.id AND element_key = 'DataQualityRuleManage:add'
+  );
+-- ====== 步骤3：插入 biz_role_permission 角色权限关联 ======
+INSERT INTO biz_role_permission (role_id, permission_id, app_code, create_user, create_time)
+SELECT 
+    r.id AS role_id,
+    p.id AS permission_id,
+    p.app_code,
+    1 AS create_user,
+    NOW() AS create_time
+FROM biz_role r
+CROSS JOIN biz_permission p
+WHERE r.name IN ('CyberDataAdmin', 'ProjectAdmin', 'Dev', 'OPS')
+  AND p.permission_code = 'DataQualityRuleManage:add'
+  AND NOT EXISTS (
+      SELECT 1 FROM biz_role_permission rp 
+      WHERE rp.role_id = r.id AND rp.permission_id = p.id
+  );
 
 
 
+-- ================================================================
+-- 完整SQL：新权限点 DataQualityDataComparisonTask:manualExecution
+-- 包含: biz_permission + biz_permission_resource + biz_role_permission
+-- ================================================================
+-- ====== 步骤1：插入 biz_permission 权限点 ======
+INSERT INTO biz_permission (parent_id, app_code, permission_code, path_code, level, name, type, sort, is_system, description, state, create_user, create_time)
+SELECT 
+    null AS parent_id,
+    p.app_code,
+    'DataQualityRuleManage:edit' AS permission_code,
+    null AS path_code,
+    0 AS level,
+    '标签管理' AS name,
+    3 AS type,              -- 3=按钮/操作
+    (SELECT COALESCE(MAX(sort), 0) + 1 FROM biz_permission WHERE parent_id = p.id) AS sort,
+    1 AS is_system,
+    '标签管理' AS description,
+    1 AS state,
+    1 AS create_user,
+    NOW() AS create_time
+FROM biz_permission p
+WHERE p.permission_code = 'DataQualityDataComparisonTask'
+  AND NOT EXISTS (
+      SELECT 1 FROM biz_permission 
+      WHERE permission_code = 'DataQualityRuleManage:edit'
+  );
+-- ====== 步骤2：插入 biz_permission_resource 权限资源关联 ======
+-- 参考 DataQualityDataComparisonTask:add 的资源配置
+INSERT INTO biz_permission_resource (
+    permission_id,
+    app_code,
+    backend_url,
+    backend_method,
+    match_mode,
+    frontend_path,
+    element_type,
+    element_key,
+    sort,
+    description,
+    state,
+    create_user,
+    create_time
+)
+SELECT 
+    p.id AS permission_id,
+    p.app_code,
+    NULL AS backend_url,           -- 如有具体接口URL请替换
+    NULL AS backend_method,        -- 如 POST/GET 等
+    1 AS match_mode,               -- 1=精确匹配
+    NULL AS frontend_path,
+    2 AS element_type,             -- 2=按钮
+    'DataQualityRuleManage:edit' AS element_key,  -- 前端元素标识
+    1 AS sort,
+    '标签管理' AS description,
+    1 AS state,
+    1 AS create_user,
+    NOW() AS create_time
+FROM biz_permission p
+WHERE p.permission_code = 'DataQualityRuleManage:edit'
+  AND NOT EXISTS (
+      SELECT 1 FROM biz_permission_resource 
+      WHERE permission_id = p.id AND element_key = 'DataQualityRuleManage:edit'
+  );
+-- ====== 步骤3：插入 biz_role_permission 角色权限关联 ======
+INSERT INTO biz_role_permission (role_id, permission_id, app_code, create_user, create_time)
+SELECT 
+    r.id AS role_id,
+    p.id AS permission_id,
+    p.app_code,
+    1 AS create_user,
+    NOW() AS create_time
+FROM biz_role r
+CROSS JOIN biz_permission p
+WHERE r.name IN ('CyberDataAdmin', 'ProjectAdmin', 'Dev', 'OPS')
+  AND p.permission_code = 'DataQualityRuleManage:edit'
+  AND NOT EXISTS (
+      SELECT 1 FROM biz_role_permission rp 
+      WHERE rp.role_id = r.id AND rp.permission_id = p.id
+  );
 
 
+-- ================================================================
+-- 完整SQL：新权限点 DataQualityDataComparisonTask:manualExecution
+-- 包含: biz_permission + biz_permission_resource + biz_role_permission
+-- ================================================================
+-- ====== 步骤1：插入 biz_permission 权限点 ======
+INSERT INTO biz_permission (parent_id, app_code, permission_code, path_code, level, name, type, sort, is_system, description, state, create_user, create_time)
+SELECT 
+    null AS parent_id,
+    p.app_code,
+    'DataQualityRuleManage:delete' AS permission_code,
+    null AS path_code,
+    0 AS level,
+    '标签管理' AS name,
+    3 AS type,              -- 3=按钮/操作
+    (SELECT COALESCE(MAX(sort), 0) + 1 FROM biz_permission WHERE parent_id = p.id) AS sort,
+    1 AS is_system,
+    '标签管理' AS description,
+    1 AS state,
+    1 AS create_user,
+    NOW() AS create_time
+FROM biz_permission p
+WHERE p.permission_code = 'DataQualityDataComparisonTask'
+  AND NOT EXISTS (
+      SELECT 1 FROM biz_permission 
+      WHERE permission_code = 'DataQualityRuleManage:delete'
+  );
+-- ====== 步骤2：插入 biz_permission_resource 权限资源关联 ======
+-- 参考 DataQualityDataComparisonTask:add 的资源配置
+INSERT INTO biz_permission_resource (
+    permission_id,
+    app_code,
+    backend_url,
+    backend_method,
+    match_mode,
+    frontend_path,
+    element_type,
+    element_key,
+    sort,
+    description,
+    state,
+    create_user,
+    create_time
+)
+SELECT 
+    p.id AS permission_id,
+    p.app_code,
+    NULL AS backend_url,           -- 如有具体接口URL请替换
+    NULL AS backend_method,        -- 如 POST/GET 等
+    1 AS match_mode,               -- 1=精确匹配
+    NULL AS frontend_path,
+    2 AS element_type,             -- 2=按钮
+    'DataQualityRuleManage:delete' AS element_key,  -- 前端元素标识
+    1 AS sort,
+    '标签管理' AS description,
+    1 AS state,
+    1 AS create_user,
+    NOW() AS create_time
+FROM biz_permission p
+WHERE p.permission_code = 'DataQualityRuleManage:delete'
+  AND NOT EXISTS (
+      SELECT 1 FROM biz_permission_resource 
+      WHERE permission_id = p.id AND element_key = 'DataQualityRuleManage:delete'
+  );
+-- ====== 步骤3：插入 biz_role_permission 角色权限关联 ======
+INSERT INTO biz_role_permission (role_id, permission_id, app_code, create_user, create_time)
+SELECT 
+    r.id AS role_id,
+    p.id AS permission_id,
+    p.app_code,
+    1 AS create_user,
+    NOW() AS create_time
+FROM biz_role r
+CROSS JOIN biz_permission p
+WHERE r.name IN ('CyberDataAdmin', 'ProjectAdmin', 'Dev', 'OPS')
+  AND p.permission_code = 'DataQualityRuleManage:delete'
+  AND NOT EXISTS (
+      SELECT 1 FROM biz_role_permission rp 
+      WHERE rp.role_id = r.id AND rp.permission_id = p.id
+  );
 
+
+-- ================================================================
+-- 完整SQL：新权限点 DataQualityDataComparisonTask:manualExecution
+-- 包含: biz_permission + biz_permission_resource + biz_role_permission
+-- ================================================================
+-- ====== 步骤1：插入 biz_permission 权限点 ======
+INSERT INTO biz_permission (parent_id, app_code, permission_code, path_code, level, name, type, sort, is_system, description, state, create_user, create_time)
+SELECT 
+    null AS parent_id,
+    p.app_code,
+    'DataQualityRuleManage:detail' AS permission_code,
+    null AS path_code,
+    0 AS level,
+    '标签管理' AS name,
+    3 AS type,              -- 3=按钮/操作
+    (SELECT COALESCE(MAX(sort), 0) + 1 FROM biz_permission WHERE parent_id = p.id) AS sort,
+    1 AS is_system,
+    '标签管理' AS description,
+    1 AS state,
+    1 AS create_user,
+    NOW() AS create_time
+FROM biz_permission p
+WHERE p.permission_code = 'DataQualityDataComparisonTask'
+  AND NOT EXISTS (
+      SELECT 1 FROM biz_permission 
+      WHERE permission_code = 'DataQualityRuleManage:detail'
+  );
+-- ====== 步骤2：插入 biz_permission_resource 权限资源关联 ======
+-- 参考 DataQualityDataComparisonTask:add 的资源配置
+INSERT INTO biz_permission_resource (
+    permission_id,
+    app_code,
+    backend_url,
+    backend_method,
+    match_mode,
+    frontend_path,
+    element_type,
+    element_key,
+    sort,
+    description,
+    state,
+    create_user,
+    create_time
+)
+SELECT 
+    p.id AS permission_id,
+    p.app_code,
+    NULL AS backend_url,           -- 如有具体接口URL请替换
+    NULL AS backend_method,        -- 如 POST/GET 等
+    1 AS match_mode,               -- 1=精确匹配
+    NULL AS frontend_path,
+    2 AS element_type,             -- 2=按钮
+    'DataQualityRuleManage:detail' AS element_key,  -- 前端元素标识
+    1 AS sort,
+    '标签管理' AS description,
+    1 AS state,
+    1 AS create_user,
+    NOW() AS create_time
+FROM biz_permission p
+WHERE p.permission_code = 'DataQualityRuleManage:detail'
+  AND NOT EXISTS (
+      SELECT 1 FROM biz_permission_resource 
+      WHERE permission_id = p.id AND element_key = 'DataQualityRuleManage:detail'
+  );
+-- ====== 步骤3：插入 biz_role_permission 角色权限关联 ======
+INSERT INTO biz_role_permission (role_id, permission_id, app_code, create_user, create_time)
+SELECT 
+    r.id AS role_id,
+    p.id AS permission_id,
+    p.app_code,
+    1 AS create_user,
+    NOW() AS create_time
+FROM biz_role r
+CROSS JOIN biz_permission p
+WHERE r.name IN ('CyberDataAdmin', 'ProjectAdmin', 'Dev', 'OPS')
+  AND p.permission_code = 'DataQualityRuleManage:detail'
+  AND NOT EXISTS (
+      SELECT 1 FROM biz_role_permission rp 
+      WHERE rp.role_id = r.id AND rp.permission_id = p.id
+  );
 
 
 
