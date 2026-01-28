@@ -1,3 +1,114 @@
+2026-01-28 14:25:40 INFO  Current task status: Running
+2026-01-28 14:25:40 INFO  Start execute FLINK_SQL on worker_host: 10.131.9.32:7800
+2026-01-28 14:25:40 INFO  Current log dir: /opt/app/instanceLogs/20260128/instanceLogs/2012469866704056322/temp/2016397243777142786/1769581540620.log
+2026-01-28 14:25:40 INFO  Task executor: com.datacyber.cyberdata.worker.service.realtime.FlinkSQLExecutorService
+日志获取中
+2026-01-28 14:25:44 INFO  Finished to download engine configs
+2026-01-28 14:25:45 INFO  Run on yarn, finished to upload jars to hdfs, url:hdfs://hacluster/cyberdata/flink/lib/1.20.0-mrs360/FLINK_SQL_1080533629
+2026-01-28 14:25:45 INFO  The environment is initialized
+2026-01-28 14:25:45 INFO  Prepare the flink submit script
+2026-01-28 14:25:46 INFO  Start download udf jars......
+2026-01-28 14:25:46 INFO  End download udf jars
+2026-01-28 14:25:46 INFO  Task dependent jar: []
+2026-01-28 14:25:50 INFO  Submit FLINK_SQL on yarn with YARN_APPLICATION
+2026-01-28 14:25:51 INFO  flink command:/opt/module/flink-1.20.0-mrs360/bin/flink run-application -t yarn-application -Dstate.backend.type=rocksdb -Drestart-strategy.type=fixeddelay -Dstate.backend.incremental=true -Dexecution.checkpointing.max-concurrent-checkpoints=3 -Dclassloader.check-leaked-classloader=false -Denv.java.opts.all=-Dfile.encoding=UTF-8 -Dpipeline.name="写入kafka流__flink_dev_temp" -Dmetrics.system-resource=true -Dmetrics.system-resource-probing-interval=30000 -Dyarn.application.queue=default -Dyarn.application.name="FLINK_SQL_写入kafka流_flink_dev_temp" -Dyarn.provided.lib.dirs=hdfs://hacluster/cyberdata/flink/lib/1.20.0-mrs360/FLINK_SQL_1080533629 -Dclassloader.resolve-order=child-first -Djobmanager.memory.process.size=1024m -Dtaskmanager.memory.process.size=2048m -Dparallelism.default=1 -Dtaskmanager.numberOfTaskSlots=1 -Dyarn.appmaster.vcores=1 -Dyarn.containers.vcores=-1 -Dexecution.checkpointing.interval=120000 -Dstate.checkpoints.dir=hdfs://hacluster/cyberdata/flink/checkpoint/2016397243777142786 -Dexecution.checkpointing.externalized-checkpoint-retention=RETAIN_ON_CANCELLATION -Dstate.checkpoints.num-retained=10 -Dexecution.checkpointing.tolerable-failed-checkpoints=3 -Dexecution.checkpointing.timeout="10min" -Drestart-strategy=fixeddelay -Drestart-strategy.fixed-delay.attempts=1 -Drestart-strategy.fixed-delay.delay="5s" -c com.datacyber.flink.FlinkSqlTask -d hdfs://hacluster/cyberdata/flink/driver/cyberdata-5.0-flink-driver-1.3.0-with-sql-flink-1.20.0-mrs360-1411420272.jar -sleepTime 20000 -logUrl http://10.131.0.85:30303/worker/writeLog -logPath /opt/app/instanceLogs/20260128/instanceLogs/2012469866704056322/temp/2016397243777142786/1769581540620.log -jobName 写入kafka流__flink_dev_temp -deployMode yarn_application -yarnMasterUrl https://10.131.194.94:9022/component/Yarn/ResourceManager/18,https://10.131.194.94:9022/component/Yarn/ResourceManager/19 -runtimeMode streaming -sqlContent Q1JFQVRFIFRBQkxFIGRhdGFnZW5fdGFibGUgKA0KICAgIGlkIElOVCwNCiAgICBhZ2UgU01BTExJTlQsDQogICAgc2FsYXJ5IEJJR0lOVCwNCiAgICBoZWlnaHQgRE9VQkxFLA0KICAgIHdlaWdodCBGTE9BVCwNCiAgICBzY29yZSBERUNJTUFMKDEwLDIpLA0KICAgIG5hbWUgU1RSSU5HLA0KICAgIGVtYWlsIFNUUklORywNCiAgICBhZGRyZXNzIFNUUklORywNCiAgICBpc19hY3RpdmUgQk9PTEVBTiwgIAogICAgY3JlYXRlX3RpbWUgREFURSwNCiAgICB1cGRhdGVfdGltZSBUSU1FU1RBTVAoMyksDQogICAgV0FURVJNQVJLIEZPUiB1cGRhdGVfdGltZSBBUyB1cGRhdGVfdGltZSAtIElOVEVSVkFMICc1JyBTRUNPTkQNCikNCldJVEggKA0KICAgICdjb25uZWN0b3InID0gJ2RhdGFnZW4nLA0KICAgICdyb3dzLXBlci1zZWNvbmQnID0gJzEnLA0KICAgICdudW1iZXItb2Ytcm93cycgPSAnMjAwJywNCiAgICANCiAgICAKICAgICdmaWVsZHMuaWQua2luZCcgPSAnc2VxdWVuY2UnLA0KICAgICdmaWVsZHMuaWQuc3RhcnQnID0gJzEnLA0KICAgICdmaWVsZHMuaWQuZW5kJyA9ICcyMDAnLA0KICAgIA0KICAgIAogICAgJ2ZpZWxkcy5hZ2Uua2luZCcgPSAncmFuZG9tJywNCiAgICAnZmllbGRzLmFnZS5taW4nID0gJzEnLA0KICAgICdmaWVsZHMuYWdlLm1heCcgPSAnMTIwJywNCiAgICANCiAgICAKICAgICdmaWVsZHMuc2FsYXJ5LmtpbmQnID0gJ3JhbmRvbScsDQogICAgJ2ZpZWxkcy5zYWxhcnkubWluJyA9ICczMDAwMCcsDQogICAgJ2ZpZWxkcy5zYWxhcnkubWF4JyA9ICcyMDAwMDAnLA0KICAgIA0KICAgIAogICAgJ2ZpZWxkcy5oZWlnaHQua2luZCcgPSAncmFuZG9tJywNCiAgICAnZmllbGRzLmhlaWdodC5taW4nID0gJzAuMDAnLA0KICAgICdmaWVsZHMuaGVpZ2h0Lm1heCcgPSAnMi41MCcsDQogICAgDQogICAgCiAgICAnZmllbGRzLndlaWdodC5raW5kJyA9ICdyYW5kb20nLA0KICAgICdmaWVsZHMud2VpZ2h0Lm1pbicgPSAnMC4wJywNCiAgICAnZmllbGRzLndlaWdodC5tYXgnID0gJzIwMC4wJywNCiAgICANCiAgICAKICAgICdmaWVsZHMuc2NvcmUua2luZCcgPSAncmFuZG9tJywNCiAgICAnZmllbGRzLnNjb3JlLm1pbicgPSAnMC4wMCcsDQogICAgJ2ZpZWxkcy5zY29yZS5tYXgnID0gJzEwMC4wMCcsDQogICAgDQogICAgCiAgICAnZmllbGRzLm5hbWUua2luZCcgPSAncmFuZG9tJywNCiAgICAnZmllbGRzLm5hbWUubGVuZ3RoJyA9ICc4JywNCiAgICANCiAgICAKICAgICdmaWVsZHMuZW1haWwua2luZCcgPSAncmFuZG9tJywNCiAgICAnZmllbGRzLmVtYWlsLmxlbmd0aCcgPSAnMTUnLA0KICAgIA0KICAgIAogICAgJ2ZpZWxkcy5hZGRyZXNzLmtpbmQnID0gJ3JhbmRvbScsDQogICAgJ2ZpZWxkcy5hZGRyZXNzLmxlbmd0aCcgPSAnMzInLA0KICAgIA0KICAgIAogICAgJ2ZpZWxkcy5pc19hY3RpdmUua2luZCcgPSAncmFuZG9tJw0KICAgIAopOwpDUkVBVEUgVEFCTEUgYHNpbmtfa2Fma2FfdG9waWNgICgNCiAgICBgaWRgIElOVCwNCiAgICBgYWdlYCBTTUFMTElOVCwNCiAgICBgc2FsYXJ5YCBCSUdJTlQsDQogICAgYGhlaWdodGAgRE9VQkxFLA0KICAgIGB3ZWlnaHRgIEZMT0FULA0KICAgIGBzY29yZWAgREVDSU1BTCgxMCwyKSwNCiAgICBgbmFtZWAgU1RSSU5HLA0KICAgIGBlbWFpbGAgU1RSSU5HLA0KICAgIGBhZGRyZXNzYCBTVFJJTkcsDQogICAgYGlzX2FjdGl2ZWAgQk9PTEVBTiwgIAogICAgYGNyZWF0ZV90aW1lYCBEQVRFLA0KICAgIGB1cGRhdGVfdGltZWAgVElNRVNUQU1QKDMpLA0KICAgIFBSSU1BUlkgS0VZIChpZCkgTk9UIEVORk9SQ0VEDQopDQpXSVRIICAgICgNCiAgICAgICAgICAgICdjb25uZWN0b3InID0gJ2thZmthJywNCiAgICAgICAgICAgICd2YWx1ZS5mb3JtYXQnID0gJ2RlYmV6aXVtLWpzb24nLA0KICAgICAgICAgICAgJ2tleS5mb3JtYXQnID0gJ2pzb24nLA0KICAgICAgICAgICAgJ2tleS5maWVsZHMnID0gJ2lkJywNCiAgICAgICAgICAgICdwcm9wZXJ0aWVzLmJvb3RzdHJhcC5zZXJ2ZXJzJz0nMTAuMTMxLjE5NC4yMTc6MjEwMDcsMTAuMTMxLjE5NC4xNToyMTAwNywxMC4xMzEuMTkyLjEzMDoyMTAwNycsDQogICAgICAgICAgICAncHJvcGVydGllcy5zZWN1cml0eS5wcm90b2NvbCcgPSAnU0FTTF9QTEFJTlRFWFQnLA0KICAgICAgICAgICAgJ3Byb3BlcnRpZXMuc2FzbC5tZWNoYW5pc20nID0gJ0dTU0FQSScsDQogICAgICAgICAgICAncHJvcGVydGllcy5zYXNsLmtlcmJlcm9zLnNlcnZpY2UubmFtZScgPSAna2Fma2EnLA0KJ3Byb3BlcnRpZXMuc2FzbC5qYWFzLmNvbmZpZycgPSAnY29tLnN1bi5zZWN1cml0eS5hdXRoLm1vZHVsZS5LcmI1TG9naW5Nb2R1bGUgcmVxdWlyZWQgdXNlS2V5VGFiPXRydWUgc3RvcmVLZXk9dHJ1ZSBrZXlUYWI9Ii4va3JiNS5rZXl0YWIiIHByaW5jaXBhbD0icF9tcnNfdXNlcl90ZXN0IjsnLA0KICAgICAgICAgICAgJ3RvcGljJyA9ICdjZF90ZXN0Jw0KICAgICAgICApOwpJTlNFUlQgSU5UTyBgc2lua19rYWZrYV90b3BpY2ANClNFTEVDVCAgYGlkYCwNCiAgICAgICAgYGFnZWAsDQogICAgICAgIGBzYWxhcnlgLA0KICAgICAgICBgaGVpZ2h0YCwNCiAgICAgICAgYHdlaWdodGAsDQogICAgICAgIGBzY29yZWAsDQogICAgICAgIGBuYW1lYCwNCiAgICAgICAgYGVtYWlsYCwNCiAgICAgICAgYGFkZHJlc3NgLA0KICAgICAgICBgaXNfYWN0aXZlYCwNCiAgICAgICAgYGNyZWF0ZV90aW1lYCwNCiAgICAgICAgYHVwZGF0ZV90aW1lYA0KRlJPTSAgICBgZGF0YWdlbl90YWJsZWA= 
+2026-01-28 14:25:51 INFO  Prepare the flink script Successful
+2026-01-28 14:25:51 INFO  Full Command
+2026-01-28 14:25:51 INFO  -------------------------
+2026-01-28 14:25:51 INFO  /bin/bash /home/datac/shell/2016397243777142786.sh
+2026-01-28 14:25:51 INFO  -------------------------
+2026-01-28 14:25:51 INFO  --- Invoking Shell command line now, task name:写入kafka流 ---
+2026-01-28 14:25:51 INFO  =================================================================
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/opt/module/flink-1.20.0-mrs360/lib/log4j-slf4j-impl-2.24.1.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/module/flink-1.20.0-mrs360/lib/flink-dist-1.20.0-h0.cbu.mrs.360.r9.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/module/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+2026-01-28 14:27:12,582 | INFO  | [main] | Login successful for user p_mrs_user_test using keytab file kerberos.keytab. Keytab auto renewal enabled : false | org.apache.hadoop.security.UserGroupInformation.loginUserFromKeytab(UserGroupInformation.java:1136)
+2026-01-28 14:27:16,270 | INFO  | [main] | No path for the flink jar passed. Using the location of class org.apache.flink.yarn.YarnClusterDescriptor to locate the jar | org.apache.flink.yarn.YarnClusterDescriptor.getLocalFlinkDistPath(YarnClusterDescriptor.java:285)
+2026-01-28 14:27:18,100 | INFO  | [main] | resource-types.xml not found | org.apache.hadoop.conf.Configuration.getConfResourceAsInputStream(Configuration.java:2871)
+2026-01-28 14:27:18,117 | INFO  | [main] | Unable to find 'resource-types.xml'. | org.apache.hadoop.yarn.util.resource.ResourceUtils.addResourcesFileToConf(ResourceUtils.java:483)
+
+
+
+
+
+
+
+
+
+
+
+2026-01-28 14:29:16 INFO  Current task status: Running
+2026-01-28 14:29:16 INFO  Start execute FLINK_SQL on worker_host: 10.131.9.32:7800
+2026-01-28 14:29:16 INFO  Current log dir: /opt/app/instanceLogs/20260128/instanceLogs/2012469866704056322/temp/2016398149012803585/1769581756336.log
+2026-01-28 14:29:16 INFO  Task executor: com.datacyber.cyberdata.worker.service.realtime.FlinkSQLExecutorService
+日志获取中
+2026-01-28 14:29:16 INFO  Finished to download engine configs
+2026-01-28 14:29:17 INFO  Run on yarn, finished to upload jars to hdfs, url:hdfs://hacluster/cyberdata/flink/lib/1.20.0-mrs360/FLINK_SQL_1080533629
+2026-01-28 14:29:17 INFO  The environment is initialized
+2026-01-28 14:29:17 INFO  Prepare the flink submit script
+2026-01-28 14:29:17 INFO  Start download udf jars......
+2026-01-28 14:29:17 INFO  End download udf jars
+2026-01-28 14:29:17 INFO  Task dependent jar: []
+2026-01-28 14:29:17 INFO  Submit FLINK_SQL on yarn with YARN_APPLICATION
+2026-01-28 14:29:17 INFO  flink command:/opt/module/flink-1.20.0-mrs360/bin/flink run-application -t yarn-application -Dstate.backend.type=rocksdb -Drestart-strategy.type=fixeddelay -Dstate.backend.incremental=true -Dexecution.checkpointing.max-concurrent-checkpoints=3 -Dclassloader.check-leaked-classloader=false -Denv.java.opts.all=-Dfile.encoding=UTF-8 -Dpipeline.name="写入kafka流__flink_dev_temp" -Dmetrics.system-resource=true -Dmetrics.system-resource-probing-interval=30000 -Dyarn.application.queue=default -Dyarn.application.name="FLINK_SQL_写入kafka流_flink_dev_temp" -Dyarn.provided.lib.dirs=hdfs://hacluster/cyberdata/flink/lib/1.20.0-mrs360/FLINK_SQL_1080533629 -Dclassloader.resolve-order=child-first -Djobmanager.memory.process.size=1024m -Dtaskmanager.memory.process.size=2048m -Dparallelism.default=1 -Dtaskmanager.numberOfTaskSlots=1 -Dyarn.appmaster.vcores=1 -Dyarn.containers.vcores=-1 -Dexecution.checkpointing.interval=120000 -Dstate.checkpoints.dir=hdfs://hacluster/cyberdata/flink/checkpoint/2016398149012803585 -Dexecution.checkpointing.externalized-checkpoint-retention=RETAIN_ON_CANCELLATION -Dstate.checkpoints.num-retained=10 -Dexecution.checkpointing.tolerable-failed-checkpoints=3 -Dexecution.checkpointing.timeout="10min" -Drestart-strategy=fixeddelay -Drestart-strategy.fixed-delay.attempts=1 -Drestart-strategy.fixed-delay.delay="5s" -c com.datacyber.flink.FlinkSqlTask -d hdfs://hacluster/cyberdata/flink/driver/cyberdata-5.0-flink-driver-1.3.0-with-sql-flink-1.20.0-mrs360-1411420272.jar -sleepTime 20000 -logUrl http://10.131.0.85:30303/worker/writeLog -logPath /opt/app/instanceLogs/20260128/instanceLogs/2012469866704056322/temp/2016398149012803585/1769581756336.log -jobName 写入kafka流__flink_dev_temp -deployMode yarn_application -yarnMasterUrl https://10.131.194.94:9022/component/Yarn/ResourceManager/18,https://10.131.194.94:9022/component/Yarn/ResourceManager/19 -runtimeMode streaming -sqlContent Q1JFQVRFIFRBQkxFIGRhdGFnZW5fdGFibGUgKA0KICAgIGlkIElOVCwNCiAgICBhZ2UgU01BTExJTlQsDQogICAgc2FsYXJ5IEJJR0lOVCwNCiAgICBoZWlnaHQgRE9VQkxFLA0KICAgIHdlaWdodCBGTE9BVCwNCiAgICBzY29yZSBERUNJTUFMKDEwLDIpLA0KICAgIG5hbWUgU1RSSU5HLA0KICAgIGVtYWlsIFNUUklORywNCiAgICBhZGRyZXNzIFNUUklORywNCiAgICBpc19hY3RpdmUgQk9PTEVBTiwgIAogICAgY3JlYXRlX3RpbWUgREFURSwNCiAgICB1cGRhdGVfdGltZSBUSU1FU1RBTVAoMyksDQogICAgV0FURVJNQVJLIEZPUiB1cGRhdGVfdGltZSBBUyB1cGRhdGVfdGltZSAtIElOVEVSVkFMICc1JyBTRUNPTkQNCikNCldJVEggKA0KICAgICdjb25uZWN0b3InID0gJ2RhdGFnZW4nLA0KICAgICdyb3dzLXBlci1zZWNvbmQnID0gJzEnLA0KICAgICdudW1iZXItb2Ytcm93cycgPSAnMjAwJywNCiAgICANCiAgICAKICAgICdmaWVsZHMuaWQua2luZCcgPSAnc2VxdWVuY2UnLA0KICAgICdmaWVsZHMuaWQuc3RhcnQnID0gJzEnLA0KICAgICdmaWVsZHMuaWQuZW5kJyA9ICcyMDAnLA0KICAgIA0KICAgIAogICAgJ2ZpZWxkcy5hZ2Uua2luZCcgPSAncmFuZG9tJywNCiAgICAnZmllbGRzLmFnZS5taW4nID0gJzEnLA0KICAgICdmaWVsZHMuYWdlLm1heCcgPSAnMTIwJywNCiAgICANCiAgICAKICAgICdmaWVsZHMuc2FsYXJ5LmtpbmQnID0gJ3JhbmRvbScsDQogICAgJ2ZpZWxkcy5zYWxhcnkubWluJyA9ICczMDAwMCcsDQogICAgJ2ZpZWxkcy5zYWxhcnkubWF4JyA9ICcyMDAwMDAnLA0KICAgIA0KICAgIAogICAgJ2ZpZWxkcy5oZWlnaHQua2luZCcgPSAncmFuZG9tJywNCiAgICAnZmllbGRzLmhlaWdodC5taW4nID0gJzAuMDAnLA0KICAgICdmaWVsZHMuaGVpZ2h0Lm1heCcgPSAnMi41MCcsDQogICAgDQogICAgCiAgICAnZmllbGRzLndlaWdodC5raW5kJyA9ICdyYW5kb20nLA0KICAgICdmaWVsZHMud2VpZ2h0Lm1pbicgPSAnMC4wJywNCiAgICAnZmllbGRzLndlaWdodC5tYXgnID0gJzIwMC4wJywNCiAgICANCiAgICAKICAgICdmaWVsZHMuc2NvcmUua2luZCcgPSAncmFuZG9tJywNCiAgICAnZmllbGRzLnNjb3JlLm1pbicgPSAnMC4wMCcsDQogICAgJ2ZpZWxkcy5zY29yZS5tYXgnID0gJzEwMC4wMCcsDQogICAgDQogICAgCiAgICAnZmllbGRzLm5hbWUua2luZCcgPSAncmFuZG9tJywNCiAgICAnZmllbGRzLm5hbWUubGVuZ3RoJyA9ICc4JywNCiAgICANCiAgICAKICAgICdmaWVsZHMuZW1haWwua2luZCcgPSAncmFuZG9tJywNCiAgICAnZmllbGRzLmVtYWlsLmxlbmd0aCcgPSAnMTUnLA0KICAgIA0KICAgIAogICAgJ2ZpZWxkcy5hZGRyZXNzLmtpbmQnID0gJ3JhbmRvbScsDQogICAgJ2ZpZWxkcy5hZGRyZXNzLmxlbmd0aCcgPSAnMzInLA0KICAgIA0KICAgIAogICAgJ2ZpZWxkcy5pc19hY3RpdmUua2luZCcgPSAncmFuZG9tJw0KICAgIAopOwpDUkVBVEUgVEFCTEUgYHNpbmtfa2Fma2FfdG9waWNgICgNCiAgICBgaWRgIElOVCwNCiAgICBgYWdlYCBTTUFMTElOVCwNCiAgICBgc2FsYXJ5YCBCSUdJTlQsDQogICAgYGhlaWdodGAgRE9VQkxFLA0KICAgIGB3ZWlnaHRgIEZMT0FULA0KICAgIGBzY29yZWAgREVDSU1BTCgxMCwyKSwNCiAgICBgbmFtZWAgU1RSSU5HLA0KICAgIGBlbWFpbGAgU1RSSU5HLA0KICAgIGBhZGRyZXNzYCBTVFJJTkcsDQogICAgYGlzX2FjdGl2ZWAgQk9PTEVBTiwgIAogICAgYGNyZWF0ZV90aW1lYCBEQVRFLA0KICAgIGB1cGRhdGVfdGltZWAgVElNRVNUQU1QKDMpLA0KICAgIFBSSU1BUlkgS0VZIChpZCkgTk9UIEVORk9SQ0VEDQopDQpXSVRIICAgICgNCiAgICAgICAgICAgICdjb25uZWN0b3InID0gJ2thZmthJywNCiAgICAgICAgICAgICd2YWx1ZS5mb3JtYXQnID0gJ2RlYmV6aXVtLWpzb24nLA0KICAgICAgICAgICAgJ2tleS5mb3JtYXQnID0gJ2pzb24nLA0KICAgICAgICAgICAgJ2tleS5maWVsZHMnID0gJ2lkJywNCiAgICAgICAgICAgICdwcm9wZXJ0aWVzLmJvb3RzdHJhcC5zZXJ2ZXJzJz0nMTAuMTMxLjE5NC4yMTc6MjEwMDcsMTAuMTMxLjE5NC4xNToyMTAwNywxMC4xMzEuMTkyLjEzMDoyMTAwNycsDQogICAgICAgICAgICAncHJvcGVydGllcy5zZWN1cml0eS5wcm90b2NvbCcgPSAnU0FTTF9QTEFJTlRFWFQnLA0KICAgICAgICAgICAgJ3Byb3BlcnRpZXMuc2FzbC5tZWNoYW5pc20nID0gJ0dTU0FQSScsDQogICAgICAgICAgICAncHJvcGVydGllcy5zYXNsLmtlcmJlcm9zLnNlcnZpY2UubmFtZScgPSAna2Fma2EnLA0KJ3Byb3BlcnRpZXMuc2FzbC5qYWFzLmNvbmZpZycgPSAnY29tLnN1bi5zZWN1cml0eS5hdXRoLm1vZHVsZS5LcmI1TG9naW5Nb2R1bGUgcmVxdWlyZWQgdXNlS2V5VGFiPXRydWUgc3RvcmVLZXk9dHJ1ZSBrZXlUYWI9Ii4va3JiNS5rZXl0YWIiIHByaW5jaXBhbD0icF9tcnNfdXNlcl90ZXN0IjsnLA0KICAgICAgICAgICAgJ3RvcGljJyA9ICdjZF90ZXN0Jw0KICAgICAgICApOwpJTlNFUlQgSU5UTyBgc2lua19rYWZrYV90b3BpY2ANClNFTEVDVCAgYGlkYCwNCiAgICAgICAgYGFnZWAsDQogICAgICAgIGBzYWxhcnlgLA0KICAgICAgICBgaGVpZ2h0YCwNCiAgICAgICAgYHdlaWdodGAsDQogICAgICAgIGBzY29yZWAsDQogICAgICAgIGBuYW1lYCwNCiAgICAgICAgYGVtYWlsYCwNCiAgICAgICAgYGFkZHJlc3NgLA0KICAgICAgICBgaXNfYWN0aXZlYCwNCiAgICAgICAgYGNyZWF0ZV90aW1lYCwNCiAgICAgICAgYHVwZGF0ZV90aW1lYA0KRlJPTSAgICBgZGF0YWdlbl90YWJsZWA= 
+2026-01-28 14:29:17 INFO  Prepare the flink script Successful
+2026-01-28 14:29:17 INFO  Full Command
+2026-01-28 14:29:17 INFO  -------------------------
+2026-01-28 14:29:17 INFO  /bin/bash /home/datac/shell/2016398149012803585.sh
+2026-01-28 14:29:17 INFO  -------------------------
+2026-01-28 14:29:17 INFO  --- Invoking Shell command line now, task name:写入kafka流 ---
+2026-01-28 14:29:17 INFO  =================================================================
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/opt/module/flink-1.20.0-mrs360/lib/log4j-slf4j-impl-2.24.1.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/module/flink-1.20.0-mrs360/lib/flink-dist-1.20.0-h0.cbu.mrs.360.r9.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/module/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+2026-01-28 14:30:25,347 | INFO  | [main] | Login successful for user p_mrs_user_test using keytab file kerberos.keytab. Keytab auto renewal enabled : false | org.apache.hadoop.security.UserGroupInformation.loginUserFromKeytab(UserGroupInformation.java:1136)
+2026-01-28 14:30:28,436 | INFO  | [main] | No path for the flink jar passed. Using the location of class org.apache.flink.yarn.YarnClusterDescriptor to locate the jar | org.apache.flink.yarn.YarnClusterDescriptor.getLocalFlinkDistPath(YarnClusterDescriptor.java:285)
+2026-01-28 14:30:29,730 | INFO  | [main] | resource-types.xml not found | org.apache.hadoop.conf.Configuration.getConfResourceAsInputStream(Configuration.java:2871)
+2026-01-28 14:30:29,768 | INFO  | [main] | Unable to find 'resource-types.xml'. | org.apache.hadoop.yarn.util.resource.ResourceUtils.addResourcesFileToConf(ResourceUtils.java:483)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- ================================================================
 -- 完整SQL：新权限点 DataQualityDataComparisonTask:manualExecution
 -- 包含: biz_permission + biz_permission_resource + biz_role_permission
