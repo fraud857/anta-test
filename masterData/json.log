@@ -1,3 +1,140 @@
+[arthas@1]$ 
+[arthas@1]$ watch com.datacyber.cybermeta.jdbc.plugins.jdbc.hive.HiveMetastoreHelper createClient \
+> '{params[0].getUsername(),params[0].getPrincipal(),params[0].getKeytabFile(),params[0].getProperties().get("hive.metastore.kerberos.principal"),params[0].getProperties().get("hive.metastore.thrift.sasl.qop"),params[0].getProperties().get("hive.metastore.uris"),throwExp}' \
+> -x 2 -n 5
+Press Q or Ctrl+C to abort.
+Affect(class count: 1 , method count: 1) cost in 199 ms, listenerId: 3
+method=com.datacyber.cybermeta.jdbc.plugins.jdbc.hive.HiveMetastoreHelper.createClient location=AtExceptionExit
+ts=2026-03-30 18:50:50.795; [cost=1079.024504ms] result=@ArrayList[
+    @String[u_shuxin_test],
+    @String[spark2x/hadoop.950c233d_ab6e_4ad9_ab28_f2766f074340.com@950C233D_AB6E_4AD9_AB28_F2766F074340.COM],
+    @String[/home/datac/tmp/kerberos/kerberos_b8902c72cfe8da622fafa0c1e5e6185b_028270b159163e287eeebb3fa7f8f328.keytab],
+    null,
+    null,
+    @String[thrift://MRS-ADP-Q02-node-master3QKOz.mrs-h69n.com:9083,thrift://MRS-ADP-Q02-node-master2FEMp.mrs-h69n.com:9083],
+    java.lang.RuntimeException: Failed to create HiveMetaStoreClient: Could not connect to meta store using any of the URIs provided. Most recent failure: org.apache.thrift.transport.TTransportException: Peer indicated failure: GSS initiate failed
+        at org.apache.thrift.transport.TSaslTransport.receiveSaslMessage(TSaslTransport.java:199)
+        at org.apache.thrift.transport.TSaslTransport.open(TSaslTransport.java:277)
+        at org.apache.thrift.transport.TSaslClientTransport.open(TSaslClientTransport.java:37)
+        at org.apache.hadoop.hive.metastore.security.TUGIAssumingTransport$1.run(TUGIAssumingTransport.java:51)
+        at org.apache.hadoop.hive.metastore.security.TUGIAssumingTransport$1.run(TUGIAssumingTransport.java:48)
+        at java.base/java.security.AccessController.doPrivileged(Native Method)
+        at java.base/javax.security.auth.Subject.doAs(Subject.java:423)
+        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1878)
+        at org.apache.hadoop.hive.metastore.security.TUGIAssumingTransport.open(TUGIAssumingTransport.java:48)
+        at org.apache.hadoop.hive.metastore.HiveMetaStoreClient.open(HiveMetaStoreClient.java:516)
+        at org.apache.hadoop.hive.metastore.HiveMetaStoreClient.<init>(HiveMetaStoreClient.java:224)
+        at org.apache.hadoop.hive.metastore.HiveMetaStoreClient.<init>(HiveMetaStoreClient.java:137)
+        at com.datacyber.cybermeta.jdbc.plugins.jdbc.hive.HiveMetastoreHelper.createClient(HiveMetastoreHelper.java:113)
+        at com.datacyber.cybermeta.jdbc.plugins.Hive3Plugin$HiveJdbcDialect.withMetastoreClient(Hive3Plugin.java:108)
+        at com.datacyber.cybermeta.jdbc.plugins.Hive3Plugin$HiveJdbcDialect.lambda$getSchemaTables$8(Hive3Plugin.java:300)
+        at java.base/java.security.AccessController.doPrivileged(Native Method)
+        at java.base/javax.security.auth.Subject.doAs(Subject.java:423)
+        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1878)
+        at com.datacyber.cybermeta.jdbc.plugins.Hive3Plugin$HiveJdbcDialect.runSecured(Hive3Plugin.java:161)
+        at com.datacyber.cybermeta.jdbc.plugins.Hive3Plugin$HiveJdbcDialect.getSchemaTables(Hive3Plugin.java:300)
+        at com.datacyber.cyberdata.worker.service.accessor.AbstractMetaDataAccessService.getTableInfos(AbstractMetaDataAccessService.java:75)
+        at com.datacyber.cyberdata.worker.service.accessor.impl.HiveAccessService.listMetaDataTables(HiveAccessService.java:78)
+        at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService.collect(MetadataCollectorService.java:215)
+        at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService$$FastClassBySpringCGLIB$$d292a704.invoke(<generated>)
+        at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:792)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithSpan(SpannedMethodInvocation.java:50)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithContinuation(SpannedMethodInvocation.java:42)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.proceed(SpannedMethodInvocation.java:36)
+        at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+
+        at com.datacyber.cybermeta.jdbc.plugins.jdbc.hive.HiveMetastoreHelper.createClient(HiveMetastoreHelper.java:125)
+        at com.datacyber.cybermeta.jdbc.plugins.Hive3Plugin$HiveJdbcDialect.withMetastoreClient(Hive3Plugin.java:108)
+        at com.datacyber.cybermeta.jdbc.plugins.Hive3Plugin$HiveJdbcDialect.lambda$getSchemaTables$8(Hive3Plugin.java:300)
+        at java.base/java.security.AccessController.doPrivileged(Native Method)
+        at java.base/javax.security.auth.Subject.doAs(Subject.java:423)
+        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1878)
+        at com.datacyber.cybermeta.jdbc.plugins.Hive3Plugin$HiveJdbcDialect.runSecured(Hive3Plugin.java:161)
+        at com.datacyber.cybermeta.jdbc.plugins.Hive3Plugin$HiveJdbcDialect.getSchemaTables(Hive3Plugin.java:300)
+        at com.datacyber.cyberdata.worker.service.accessor.AbstractMetaDataAccessService.getTableInfos(AbstractMetaDataAccessService.java:75)
+        at com.datacyber.cyberdata.worker.service.accessor.impl.HiveAccessService.listMetaDataTables(HiveAccessService.java:78)
+        at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService.collect(MetadataCollectorService.java:215)
+        at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService$$FastClassBySpringCGLIB$$d292a704.invoke(<generated>)
+        at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:792)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithSpan(SpannedMethodInvocation.java:50)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithContinuation(SpannedMethodInvocation.java:42)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.proceed(SpannedMethodInvocation.java:36)
+        at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: MetaException(message:Could not connect to meta store using any of the URIs provided. Most recent failure: org.apache.thrift.transport.TTransportException: Peer indicated failure: GSS initiate failed
+        at org.apache.thrift.transport.TSaslTransport.receiveSaslMessage(TSaslTransport.java:199)
+        at org.apache.thrift.transport.TSaslTransport.open(TSaslTransport.java:277)
+        at org.apache.thrift.transport.TSaslClientTransport.open(TSaslClientTransport.java:37)
+        at org.apache.hadoop.hive.metastore.security.TUGIAssumingTransport$1.run(TUGIAssumingTransport.java:51)
+        at org.apache.hadoop.hive.metastore.security.TUGIAssumingTransport$1.run(TUGIAssumingTransport.java:48)
+        at java.base/java.security.AccessController.doPrivileged(Native Method)
+        at java.base/javax.security.auth.Subject.doAs(Subject.java:423)
+        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1878)
+        at org.apache.hadoop.hive.metastore.security.TUGIAssumingTransport.open(TUGIAssumingTransport.java:48)
+        at org.apache.hadoop.hive.metastore.HiveMetaStoreClient.open(HiveMetaStoreClient.java:516)
+        at org.apache.hadoop.hive.metastore.HiveMetaStoreClient.<init>(HiveMetaStoreClient.java:224)
+        at org.apache.hadoop.hive.metastore.HiveMetaStoreClient.<init>(HiveMetaStoreClient.java:137)
+        at com.datacyber.cybermeta.jdbc.plugins.jdbc.hive.HiveMetastoreHelper.createClient(HiveMetastoreHelper.java:113)
+        at com.datacyber.cybermeta.jdbc.plugins.Hive3Plugin$HiveJdbcDialect.withMetastoreClient(Hive3Plugin.java:108)
+        at com.datacyber.cybermeta.jdbc.plugins.Hive3Plugin$HiveJdbcDialect.lambda$getSchemaTables$8(Hive3Plugin.java:300)
+        at java.base/java.security.AccessController.doPrivileged(Native Method)
+        at java.base/javax.security.auth.Subject.doAs(Subject.java:423)
+        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1878)
+        at com.datacyber.cybermeta.jdbc.plugins.Hive3Plugin$HiveJdbcDialect.runSecured(Hive3Plugin.java:161)
+        at com.datacyber.cybermeta.jdbc.plugins.Hive3Plugin$HiveJdbcDialect.getSchemaTables(Hive3Plugin.java:300)
+        at com.datacyber.cyberdata.worker.service.accessor.AbstractMetaDataAccessService.getTableInfos(AbstractMetaDataAccessService.java:75)
+        at com.datacyber.cyberdata.worker.service.accessor.impl.HiveAccessService.listMetaDataTables(HiveAccessService.java:78)
+        at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService.collect(MetadataCollectorService.java:215)
+        at com.datacyber.cyberdata.worker.service.metadata.MetadataCollectorService$$FastClassBySpringCGLIB$$d292a704.invoke(<generated>)
+        at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:792)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithSpan(SpannedMethodInvocation.java:50)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.invokeWithContinuation(SpannedMethodInvocation.java:42)
+        at datadog.trace.instrumentation.springscheduling.SpannedMethodInvocation.proceed(SpannedMethodInvocation.java:36)
+        at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+)
+        at org.apache.hadoop.hive.metastore.HiveMetaStoreClient.open(HiveMetaStoreClient.java:565)
+        at org.apache.hadoop.hive.metastore.HiveMetaStoreClient.<init>(HiveMetaStoreClient.java:224)
+        at org.apache.hadoop.hive.metastore.HiveMetaStoreClient.<init>(HiveMetaStoreClient.java:137)
+        at com.datacyber.cybermeta.jdbc.plugins.jdbc.hive.HiveMetastoreHelper.createClient(HiveMetastoreHelper.java:113)
+        ... 23 more
+,
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 2026-03-30 18:40:34.069 INFO  [cyber-worker] [work-async-executor-7] com.datacyber.cyberdata.common.task.datasource.JdbcDialectPluginHolder - no cache,init jdbcDialect connectionInfo:2012802384123506689
 2026-03-30 18:40:34.069 INFO  [cyber-worker] [work-async-executor-7] com.datacyber.cyberdata.common.task.datasource.JdbcDialectPluginHolder - dialect map size:0
 2026-03-30 18:40:34.069 INFO  [cyber-worker] [work-async-executor-7] com.datacyber.cyberdata.worker.service.accessor.AbstractMetaDataAccessService - getTables,  schema:ysmtest,tables:null
