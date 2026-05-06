@@ -1,78 +1,229 @@
-com.datacyber.cyber.user.sdk.exception.SdkException: request for /sdkAuth/getToken error: {}
-	at com.datacyber.cyber.user.sdk.service.impl.SysDataServiceImpl.getToken(SysDataServiceImpl.java:132)
-	at com.datacyber.cyber.user.sdk.filter.JwtAuthenticationTokenFilter.doFilterInternal(JwtAuthenticationTokenFilter.java:54)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:111)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
-	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112)
-	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
-	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221)
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-	at datadog.trace.instrumentation.springweb.HandlerMappingResourceNameFilter.doFilterInternal(HandlerMappingResourceNameFilter.java:50)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-	at com.datacyber.cyber.user.sdk.filter.ExceptionFilter.doFilterInternal(ExceptionFilter.java:22)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:56)
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
-	at org.apache.catalina.valves.RemoteIpValve.invoke(RemoteIpValve.java:768)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.base/java.lang.Thread.run(Thread.java:834)
+server:
+  port: 8080
+  servlet:
+    encoding:
+      force-response: true
+      charset: UTF-8
+      enabled: true
+
+http:
+  httpMaxTotal: 100
+  httpDefaultMaxPerRoute: 4
+  httpConnectTimeout: 1000
+  httpConnectionRequestTimeout: 500
+  httpSocketTimeout: 10000
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    #确保:在查询结果map映射中，当value=null时仍保留字段映射
+    call-setters-on-nulls: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  mapperLocations: classpath:mapper/*.xml
+
+spring:
+  #i18n#
+  messages:
+    basename: i18n/messages #相对路径 开头请勿添加斜杠
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+  #datasource#
+  datasource:
+    dynamic:
+      hikari:
+        max-pool-size: 20
+        connection-test-query: select 1
+      #default datasource#
+      primary: cyberdata
+      datasource:
+        cyberdata:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://10.131.2.34:3306/cyberdata_user?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useAffectedRows=true&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false
+          username: cyberdata_user
+          password: cyber!P4D7,aNMh
+  quartz:
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: clusteredScheduler
+            instanceId: AUTO
+            makeSchedulerThreadDaemon: true
+          jobStore:
+            #useProperties: false
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            tablePrefix: QRTZ_ # using upper case here has better compatible#
+            dataSource: cyberdata
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            isClustered: true
+            clusterCheckinInterval: 5000
+            acquireTriggersWithinLock: true
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            makeThreadsDaemons: true
+            threadCount: 10
+            threadPriority: 5
+            #threadsInheritContextClassLoaderOfInitializingThread: true
+    job-store-type: jdbc
+  jpa:
+    open-in-view: false
+    show-sql: false
+  #redis#
+  redis:
+    database: 0
+    host: 10.131.3.116
+    port: 6379
+    password: XHB5yL*UvxCvcbGC
+    # redis连接超时时间（单位毫秒）:不能设置为0，否则报无法连接
+    timeout: 60s
+    # redis高级客户端:springboot2.0之后将连接池由jedis改为lettuce #
+    lettuce:
+      pool:
+        max-active: 200  # 连接池最大连接数（使用负值表示没有限制）
+        max-idle: 50      # 连接池中的最大空闲连接
+        min-idle: 8       # 连接池中的最小空闲连接    
+  mvc:
+    pathmatch:
+      # 配置策略
+      matching-strategy: ant-path-matcher
+
+cyber:
+  user:
+    base:
+      baseUrl: http://localhost:8080/
+      sysUser: sdkAuth/sysUser
+      permissionAll: sdkAuth/permissionAll
+      addOperationLog: sdkAuth/add/operationLog
+      extendExpiration: sdkAuth/extendExpiration
+      expiration: 43200
+      #指定时间内失败次数，超出该次数即锁定，比如在120s之内连续失败5次即锁定账号,默认不开启锁定功能
+      lockErrorCount: 3
+      #指定时间内失败次数，该时间段内失败超出指定次数即锁定，比如在120s之内连续失败5次即锁定账号，单位秒,如果开启锁定功能，默认120s
+      lockErrorTime: 120
+      # #锁定时间，单位秒，默认600s
+      lockTime: 600
+    auth:
+      rules:
+        - /sdkAuth/**
+        - /sys/error
+        - /heartbeat/**
+        - /user/check/token**
+        - /captcha
+        - /auth/loginWithCaptcha
+        - /auth/login
+        - /auth/loginWithCode
+        - /auth/captchaEnabled
+        - /auth/getThirdLoginUrl
+        - /auth/getThirdLogoutUrl
+        - /permission/import/**
+        - /role/permission/init**
+        - /migration/history-role/**
+        - /migration/project-user-role/**
+        # 审批中心接口
+        - /approval/flow/submit
+        - /approval/flow/latest
+        - /deploy/applyAuditCallBack
+        - /logic/model/auditCallBack
+        - /asset/approval/handle
+        #元数据安全等级变更审批回调接口
+        - /metaserver/metadata/security/level/apply/approval
+        - /tenant/businessSystem/external/**
+        # 审批中心接口
+        - /model/column/api/**
+
+#安全配置
+security:
+  # 验证码
+  captcha:
+    # true:开启验证码登录，false:关闭验证码登录
+    enabled: true
+    # type: math 数字计算 type: char 字符
+    type: math
+
+third:
+  login:
+    enabled: false
+    thirdPartyLoginPlatformConfig: anta
+    userInfoUrl: https://authtest.anta.com/oauth2.0/profile
+    accessTokenUrl: https://authtest.anta.com/oauth2.0/accessToken
+    clientId: 100264
+    clientPassword: d8ad6120b06d42d983dfe267e2a6d54f
+    redirectUrl: https://adp-test.anta.com/index
+    #loginUrl: https://authtest.anta.com/oauth2.0/authorize?response_type=code&client_id=100264&redirect_uri=https://adp-test.anta.com/index
+    # logoutUrl: https://authtest.anta.com/logout?service=https://authtest.anta.com/oauth2.0/authorize?response_type=code&client_id=100264&redirect_uri=https://adp-test.anta.com/index
+    #logoutUrl: https://authtest.anta.com/logout?service=https://adp-test.anta.com/index
+
+    loginAccountField: loginName
+    loginAccountFieldValue: employeeId
+    loginAccountThirdPartyIdValue: employeeId
+
+    tenantLoginName: SuperAdmin
+    loginAccountAliasNameValue: name
+    loginAccountLoginNameValue: employeeId
+    loginAccountUserNameValue: employeeId
+    loginAccountPhoneValue: mobilephone
+    loginAccountEmailValue: email
+
+    # ========== 按产品区分的配置 ==========
+    products:
+      CyberData:
+        enabled: false
+        clientId: 100264
+        clientPassword: d8ad6120b06d42d983dfe267e2a6d54
+        loginUrl: https://authtest.anta.com/oauth2.0/authorize?response_type=code&client_id=100264&redirect_uri=https://adp-test.anta.com/index
+        logoutUrl: https://authtest.anta.com/logout?service=https://adp-test.anta.com/index
+        redirectUrl: https://adp-test.anta.com/index
+      CyberAI:
+        enabled: true
+        clientId: 100261
+        clientPassword: 5a3c64c95f2f47ec8ea50d368aaf11f2
+        loginUrl: https://authtest.anta.com/oauth2.0/authorize?response_type=code&client_id=100261&redirect_uri=https://ml-test.anta.com/%23/common
+        logoutUrl: https://authtest.anta.com/logout?service=https://ml-test.anta.com/%23/common
+        redirectUrl: https://ml-test.anta.com/%23/common
+
+
+# mdm:
+#   sync:
+#     personSyncEnabled: true
+#     personSyncCron: "0 3 * * * ?"
+#     transferEnabled: true
+#     apiBaseUrl: http://aop-test.antaapi.com/ASH24111208564609
+#     appCode: ASH25101309132431
+#     secretKey: 5c3ce657c7fb4c29aa06c6d35df5eee9
+#     mdmAppCode: SYSID0432
+#     cron: "0 1 * * * ?"
+#     appOrgCodes: 20215819
+#     resignationSyncEnabled: true
+mdm:
+  sync:
+    # ==================== 基础认证配置 ====================
+    apiBaseUrl: http://aop-test.antaapi.com/ASH24111208564609
+    appCode: ASH25101309132431
+    secretKey: 5c3ce657c7fb4c29aa06c6d35df5eee9
+    mdmAppCode: SYSID0432
+
+    # ==================== 组织数据同步 | 每天 01:00 ====================
+    orgSyncEnabled: true
+    orgSyncCron: "0 0 1 * * ?"
+    orgBatchSize: 100
+
+    # ==================== 人员全量同步 | 每天 01:30 ====================
+    personSyncEnabled: true
+    personSyncCron: "0 30 1 * * ?"
+
+    # ==================== 离职/调岗同步 | 每2小时 ====================
+    resignationSyncEnabled: true
+    cron: "0 0 */2 * * ?"
+    resignationBatchSize: 100
+    transferEnabled: true
+    transferSyncCron: "0 0 */2 * * ?"
+    transferBatchSize: 100
+    appOrgCodes: 20215819
+    hrPersonInfoQueryUrl: ""
+
+    # ==================== 3PI离职同步 | 每2小时 ====================
+    threePiResignationSyncEnabled: false
+    threePiResignationCron: "0 0 */2 * * ?"
+    threePiBatchSize: 100
