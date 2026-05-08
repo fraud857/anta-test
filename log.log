@@ -1,3 +1,13 @@
+kms: 
+  provider: huawei
+  huawei:
+    accessKey: HPUALQ7OGUGP7Q1DC7TF
+    secretKey: pGyFs6s8KATPflx6zuizHksM5mzaj2vJhw8ALUT1
+    projectId: c77fefb599de41cc9258b6b37b103fa1
+    region: cn-north-4
+    endpoint: https://kms.cn-north-4.myhuaweicloud.com
+
+
 {
   "_t": 1770630706578,
   "tenantId": "1001",
